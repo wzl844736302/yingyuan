@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements CustomAdapt {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         handler.sendEmptyMessageDelayed(1,1000);
-        Toast.makeText(this, "12", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "123", Toast.LENGTH_SHORT).show();
     }
 
     @Override
