@@ -1,5 +1,6 @@
 package com.bw.movie.view;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +20,9 @@ public class MainActivity extends AppCompatActivity implements CustomAdapt {
             if(msg.what==1){
                 i--;
                 if(i<=0){
-                   /* Intent intent = new Intent(MainActivity.this, JumpActivity.class);
+                    Intent intent = new Intent(MainActivity.this, GuideActivity.class);
                     startActivity(intent);
-                    finish();*/
+                    finish();
                     return;
                 }
                 handler.sendEmptyMessageDelayed(1,1000);
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements CustomAdapt {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         handler.sendEmptyMessageDelayed(1,1000);
-        Toast.makeText(this, "123", Toast.LENGTH_SHORT).show();
     }
 
     @Override

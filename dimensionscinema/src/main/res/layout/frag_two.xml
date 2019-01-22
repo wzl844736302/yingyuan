@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+    <ImageView
+        android:id="@+id/mIV"
+        android:layout_width="205dp"
+        android:layout_height="205dp"
+        android:src="@drawable/two"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"/>
+    <TextView
+        android:id="@+id/mtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="一场电影"
+        android:layout_below="@id/mIV"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="60dp"
+        android:textSize="14sp"
+        android:textColor="#333333"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="荡涤你的心灵"
+        android:layout_below="@id/mtext"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textSize="14sp"
+        android:textColor="#333333"/>
+</RelativeLayout>
