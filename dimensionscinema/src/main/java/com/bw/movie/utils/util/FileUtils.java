@@ -2,6 +2,8 @@ package com.bw.movie.utils.util;
 
 import android.os.Environment;
 
+import com.bw.movie.MyApp;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -18,7 +20,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
-import wzl.com.dimensionscinema.MyApp;
 
 
 /**
