@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import com.bw.movie.R;
 import me.jessyan.autosize.internal.CustomAdapt;
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements CustomAdapt {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         handler.sendEmptyMessageDelayed(1,1000);
+        Toast.makeText(this, "12", Toast.LENGTH_SHORT).show();
     }
 
     @Override
