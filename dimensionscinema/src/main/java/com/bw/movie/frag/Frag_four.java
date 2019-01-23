@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import com.bw.movie.R;
 import com.bw.movie.view.LoginActivity;
 
+import me.jessyan.autosize.internal.CustomAdapt;
+
 public class Frag_four extends Fragment implements View.OnClickListener {
 
     private RelativeLayout mrelate;
@@ -34,4 +36,5 @@ public class Frag_four extends Fragment implements View.OnClickListener {
         startActivity(intent);
         getActivity().finish();
     }
+
 }
