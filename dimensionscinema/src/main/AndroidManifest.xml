@@ -31,8 +31,8 @@
         <activity android:name=".view.LoginActivity" >
         </activity>
         <activity android:name=".view.RegsterActivity">
-
         </activity>
+        <activity android:name=".view.HomeActivity"></activity>
     </application>
 
 </manifest>

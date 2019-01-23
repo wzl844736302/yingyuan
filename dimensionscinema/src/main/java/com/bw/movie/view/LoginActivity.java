@@ -82,10 +82,10 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
 
             //登陆成功回调
 
-            /*if(data.getStatus().equals("0000")){
-                startActivity(new Intent(LoginActivity.this,RegsterActivity.class));
+            if(data.getStatus().equals("0000")){
+                startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                 finish();
-            }*/
+            }
         }
         @Override
         public void fail(ApiException e) {
