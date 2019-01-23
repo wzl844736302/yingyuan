@@ -26,8 +26,13 @@
         <meta-data
             android:name="design_height_in_dp"
             android:value="1280" />
-        <activity android:name=".view.GuideActivity"></activity>
-        <activity android:name=".view.LoginActivity"></activity>
+
+        <activity android:name=".view.GuideActivity" />
+        <activity android:name=".view.LoginActivity" >
+        </activity>
+        <activity android:name=".view.RegsterActivity">
+
+        </activity>
     </application>
 
 </manifest>

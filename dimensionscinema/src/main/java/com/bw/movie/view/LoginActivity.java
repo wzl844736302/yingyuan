@@ -1,5 +1,6 @@
 package com.bw.movie.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
@@ -9,7 +10,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.bw.movie.R;
 import com.bw.movie.bean.Result;
 import com.bw.movie.bean.User;
@@ -30,9 +30,8 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView( R.layout.activity_login);
+        setContentView(R.layout.activity_login);
         initView();
-
     }
 
     private void initView() {
@@ -42,13 +41,13 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
         pwdEd = findViewById(R.id.login_password_ed);
         eyeCb = findViewById(R.id.login_eye_cb);
         eyeCb.setOnClickListener(this);
+        findViewById(R.id.btn_regirect_tiao).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.login_btn:
-
                 String pwdStr = pwdEd.getText().toString().trim();
                 String numStr = numEd.getText().toString().trim();
                 //AES对称加密
@@ -67,6 +66,9 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
                 }
                 iseye = !iseye;
                 break;
+            case R.id.btn_regirect_tiao:
+                startActivity(new Intent(LoginActivity.this,RegsterActivity.class));
+                break;
         }
     }
 
@@ -77,8 +79,14 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
         @Override
         public void success(Result<User> data) {
             Toast.makeText(LoginActivity.this, data.getMessage()+"", Toast.LENGTH_SHORT).show();
-        }
 
+            //登陆成功回调
+
+            /*if(data.getStatus().equals("0000")){
+                startActivity(new Intent(LoginActivity.this,RegsterActivity.class));
+                finish();
+            }*/
+        }
         @Override
         public void fail(ApiException e) {
 
