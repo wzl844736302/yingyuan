@@ -3,22 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <RelativeLayout
-        android:layout_marginTop="30dp"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp">
-        <ImageView
-            android:id="@+id/mIV"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/com_icon_loc_white_default"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:text="北京"
-            android:layout_toRightOf="@id/mIV"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="6dp"/>
-    </RelativeLayout>
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="186dp"
+                android:background="@drawable/hotmovie_bg">
+
+            </LinearLayout>
+
+            <com.bw.movie.view.RecyclerCoverFlow
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="223dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="85dp"
+                android:layout_marginRight="24dp"></com.bw.movie.view.RecyclerCoverFlow>
+        </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
 </LinearLayout>
