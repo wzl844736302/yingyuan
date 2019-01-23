@@ -180,7 +180,6 @@
         android:layout_marginTop="10dp"
         android:background="#55D1D1D1" />
 
-
     <RelativeLayout
         android:layout_width="280dp"
         android:layout_height="match_parent"
