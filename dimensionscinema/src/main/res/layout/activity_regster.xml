@@ -161,7 +161,6 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/log_icon_lock" />
-
         <EditText
             android:id="@+id/edit_register_pwd"
             android:layout_width="wrap_content"
@@ -179,7 +178,6 @@
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:background="#55D1D1D1" />
-
     <RelativeLayout
         android:layout_width="280dp"
         android:layout_height="match_parent"

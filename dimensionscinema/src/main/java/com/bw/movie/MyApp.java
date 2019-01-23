@@ -29,7 +29,6 @@ public class MyApp extends Application {
         mMainThreadHandler = new Handler();
         mMainLooper = getMainLooper();
     }
-
     /**
      * @author: 康海涛 QQ2541849981
      * @describe: 获取全局Application的上下文
