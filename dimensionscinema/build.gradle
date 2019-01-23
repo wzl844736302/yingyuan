@@ -1,10 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'bw_movie'
+            keyPassword '123456'
+            storeFile file('C:/Users/asus/Desktop/movie.keystore')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 28
-
-
-
     defaultConfig {
         applicationId "com.bw.movie"
         minSdkVersion 15
@@ -15,14 +20,12 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
