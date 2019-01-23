@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/login_bg"
+    android:layout_height="match_parent"
+    tools:context=".view.RegsterActivity">
+
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="120dp"
+        android:layout_gravity="center">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/register_icon_name" />
+        <EditText
+            android:id="@+id/edit_regiter_name"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:textColor="#ffff"
+            android:hint="昵称"
+            android:paddingLeft="50dp"
+            android:textColorHint="#eeeeee" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="280dp"
+        android:layout_gravity="center"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+
+        android:background="#55D1D1D1" />
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/register_icon_sex" />
+
+        <EditText
+            android:id="@+id/edit_register"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:textColor="#ffff"
+            android:hint="性别"
+            android:paddingLeft="50dp"
+            android:textColorHint="#eeeeee" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="280dp"
+        android:layout_gravity="center"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#55D1D1D1" />
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/register_icon_date" />
+
+        <EditText
+            android:id="@+id/edit_register_date"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:textColor="#ffff"
+            android:hint="出生日期"
+            android:paddingLeft="50dp"
+            android:textColorHint="#eeeeee" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="280dp"
+        android:layout_gravity="center"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#55D1D1D1" />
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/log_icon_phone" />
+
+        <EditText
+            android:id="@+id/edit_register_number"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginLeft="0dp"
+            android:background="@null"
+            android:hint="手机号"
+            android:inputType="number"
+            android:paddingLeft="50dp"
+            android:textColor="#ffff"
+            android:textColorHint="#eeeeee" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="280dp"
+        android:layout_gravity="center"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#55D1D1D1" />
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/register_icon_mail" />
+
+        <EditText
+            android:id="@+id/edit_register_email"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:textColor="#ffff"
+            android:hint="邮箱"
+            android:paddingLeft="50dp"
+            android:textColorHint="#eeeeee" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="280dp"
+        android:layout_gravity="center"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#55D1D1D1" />
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/log_icon_lock" />
+
+        <EditText
+            android:id="@+id/edit_register_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:inputType="textPassword"
+            android:textColor="#ffff"
+            android:hint="登录密码"
+            android:paddingLeft="50dp"
+            android:textColorHint="#eeeeee" />
+    </RelativeLayout>
+    <View
+        android:layout_width="280dp"
+        android:layout_gravity="center"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#55D1D1D1" />
+
+
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp">
+        <Button
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:text="注册"
+            android:textSize="20sp"
+            android:background="@drawable/log_but_bg"
+            android:id="@+id/btn_register"
+            />
+    </RelativeLayout>
+</LinearLayout>
