@@ -27,4 +27,5 @@ public class Result<T> {
     public void setResult(T result) {
         this.result = result;
     }
+
 }

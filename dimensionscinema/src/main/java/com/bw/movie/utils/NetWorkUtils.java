@@ -37,7 +37,7 @@ public class NetWorkUtils {
         //初始化retrofit
         retrofit = new Retrofit.Builder()
                 .client(client)
-                .baseUrl("http://172.17.8.100/")//设置url
+                .baseUrl("http://mobile.bwstudent.com/movieApi/")//设置url
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
