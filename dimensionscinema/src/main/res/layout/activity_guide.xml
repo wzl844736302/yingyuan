@@ -5,11 +5,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.GuideActivity"
-    android:background="#fff">
+    android:background="#fff"
+    android:orientation="vertical">
     <android.support.v4.view.ViewPager
         android:id="@+id/mView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="wrap_content">
     </android.support.v4.view.ViewPager>
+    <RadioGroup
+        android:id="@+id/mRadio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="154dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/my_btn1"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:button="@null"
+            android:layout_margin="5dp"
+            android:background="@drawable/yuan_check"/>
+        <RadioButton
+            android:id="@+id/my_btn2"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:button="@null"
+            android:layout_margin="5dp"
+            android:background="@drawable/yuan_check"/>
+        <RadioButton
+            android:id="@+id/my_btn3"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:button="@null"
+            android:layout_margin="5dp"
+            android:background="@drawable/yuan_check"/>
+        <RadioButton
+            android:id="@+id/my_btn4"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:button="@null"
+            android:layout_margin="5dp"
+            android:background="@drawable/yuan_check"/>
+    </RadioGroup>
 </RelativeLayout>
