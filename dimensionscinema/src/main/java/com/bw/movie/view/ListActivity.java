@@ -39,6 +39,11 @@ public class ListActivity extends AppCompatActivity implements CustomAdapt {
         adapter = new ListAdapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
+
+        onItemClick(adapter);
+        HotMoviePresenter hotMoviePresenter = new HotMoviePresenter(new HorMovieData());
+        hotMoviePresenter.request(1770, "15482453997081770", 1, 500);
+        group.check(group.getChildAt(0).getId());
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -86,7 +91,6 @@ public class ListActivity extends AppCompatActivity implements CustomAdapt {
         }
         @Override
         public void fail(ApiException e) {
-
         }
     }
     //正在热销
@@ -114,6 +118,7 @@ public class ListActivity extends AppCompatActivity implements CustomAdapt {
         @Override
 
         public void fail(ApiException e) {
+
         }
     }
     private void onItemClick(ListAdapter adapter){

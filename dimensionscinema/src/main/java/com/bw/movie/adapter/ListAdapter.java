@@ -22,7 +22,6 @@ public class ListAdapter extends RecyclerView.Adapter  {
     private List<HotMovie> mList = new ArrayList<>();
     private Context context;
 
-
     private OnclickItem onclickItem;
     private  LayoutInflater from;
 

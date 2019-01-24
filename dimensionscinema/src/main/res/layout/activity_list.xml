@@ -29,14 +29,14 @@
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/com_icon_loc"
+            android:src="@drawable/cinema_detail_icon_location_default"
             android:padding="10dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="北京"
-            android:textColor="#fff"
+            android:textColor="#333"
             android:textSize="14sp"
             android:layout_gravity="center"/>
     </LinearLayout>
