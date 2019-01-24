@@ -5,6 +5,9 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.bw.movie.dao.AllUserDao;
+import com.bw.movie.dao.DaoMaster;
+import com.bw.movie.dao.DaoSession;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 
@@ -22,6 +25,8 @@ public class MyApp extends Application {
      * context 全局唯一的上下文
      */
     private static Context context;
+    public static DaoSession daoSession;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -31,6 +36,8 @@ public class MyApp extends Application {
         mMainThreadHandler = new Handler();
         mMainLooper = getMainLooper();
         Fresco.initialize(this);
+        daoSession = DaoMaster.newDevSession(context,AllUserDao.TABLENAME);
+
     }
     /**
      * @author: 康海涛 QQ2541849981

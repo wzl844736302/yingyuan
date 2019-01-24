@@ -10,13 +10,17 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.bw.movie.MyApp;
 import com.bw.movie.R;
+import com.bw.movie.bean.AllUser;
 import com.bw.movie.bean.Result;
 import com.bw.movie.bean.User;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.presenter.LoginPresenter;
 import com.bw.movie.utils.util.EncryptUtil;
+import com.bw.movie.utils.util.UIUtils;
 
 import me.jessyan.autosize.internal.CustomAdapt;
 
@@ -71,25 +75,24 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
                 break;
         }
     }
-
     /**
      * 登陆返回的数据
      */
     private class LoginData implements DataCall<Result<User>> {
         @Override
         public void success(Result<User> data) {
-            Toast.makeText(LoginActivity.this, data.getMessage()+"", Toast.LENGTH_SHORT).show();
-
             //登陆成功回调
-
             if(data.getStatus().equals("0000")){
+                User result = data.getResult();
+                AllUser allUser = new AllUser(System.currentTimeMillis(),result.getSessionId(),result.getUserId(),result.getUserInfo().getNickName(),result.getUserInfo().getPhone(),result.getUserInfo().getBirthday(),result.getUserInfo().getSex(),result.getUserInfo().getLastLoginTime(),result.getUserInfo().getHeadPic());
+                MyApp.daoSession.insertOrReplace(allUser);
                 startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                 finish();
             }
         }
         @Override
         public void fail(ApiException e) {
-
+            UIUtils.showToastSafe(e.getCode()+" "+e.getDisplayMessage());
         }
     }
     @Override
