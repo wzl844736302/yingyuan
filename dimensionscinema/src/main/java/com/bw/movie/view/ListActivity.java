@@ -1,28 +1,19 @@
 package com.bw.movie.view;
 
-import android.graphics.Color;
-import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bw.movie.MyApp;
 import com.bw.movie.R;
-import com.bw.movie.adapter.ListAdapter;
-import com.bw.movie.bean.AllUser;
+import com.bw.movie.adapter.ListAdapter;;
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
-import com.bw.movie.frag.FragMovie;
 import com.bw.movie.presenter.HotMoviePresenter;
 import com.bw.movie.presenter.ReleasePresenter;
 import com.bw.movie.presenter.SoonPresenter;

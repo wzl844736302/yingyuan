@@ -40,6 +40,7 @@
         <activity android:name=".view.HomeActivity"></activity>
         <activity android:name=".view.MyInForMation" />
         <activity android:name=".view.ListActivity" />
+        <activity android:name=".view.DetailsActivity"/>
         <activity android:name=".view.DetailCinemaActivity"></activity>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
