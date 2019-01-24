@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 
 public class MyApp extends Application {
     /** 主线程ID */
@@ -28,6 +30,7 @@ public class MyApp extends Application {
         mMainThread = Thread.currentThread();
         mMainThreadHandler = new Handler();
         mMainLooper = getMainLooper();
+        Fresco.initialize(this);
     }
     /**
      * @author: 康海涛 QQ2541849981

@@ -19,11 +19,15 @@ import java.util.List;
  */
 
 public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHolder> {
-    private List<HotMovie> list = new ArrayList<>();
+ private List<HotMovie> list;
     private Context mContext;
-    private int[] mColors = {R.drawable.baobeier, R.drawable.hutaojiazi};
-    private String[] name = {"宝贝儿", "胡桃夹子与四个王国"};
     private onItemClick clickCb;
+
+    public HotMovieAdapter(List<HotMovie> list, Context mContext, onItemClick clickCb) {
+        this.list = list;
+        this.mContext = mContext;
+        this.clickCb = clickCb;
+    }
 
     public HotMovieAdapter(Context c) {
         mContext = c;
@@ -35,9 +39,9 @@ public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHo
         clickCb = cb;
     }
 
-    public void setList(List<HotMovie> lists){
+  /*  public void setList(List<HotMovie> lists){
         list.addAll(lists);
-    }
+    }*/
 
     public void setOnClickLstn(onItemClick cb) {
         this.clickCb = cb;
@@ -51,24 +55,27 @@ public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Glide.with(mContext).load(list.get(position).getImageUrl())
-                .into(holder.img);
-        holder.tv.setBackgroundColor(0x55000000);
-        holder.tv.setText(list.get(position).getName());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (list.size()!=0){
+            Glide.with(mContext).load(list.get(position%list.size()).getImageUrl())
+                    .into(holder.img);
+            holder.tv.setBackgroundColor(0x55000000);
+            holder.tv.setText(list.get(position%list.size()).getName());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 //                Toast.makeText(mContext, "点击了："+position, Toast.LENGTH_SHORT).show();
-                if (clickCb != null) {
-                    clickCb.clickItem(position);
+                    if (clickCb != null) {
+                        clickCb.clickItem(position);
+                    }
                 }
-            }
-        });
+            });
+        }
+
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return Integer.MAX_VALUE;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
