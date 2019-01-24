@@ -1,5 +1,6 @@
 package com.bw.movie.frag;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bw.movie.R;
@@ -22,12 +24,13 @@ import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.presenter.HotMoviePresenter;
 import com.bw.movie.presenter.ReleasePresenter;
 import com.bw.movie.presenter.SoonPresenter;
+import com.bw.movie.view.ListActivity;
 import com.bw.movie.view.RecyclerCoverFlow;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick {
+public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,View.OnClickListener {
 
     private RecyclerCoverFlow mList;
     private HotMovieAdapter hotMovieAdapter;
@@ -36,6 +39,7 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick {
     private HotAdapter hotAdapter;
     private HotAdapter hotAdapter1;
     private HotAdapter hotAdapter2;
+
 
     @Nullable
     @Override
@@ -84,11 +88,32 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick {
         hotrcycler = view.findViewById(R.id.home_recycler_hotmovie);
         beingrcycler = view.findViewById(R.id.home_recycler_being);
         soonrecycler = view.findViewById(R.id.home_recycler_soon);
+        view.findViewById(R.id.movie_image).setOnClickListener(this);
+        view.findViewById(R.id.movie_image1).setOnClickListener(this);
+        view.findViewById(R.id.movie_image2).setOnClickListener(this);
     }
 
     @Override
     public void clickItem(int pos) {
         mList.smoothScrollToPosition(pos);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.movie_image:
+                goListActivity();
+                break;
+            case R.id.movie_image1:
+                goListActivity();
+                break;
+            case R.id.movie_image2:
+                goListActivity();
+                break;
+        }
+    }
+    private void goListActivity(){
+        startActivity(new Intent(getActivity(),ListActivity.class));
     }
     //热门电影
     private class HorMovieData implements DataCall<Result<List<HotMovie>>> {
