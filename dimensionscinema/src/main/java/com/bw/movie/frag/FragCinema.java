@@ -16,14 +16,25 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.map.MapView;
+import com.bw.movie.MyApp;
 import com.bw.movie.R;
 import com.bw.movie.adapter.RecommendAdapter;
+import com.bw.movie.bean.AllUser;
 import com.bw.movie.bean.Recommend;
 import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
+import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.FuJinPresenter;
 import com.bw.movie.presenter.RecommendPresenter;
+import com.bw.movie.utils.util.UIUtils;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -45,7 +56,13 @@ public class FragCinema extends Fragment implements CustomAdapt {
     private Unbinder bind;
     private TextView tv_sou;
     private EditText et_sou;
-
+    private List<AllUser> users = new ArrayList<>();
+    private int userId;
+    private String sessionId;
+    private TextView mdingwei;
+    private MapView mMapView = null;
+    public LocationClient mLocationClient = null;
+    private MyLocationListener myListener = new MyLocationListener();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,6 +77,13 @@ public class FragCinema extends Fragment implements CustomAdapt {
         mrecycler_cinema = view.findViewById(R.id.mrecycler_cinema);
         tv_sou = view.findViewById(R.id.tv_sou);
         et_sou = view.findViewById(R.id.et_sou);
+        mdingwei = view.findViewById(R.id.mdingwei);
+        //查询数据库
+        AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
+        users.addAll(allUserDao.loadAll());
+        AllUser allUser = users.get(0);
+        userId = allUser.getUserId();
+        sessionId = allUser.getSessionId();
         //设置适配器
         recommendAdapter = new RecommendAdapter(getActivity());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -67,7 +91,7 @@ public class FragCinema extends Fragment implements CustomAdapt {
         mrecycler_cinema.setAdapter(recommendAdapter);
         //设置数据
         recommendPresenter = new RecommendPresenter(new RecommendCall());
-        recommendPresenter.request(1770,"15482453997081770",1,10);
+        recommendPresenter.request(userId,sessionId,1,10);
         //默认选中第一个
         mradio_cinema.check(mradio_cinema.getChildAt(0).getId());
         mbutton1.setTextColor(Color.WHITE);
@@ -81,18 +105,36 @@ public class FragCinema extends Fragment implements CustomAdapt {
                         mbutton1.setTextColor(Color.WHITE);
                         mbutton2.setTextColor(Color.BLACK);
                         recommendPresenter = new RecommendPresenter(new RecommendCall());
-                        recommendPresenter.request(1770,"15482453997081770",1,10);
+                        recommendPresenter.request(userId,sessionId,1,10);
                         break;
                     case R.id.mbutton2:
                         recommendAdapter.clear();
                         mbutton1.setTextColor(Color.BLACK);
                         mbutton2.setTextColor(Color.WHITE);
                         fuJinPresenter = new FuJinPresenter(new FuJinCall());
-                        fuJinPresenter.request(1770,"15482453997081770","116.30551391385724","40.04571807462411",1,10);
+                        fuJinPresenter.request(userId,sessionId,"116.30551391385724","40.04571807462411",1,10);
                         break;
                 }
             }
         });
+        //定位
+        mLocationClient = new LocationClient(getActivity());
+        //声明LocationClient类
+        mLocationClient.registerLocationListener(myListener);
+        //注册监听函数
+        LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
+        //可选，是否需要位置描述信息，默认为不需要，即参数为false
+        //如果开发者需要获得当前点的位置信息，此处必须为true
+        option.setIsNeedLocationDescribe(true);
+        //可选，设置是否需要地址信息，默认不需要
+        option.setIsNeedAddress(true);
+        //可选，默认false,设置是否使用gps
+        option.setOpenGps(true);
+        //可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
+        option.setLocationNotify(true);
+        mLocationClient.setLocOption(option);
+        mLocationClient.start();
         return view;
     }
     //点击实现搜索
@@ -119,7 +161,7 @@ public class FragCinema extends Fragment implements CustomAdapt {
         }
         @Override
         public void fail(ApiException e) {
-
+            UIUtils.showToastSafe(e.getCode()+" "+e.getDisplayMessage());
         }
     }
     //实现推荐影院接口
@@ -135,6 +177,19 @@ public class FragCinema extends Fragment implements CustomAdapt {
 
         @Override
         public void fail(ApiException e) {
+            UIUtils.showToastSafe(e.getCode()+" "+e.getDisplayMessage());
+        }
+    }
+    //定位实现接口
+    public class MyLocationListener implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            //此处的BDLocation为定位结果信息类，通过它的各种get方法可获取定位相关的全部结果
+            //以下只列举部分获取地址相关的结果信息
+            //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
+            String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
+            String addr = location.getAddrStr();    //获取详细地址信息
+            mdingwei.setText(locationDescribe+addr);
 
         }
     }

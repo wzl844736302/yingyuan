@@ -1,82 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ListActivity">
+    tools:context=".view.ListActivity"
+    android:orientation="vertical">
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
         android:layout_marginTop="30dp"
-        android:layout_width="50dp"
-        android:layout_height="24dp"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/shape_search">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="2dp"
-            android:src="@drawable/com_icon_search" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/wz"
-        android:layout_marginTop="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginLeft="5dp"
         android:orientation="horizontal">
         <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="20dp"
             android:src="@drawable/cinema_detail_icon_location_default"
-            android:padding="10dp"
-            />
+            android:layout_gravity="center_vertical"/>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_gravity="center_vertical"
+            android:text="北京"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="北京"
-            android:textColor="#333"
-            android:textSize="14sp"
-            android:layout_gravity="center"/>
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_search"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/sou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:paddingLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/com_icon_search_default"/>
+            <EditText
+                android:id="@+id/et_sou"
+                android:layout_width="150dp"
+                android:background="@null"
+                android:textSize="10sp"
+                android:hint="请输入您要输入的名称"
+                android:textColorHint="#fff"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tv_sou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffff"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"
+                android:textSize="12sp"
+                android:layout_marginRight="24dp"
+                android:text="搜索"/>
+        </LinearLayout>
     </LinearLayout>
     <RadioGroup
-        android:layout_below="@+id/wz"
         android:id="@+id/list_mRadio_cinema"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="16dp"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:layout_marginRight="24dp"
+        android:layout_marginLeft="24dp">
         <RadioButton
             android:id="@+id/list_mbutton1"
-            android:layout_width="83dp"
+            android:layout_width="wrap_content"
             android:layout_height="25dp"
+            android:layout_weight="1"
             android:button="@null"
             android:text="热门电影"
             android:textSize="14sp"
             android:gravity="center"
-            android:layout_marginRight="16dp"
             android:background="@drawable/select_yy"/>
         <RadioButton
             android:id="@+id/list_mbutton2"
-            android:layout_width="83dp"
+            android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:button="@null"
+            android:layout_weight="1"
             android:text="正在热映"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:gravity="center"
             android:textSize="14sp"
-            android:layout_marginLeft="16dp"
             android:background="@drawable/select_yy"/>
         <RadioButton
             android:id="@+id/list_mbutton3"
-            android:layout_width="83dp"
+            android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:button="@null"
+            android:layout_weight="1"
             android:text="即将上映"
             android:gravity="center"
             android:textSize="14sp"
-            android:layout_marginLeft="16dp"
             android:background="@drawable/select_yy"/>
     </RadioGroup>
     <android.support.v7.widget.RecyclerView
@@ -86,6 +119,8 @@
         android:layout_marginRight="24dp"
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

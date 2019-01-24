@@ -18,6 +18,7 @@ import com.bw.movie.bean.Result;
 import com.bw.movie.bean.User;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
+import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.LoginPresenter;
 import com.bw.movie.utils.util.EncryptUtil;
 import com.bw.movie.utils.util.UIUtils;
@@ -83,9 +84,12 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
         public void success(Result<User> data) {
             //登陆成功回调
             if(data.getStatus().equals("0000")){
+                //添加数据库
                 User result = data.getResult();
                 AllUser allUser = new AllUser(System.currentTimeMillis(),result.getSessionId(),result.getUserId(),result.getUserInfo().getNickName(),result.getUserInfo().getPhone(),result.getUserInfo().getBirthday(),result.getUserInfo().getSex(),result.getUserInfo().getLastLoginTime(),result.getUserInfo().getHeadPic());
-                MyApp.daoSession.insertOrReplace(allUser);
+                AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
+                allUserDao.insertOrReplace(allUser);
+                //跳转
                 startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                 finish();
             }
