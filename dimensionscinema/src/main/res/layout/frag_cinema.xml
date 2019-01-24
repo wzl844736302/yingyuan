@@ -51,6 +51,7 @@
                 android:background="@null"
                 android:textSize="10sp"
                 android:hint="CGV影城"
+                android:textColorHint="#fff"
                 android:layout_gravity="center_vertical"
                 android:layout_height="wrap_content"
                 android:visibility="gone"/>

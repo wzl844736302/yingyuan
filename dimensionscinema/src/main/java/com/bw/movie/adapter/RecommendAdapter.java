@@ -1,6 +1,7 @@
 package com.bw.movie.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.bw.movie.R;
 import com.bw.movie.bean.Recommend;
+import com.bw.movie.view.DetailCinemaActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,13 +37,23 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int i) {
         MyHolder myHolder = (MyHolder) holder;
         String logo = list.get(i).getLogo();
         myHolder.imageView.setImageURI(Uri.parse(logo));
         myHolder.textView.setText(list.get(i).getName());
         myHolder.textView2.setText(list.get(i).getAddress());
         myHolder.textView3.setText(list.get(i).getFollowCinema()+""+"km");
+        //点击跳转
+        myHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = list.get(i).getId();
+                Intent intent = new Intent(activity.getBaseContext(), DetailCinemaActivity.class);
+                intent.putExtra("id",id);
+                activity.startActivity(intent);
+            }
+        });
     }
 
     @Override
