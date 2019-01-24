@@ -9,7 +9,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="40dp">
 
 
             <LinearLayout
@@ -94,6 +95,78 @@
                 android:layout_width="match_parent"
                 android:layout_height="164dp"
                 android:layout_below="@+id/ry"></android.support.v7.widget.RecyclerView>
+            <RelativeLayout
+                android:id="@+id/zz"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_recycler_hotmovie"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp">
+                <TextView
+                    android:id="@+id/zzry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:textSize="16sp"
+                    android:textColor="#333"
+                    android:text="正在热映"/>
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="3dp"
+                    android:background="@drawable/shape_shou_lien"
+                    android:layout_below="@+id/zzry"/>
+                <ImageView
+                    android:padding="5dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/com_icon_next_default"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/home_recycler_being"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="164dp"
+                android:layout_below="@+id/zz"></android.support.v7.widget.RecyclerView>
+            <RelativeLayout
+                android:id="@+id/jj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/home_recycler_being"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp">
+                <TextView
+                    android:id="@+id/jjry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:textSize="16sp"
+                    android:textColor="#333"
+                    android:text="即将上映"/>
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="3dp"
+                    android:background="@drawable/shape_shou_lien"
+                    android:layout_below="@+id/jjry"/>
+                <ImageView
+                    android:padding="5dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/com_icon_next_default"
+                    android:layout_alignParentRight="true"/>
+            </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/home_recycler_soon"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="164dp"
+                android:layout_below="@+id/jj"></android.support.v7.widget.RecyclerView>
         </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>

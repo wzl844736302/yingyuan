@@ -1,6 +1,7 @@
 package com.bw.movie.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,9 +57,8 @@ public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         if (list.size()!=0){
-            Glide.with(mContext).load(list.get(position%list.size()).getImageUrl())
-                    .into(holder.img);
-            holder.tv.setBackgroundColor(0x55000000);
+
+            holder.img.setImageURI(Uri.parse(list.get(position%list.size()).getImageUrl()));
             holder.tv.setText(list.get(position%list.size()).getName());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

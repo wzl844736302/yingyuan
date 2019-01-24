@@ -26,7 +26,7 @@ public class HotAdapter extends RecyclerView.Adapter {
     private OnclickItem onclickItem;
     private  LayoutInflater from;
 
-    public HotAdapter(OnclickItem onclickItem) {
+    public void setOnclickItem(OnclickItem onclickItem) {
         this.onclickItem = onclickItem;
     }
 
