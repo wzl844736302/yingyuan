@@ -2,9 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-    <TextView
+    android:orientation="vertical"
+    android:background="#fff">
+    <RadioGroup
+        android:id="@+id/mRadio_cinema"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="2"/>
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal">
+        <RadioButton
+            android:id="@+id/mbutton1"
+            android:layout_width="83dp"
+            android:layout_height="25dp"
+            android:button="@null"
+            android:text="推荐影院"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/select_yy"/>
+        <RadioButton
+            android:id="@+id/mbutton2"
+            android:layout_width="83dp"
+            android:layout_height="25dp"
+            android:button="@null"
+            android:text="附近影院"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/select_yy"/>
+    </RadioGroup>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mrecycler_cinema"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

@@ -8,14 +8,17 @@
     tools:context=".view.RegsterActivity">
 
     <RelativeLayout
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="120dp"
-        android:layout_gravity="center">
+        android:layout_marginTop="140dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/register_icon_name" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/register_icon_name"
+            android:layout_centerVertical="true"/>
         <EditText
             android:id="@+id/edit_regiter_name"
             android:layout_width="wrap_content"
@@ -23,27 +26,32 @@
             android:background="@null"
             android:textColor="#ffff"
             android:hint="昵称"
+            android:textSize="16sp"
             android:paddingLeft="50dp"
             android:textColorHint="#eeeeee" />
 
     </RelativeLayout>
     <View
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_gravity="center"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
         android:background="#55D1D1D1" />
     <RelativeLayout
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center">
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/register_icon_sex" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/register_icon_sex"
+            android:layout_centerVertical="true"/>
 
         <EditText
             android:id="@+id/edit_register"
@@ -52,26 +60,32 @@
             android:background="@null"
             android:textColor="#ffff"
             android:hint="性别"
+            android:textSize="16sp"
             android:paddingLeft="50dp"
             android:textColorHint="#eeeeee" />
 
     </RelativeLayout>
     <View
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_gravity="center"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="#55D1D1D1" />
+        android:background="#55D1D1D1"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"/>
     <RelativeLayout
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
         android:layout_gravity="center">
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/register_icon_date" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/register_icon_date"
+            android:layout_centerVertical="true"/>
 
         <EditText
             android:id="@+id/edit_register_date"
@@ -80,26 +94,32 @@
             android:background="@null"
             android:textColor="#ffff"
             android:hint="出生日期"
+            android:textSize="16sp"
             android:paddingLeft="50dp"
             android:textColorHint="#eeeeee" />
 
     </RelativeLayout>
     <View
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_gravity="center"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="#55D1D1D1" />
+        android:background="#55D1D1D1"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"/>
     <RelativeLayout
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/log_icon_phone" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/log_icon_phone"
+            android:layout_centerVertical="true"/>
 
         <EditText
             android:id="@+id/edit_register_number"
@@ -114,25 +134,31 @@
             android:inputType="number"
             android:paddingLeft="50dp"
             android:textColor="#ffff"
-            android:textColorHint="#eeeeee" />
+            android:textColorHint="#eeeeee"
+            android:textSize="16sp"/>
 
     </RelativeLayout>
     <View
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_gravity="center"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="#55D1D1D1" />
+        android:background="#55D1D1D1"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"/>
     <RelativeLayout
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/register_icon_mail" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/register_icon_mail"
+            android:layout_centerVertical="true"/>
 
         <EditText
             android:id="@+id/edit_register_email"
@@ -141,26 +167,32 @@
             android:background="@null"
             android:textColor="#ffff"
             android:hint="邮箱"
+            android:textSize="16sp"
             android:paddingLeft="50dp"
             android:textColorHint="#eeeeee" />
 
     </RelativeLayout>
     <View
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_gravity="center"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="#55D1D1D1" />
+        android:background="#55D1D1D1"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"/>
     <RelativeLayout
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="30dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:src="@drawable/log_icon_lock" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/log_icon_lock"
+            android:layout_centerVertical="true"/>
         <EditText
             android:id="@+id/edit_register_pwd"
             android:layout_width="wrap_content"
@@ -170,26 +202,30 @@
             android:textColor="#ffff"
             android:hint="登录密码"
             android:paddingLeft="50dp"
+            android:textSize="16sp"
             android:textColorHint="#eeeeee" />
     </RelativeLayout>
     <View
-        android:layout_width="280dp"
+        android:layout_width="match_parent"
         android:layout_gravity="center"
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
-        android:background="#55D1D1D1" />
+        android:background="#55D1D1D1"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"/>
     <RelativeLayout
-        android:layout_width="280dp"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="78dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp">
         <Button
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:text="注册"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:background="@drawable/log_but_bg"
-            android:id="@+id/btn_register"
-            />
+            android:id="@+id/btn_register" />
     </RelativeLayout>
 </LinearLayout>

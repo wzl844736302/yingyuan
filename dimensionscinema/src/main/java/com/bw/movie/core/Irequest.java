@@ -1,6 +1,7 @@
 package com.bw.movie.core;
 
 import com.bw.movie.bean.HotMovie;
+import com.bw.movie.bean.Recommend;
 import com.bw.movie.bean.Result;
 import com.bw.movie.bean.User;
 
@@ -70,4 +71,46 @@ public interface Irequest {
                                                 @Header("sessionId") String sessionId,
                                                 @Query("page") int page,
                                                 @Query("count") int count);
+
+    /**
+     * 正在上映
+     * @param userId
+     * @param sessionId
+     * @param page
+     * @param count
+     * @return
+     */
+    @GET("movie/v1/findReleaseMovieList")
+    Observable<Result<List<HotMovie>>> findReleaseMovieList(@Header("userId") int userId,
+                                                            @Header("sessionId") String sessionId,
+                                                            @Query("page") int page,
+                                                            @Query("count") int count);
+
+    /**
+     * 即将上映
+     * @param userId
+     * @param sessionId
+     * @param page
+     * @param count
+     * @return
+     */
+    @GET("movie/v1/findComingSoonMovieList")
+    Observable<Result<List<HotMovie>>> findComingSoonMovieList(@Header("userId") int userId,
+                                                               @Header("sessionId") String sessionId,
+                                                               @Query("page") int page,
+                                                               @Query("count") int count);
+
+    /**
+     * 推荐影院
+     * @param userId
+     * @param sessionId
+     * @param page
+     * @param count
+     * @return
+     */
+    @GET("cinema/v1/findRecommendCinemas")
+    Observable<Result<List<Recommend>>> findRecommendCinemas(@Header("userId") int userId,
+                                                             @Header("sessionId") String sessionId,
+                                                             @Query("page") int page,
+                                                             @Query("count") int count);
 }

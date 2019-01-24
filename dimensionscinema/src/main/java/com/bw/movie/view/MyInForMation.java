@@ -1,12 +1,8 @@
 package com.bw.movie.view;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import com.bw.movie.R;
-import com.bw.movie.frag.FragUser;
-
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.jessyan.autosize.internal.CustomAdapt;

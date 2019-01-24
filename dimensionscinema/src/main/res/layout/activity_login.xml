@@ -14,21 +14,23 @@
 
         <LinearLayout
             android:id="@+id/member_activity_login_layout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="110dp"
+            android:layout_marginTop="130dp"
             android:gravity="center_vertical"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp">
 
             <RelativeLayout
-                android:layout_width="280dp"
+                android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="30dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/log_icon_phone" />
 
                 <EditText
@@ -40,9 +42,10 @@
                     android:textColor="#ffff"
                     android:digits="0123456789"
                     android:ems="11"
+                    android:textSize="18sp"
                     android:hint="手机号"
                     android:imeOptions="actionNext"
-                    android:paddingLeft="50dp"
+                    android:paddingLeft="40dp"
                     android:textColorHint="#eeeeee" />
 
             </RelativeLayout>
@@ -54,13 +57,13 @@
                 android:background="#ffffff" />
 
             <RelativeLayout
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="30dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/log_icon_lock" />
 
                 <EditText
@@ -70,10 +73,11 @@
                     android:textColor="#ffff"
                     android:background="@null"
                     android:ems="11"
+                    android:textSize="18sp"
                     android:inputType="textPassword"
                     android:hint="登录密码"
                     android:imeOptions="actionNext"
-                    android:paddingLeft="50dp"
+                    android:paddingLeft="40dp"
                     android:textColorHint="#eeeeee" />
 
                 <CheckBox
@@ -94,7 +98,7 @@
                 android:background="#ffffff" />
 
             <RelativeLayout
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_marginTop="15dp"
                 android:layout_height="wrap_content">
 
@@ -125,6 +129,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="5dp"
+                    android:textSize="14sp"
                     android:layout_marginRight="0dp"
                     android:text="快速注册"/>
 
@@ -134,7 +139,7 @@
 
         <Button
             android:id="@+id/login_btn"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_below="@id/member_activity_login_layout"
             android:layout_gravity="center_horizontal"
@@ -142,41 +147,49 @@
             android:background="@drawable/log_but_bg"
             android:text="登录"
             android:textColor="#FFF"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"/>
 
         <LinearLayout
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp">
 
             <View
                 android:layout_width="90dp"
                 android:layout_height="1dp"
                 android:layout_gravity="center_vertical"
-                android:background="#ffffff" />
+                android:background="#ffffff"
+                android:layout_weight="1"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="第三方账号快速登录"
                 android:textColor="#ffffff"
-                android:textSize="12sp" />
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:textSize="10sp" />
 
             <View
                 android:layout_width="90dp"
                 android:layout_height="1dp"
                 android:layout_gravity="center_vertical"
-                android:background="#ffffff" />
+                android:background="#ffffff"
+                android:layout_weight="1"/>
         </LinearLayout>
 
         <ImageView
             android:id="@+id/weixin_login"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="16dp"
             android:src="@drawable/log_icon_weixin" />
 
     </LinearLayout>
