@@ -42,46 +42,49 @@
     </LinearLayout>
     <RadioGroup
         android:layout_below="@+id/wz"
-        android:id="@+id/mRadio_cinema"
+        android:id="@+id/list_mRadio_cinema"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal">
         <RadioButton
-            android:id="@+id/mbutton1"
+            android:id="@+id/list_mbutton1"
             android:layout_width="83dp"
             android:layout_height="25dp"
             android:button="@null"
-            android:text="推荐影院"
+            android:text="热门电影"
             android:textSize="14sp"
             android:gravity="center"
             android:layout_marginRight="16dp"
             android:background="@drawable/select_yy"/>
         <RadioButton
-            android:id="@+id/mbutton2"
+            android:id="@+id/list_mbutton2"
             android:layout_width="83dp"
             android:layout_height="25dp"
             android:button="@null"
-            android:text="附近影院"
+            android:text="正在热映"
             android:gravity="center"
             android:textSize="14sp"
             android:layout_marginLeft="16dp"
             android:background="@drawable/select_yy"/>
         <RadioButton
-            android:id="@+id/mbutton3"
+            android:id="@+id/list_mbutton3"
             android:layout_width="83dp"
             android:layout_height="25dp"
             android:button="@null"
-            android:text="附近影院"
+            android:text="即将上映"
             android:gravity="center"
             android:textSize="14sp"
             android:layout_marginLeft="16dp"
             android:background="@drawable/select_yy"/>
     </RadioGroup>
     <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/mRadio_cinema"
-        android:layout_margin="24dp"
+        android:id="@+id/list_recycer"
+        android:layout_below="@+id/list_mRadio_cinema"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
