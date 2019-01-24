@@ -1,6 +1,7 @@
-package com.bw.movie;
+package com.bw.movie.adapter;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bw.movie.R;
 import com.bw.movie.bean.Recommend;
 
 import java.util.ArrayList;
@@ -35,6 +37,8 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         MyHolder myHolder = (MyHolder) holder;
+        String logo = list.get(i).getLogo();
+        myHolder.imageView.setImageURI(Uri.parse(logo));
         myHolder.textView.setText(list.get(i).getName());
         myHolder.textView2.setText(list.get(i).getAddress());
         myHolder.textView3.setText(list.get(i).getFollowCinema()+""+"km");
@@ -49,6 +53,10 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (result!=null){
             list.addAll(result);
         }
+    }
+
+    public void clear() {
+        list.clear();
     }
 
     class MyHolder extends RecyclerView.ViewHolder{

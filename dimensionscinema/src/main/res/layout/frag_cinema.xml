@@ -4,6 +4,68 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/cinema_detail_icon_location_default"
+            android:layout_gravity="center_vertical"/>
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textSize="14sp"
+            android:layout_gravity="center_vertical"
+            android:text="北京"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_shape"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/sou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/com_icon_search_default"/>
+            <EditText
+                android:id="@+id/et_sou"
+                android:layout_width="150dp"
+                android:background="@null"
+                android:textSize="10sp"
+                android:hint="CGV影城"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+            <TextView
+                android:id="@+id/tv_sou"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffff"
+                android:visibility="gone"
+                android:layout_gravity="center_vertical"
+                android:textSize="12sp"
+                android:layout_marginRight="24dp"
+                android:text="搜索"/>
+        </LinearLayout>
+    </LinearLayout>
     <RadioGroup
         android:id="@+id/mRadio_cinema"
         android:layout_width="match_parent"

@@ -2,16 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:background="@drawable/me_back"
     android:layout_marginTop="20dp">
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/mtupian"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        app:roundedCornerRadius="5dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,24 +33,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="你好"
+            android:textSize="12sp"
+            android:textColor="#333333"
             android:layout_marginTop="10dp"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="10dp">
             <TextView
                 android:id="@+id/mqianmi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="嘻嘻" />
+                android:text="嘻嘻"
+                android:textSize="12sp"
+                android:textColor="#333333"
+                android:gravity="bottom"/>
             <CheckBox
                 android:id="@+id/mguanzhu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_alignParentRight="true"
+                android:button="@null"
                 android:layout_centerVertical="true"
-                android:layout_marginBottom="-10dp"/>
+                android:background="@drawable/select_xin"/>
         </RelativeLayout>
     </LinearLayout>
+
 </LinearLayout>
