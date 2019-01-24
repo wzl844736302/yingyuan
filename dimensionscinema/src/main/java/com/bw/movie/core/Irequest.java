@@ -128,4 +128,6 @@ public interface Irequest {
                                                           @Query("latitude")String latitude,
                                                           @Query("page") int page,
                                                           @Query("count") int count);
+
+
 }

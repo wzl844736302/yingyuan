@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="129dp"
+    android:layout_marginTop="30dp"
+    android:background="@drawable/list_bg"
+    android:paddingLeft="123dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/list_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="铁血战士"
+            android:textSize="14sp"
+            android:textColor="#fff"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <CheckBox
+            android:id="@+id/lsit_item_cb"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/select_xin"
+            android:button="@null"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/list_item_cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:maxLines="5"
+        android:ellipsize="end"
+        android:textSize="10sp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"/>
+
+
+</LinearLayout>
+    
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/list_item_iv"
+        android:layout_width="103dp"
+        android:layout_height="129dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        app:roundedCornerRadius="5dp"/>
+
+</RelativeLayout>
