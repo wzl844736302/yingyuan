@@ -1,6 +1,7 @@
 package com.bw.movie.core;
 
 import com.bw.movie.bean.HotMovie;
+import com.bw.movie.bean.MovieDetail;
 import com.bw.movie.bean.Recommend;
 import com.bw.movie.bean.Result;
 import com.bw.movie.bean.User;
@@ -129,5 +130,8 @@ public interface Irequest {
                                                           @Query("page") int page,
                                                           @Query("count") int count);
 
-
+    @GET("movie/v1/findMoviesDetail")
+    Observable<Result<MovieDetail>> findDetailMovie(@Header("userId") int userId,
+                                                          @Header("sessionId") String sessionId,
+                                                          @Query("movieId")int movieId);
 }

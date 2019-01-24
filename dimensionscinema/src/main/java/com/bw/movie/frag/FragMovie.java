@@ -24,6 +24,7 @@ import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.presenter.HotMoviePresenter;
 import com.bw.movie.presenter.ReleasePresenter;
 import com.bw.movie.presenter.SoonPresenter;
+import com.bw.movie.view.DetailsActivity;
 import com.bw.movie.view.ListActivity;
 import com.bw.movie.view.RecyclerCoverFlow;
 
@@ -155,11 +156,14 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
         public void fail(ApiException e) {
         }
     }
-    private void onItemClick(HotAdapter adapter){
+    private void onItemClick(final HotAdapter adapter){
         adapter.setOnclickItem(new HotAdapter.OnclickItem() {
             @Override
             public void OnclickItem(View view) {
-                Toast.makeText(getActivity(), soonrecycler.getChildAdapterPosition(view)+"", Toast.LENGTH_SHORT).show();
+                List<HotMovie> list = adapter.getList();
+                Intent intent = new Intent(getActivity(),DetailsActivity.class);
+                intent.putExtra("id",list.get(soonrecycler.getChildAdapterPosition(view)).getId());
+                startActivity(intent);
             }
         });
     }

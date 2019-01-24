@@ -12,13 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity" >
+        <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="design_width_in_dp"
             android:value="720" />
@@ -29,11 +30,13 @@
         <activity android:name=".view.GuideActivity" />
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.RegsterActivity" />
-        <activity android:name=".view.HomeActivity">
-        </activity>
+        <activity android:name=".view.HomeActivity"></activity>
         <activity android:name=".view.MyInForMation" />
         <activity android:name=".view.ListActivity" />
-        <activity android:name=".view.DetailCinemaActivity"></activity>
+        <activity android:name=".view.DetailCinemaActivity" />
+        <activity android:name=".view.DetailsActivity">
+
+        </activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.bw.movie.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -121,11 +122,15 @@ public class ListActivity extends AppCompatActivity implements CustomAdapt {
 
         }
     }
-    private void onItemClick(ListAdapter adapter){
+    private void onItemClick(final ListAdapter adapter){
         adapter.setOnclickItem(new ListAdapter.OnclickItem() {
             @Override
             public void OnclickItem(View view) {
-                Toast.makeText(ListActivity.this, recyclerView.getChildAdapterPosition(view)+"", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(ListActivity.this, recyclerView.getChildAdapterPosition(view)+"", Toast.LENGTH_SHORT).show();
+                List<HotMovie> list = adapter.getList();
+                Intent intent = new Intent(ListActivity.this,DetailsActivity.class);
+                intent.putExtra("id",list.get(recyclerView.getChildAdapterPosition(view)).getId());
+                startActivity(intent);
             }
         });
     }
