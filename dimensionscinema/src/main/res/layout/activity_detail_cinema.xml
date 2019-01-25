@@ -6,5 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".view.DetailCinemaActivity"
     android:background="#fff">
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_bg">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/msim"
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            app:roundedCornerRadius="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="24dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/msim"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="10dp">
+            <TextView
+                android:id="@+id/mname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="哈哈"
+                android:textColor="#fff"/>
+            <TextView
+                android:id="@+id/mweizhi"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="嘻嘻"
+                android:gravity="bottom"
+                android:textColor="#fff"
+                android:layout_marginRight="50dp"/>
+        </LinearLayout>
+        <ImageView
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="66dp"
+            android:src="@drawable/com_icon_navigation_default"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="24dp"/>
+    </RelativeLayout>
 </LinearLayout>

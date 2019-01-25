@@ -79,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
                 SharedPreferences.Editor edit = sp.edit();
                 edit.putString("phone",numStr);
                 edit.putString("pwd",pwdStr);
+                edit.putBoolean("xian",true);
                 edit.putBoolean("bool",save_pwd.isChecked());
                 edit.commit();
                 break;
@@ -107,7 +108,7 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
             if(data.getStatus().equals("0000")){
                 //添加数据库
                 User result = data.getResult();
-                AllUser allUser = new AllUser(System.currentTimeMillis(),result.getSessionId(),result.getUserId(),result.getUserInfo().getNickName(),result.getUserInfo().getPhone(),result.getUserInfo().getBirthday(),result.getUserInfo().getSex(),result.getUserInfo().getLastLoginTime(),result.getUserInfo().getHeadPic());
+                AllUser allUser = new AllUser(1,result.getSessionId(),result.getUserId(),result.getUserInfo().getNickName(),result.getUserInfo().getPhone(),result.getUserInfo().getBirthday(),result.getUserInfo().getSex(),result.getUserInfo().getLastLoginTime(),result.getUserInfo().getHeadPic());
                 AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
                 allUserDao.insertOrReplace(allUser);
                 finish();

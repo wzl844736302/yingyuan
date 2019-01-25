@@ -1,9 +1,6 @@
 package com.bw.movie.view;
 
 import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,12 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,9 +22,6 @@ import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.presenter.DetailMoviePresenter;
 import com.facebook.drawee.view.SimpleDraweeView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import me.jessyan.autosize.internal.CustomAdapt;
 
@@ -168,30 +159,6 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
         btn3Adapter.addList(result.getPosterList());
         btn3Adapter.notifyDataSetChanged();
     }
-    public void showPopupwindow(){
-        View inflate = LayoutInflater.from(DetailsActivity.this).inflate(R.layout.item_btn3, null);
-        PopupWindow popupWindow = new PopupWindow(inflate, RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-        //设置背景,这个没什么效果，不添加会报错
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        //设置点击弹窗外隐藏自身
-        popupWindow.setFocusable(true);
-        popupWindow.setOutsideTouchable(true);
-        //设置位置
-        popupWindow.showAtLocation(inflate, Gravity.BOTTOM, 0, 0);
-        //设置PopupWindow的View点击事件
-        /*setOnPopupViewClick(inflate);*/
-        RecyclerView recyclerView3 = inflate.findViewById(R.id.btn3_recycler);
-        StaggeredGridLayoutManager recyclerViewLayoutManager =
-                new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-
-        recyclerView3.setLayoutManager(recyclerViewLayoutManager);
-        Btn3Adapter btn3Adapter = new Btn3Adapter(DetailsActivity.this);
-        recyclerView3.setAdapter(btn3Adapter);
-        btn3Adapter.addList(result.getPosterList());
-        btn3Adapter.notifyDataSetChanged();
-    }
-
 
     @Override
     public boolean isBaseOnWidth() {

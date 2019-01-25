@@ -51,6 +51,9 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 int id = list.get(i).getId();
                 Intent intent = new Intent(activity.getBaseContext(), DetailCinemaActivity.class);
                 intent.putExtra("id",id);
+                intent.putExtra("tupian",list.get(i).getLogo());
+                intent.putExtra("name",list.get(i).getName());
+                intent.putExtra("weizhi",list.get(i).getAddress());
                 activity.startActivity(intent);
             }
         });

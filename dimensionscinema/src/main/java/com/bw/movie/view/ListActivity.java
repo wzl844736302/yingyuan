@@ -71,7 +71,7 @@ public class ListActivity extends AppCompatActivity implements CustomAdapt {
 
         onItemClick(adapter);
         HotMoviePresenter hotMoviePresenter = new HotMoviePresenter(new HorMovieData());
-        hotMoviePresenter.request(1770, "15482453997081770", 1, 500);
+        hotMoviePresenter.request(userId, sessionId, 1, 500);
         group.check(group.getChildAt(0).getId());
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -228,7 +228,6 @@ public class ListActivity extends AppCompatActivity implements CustomAdapt {
                 Intent intent = new Intent(ListActivity.this,DetailsActivity.class);
                 intent.putExtra("id",list.get(recyclerView.getChildAdapterPosition(view)).getId());
                 startActivity(intent);
-
              }
         });
     }

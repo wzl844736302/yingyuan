@@ -40,6 +40,12 @@
                     android:layout_centerVertical="true"
                     android:textSize="14sp"
                     android:textColor="#333333"/>
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/msim_my"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"/>
             </RelativeLayout>
             <View
                 android:layout_width="match_parent"

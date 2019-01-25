@@ -2,6 +2,8 @@ package com.bw.movie.core;
 
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.MovieDetail;
+import com.bw.movie.bean.MovieList;
+import com.bw.movie.bean.QureyUser;
 import com.bw.movie.bean.Recommend;
 import com.bw.movie.bean.Result;
 import com.bw.movie.bean.User;
@@ -130,8 +132,33 @@ public interface Irequest {
                                                           @Query("page") int page,
                                                           @Query("count") int count);
 
+    /**
+     *
+     * @param userId
+     * @param sessionId
+     * @param movieId
+     * @return
+     */
     @GET("movie/v1/findMoviesDetail")
     Observable<Result<MovieDetail>> findDetailMovie(@Header("userId") int userId,
                                                           @Header("sessionId") String sessionId,
                                                           @Query("movieId")int movieId);
+
+    /**
+     * 查询用户信息
+     * @param userId
+     * @param sessionId
+     * @return
+     */
+    @GET("user/v1/verify/getUserInfoByUserId")
+    Observable<Result<QureyUser>> getUserInfoByUserId(@Header("userId") int userId,
+                                                      @Header("sessionId") String sessionId);
+
+    /**
+     * 根据影院ID查询该影院当前排期的电影列表
+     * @param cinemaId
+     * @return
+     */
+    @GET("movie/v1/findMovieListByCinemaId")
+    Observable<Result<List<MovieList>>> findMovieListByCinemaId(@Query("cinemaId")int cinemaId);
 }

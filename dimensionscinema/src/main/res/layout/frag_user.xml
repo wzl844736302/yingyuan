@@ -20,13 +20,13 @@
             android:src="@drawable/my_icon_remind_default" />
 
         <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/msim_user"
+            android:id="@+id/msimUser"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:layout_gravity="center_horizontal"
             fresco:roundAsCircle="true"/>
         <TextView
-            android:id="@+id/text_login_regist"
+            android:id="@+id/textLoginRegist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -34,6 +34,15 @@
             android:text="登录/注册"
             android:textColor="#fff"
             android:textSize="18sp" />
+        <Button
+            android:layout_width="66dp"
+            android:layout_height="28dp"
+            android:text="签到"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/shape_searchs"
+            android:textSize="14sp"
+            android:textColor="#ffffff"/>
     </LinearLayout>
 
     <LinearLayout
