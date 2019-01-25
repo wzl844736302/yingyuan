@@ -1,6 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_detail_ll">
+    <TextView
+        android:id="@+id/rmdy1"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/tn1_detail"
+        android:layout_marginTop="20dp"
+        android:text="预告片"
+        android:layout_marginLeft="24dp"
+        android:textColor="#333"
+        android:textSize="16sp" />
 
-</LinearLayout>
+    <View
+        android:layout_width="30dp"
+        android:layout_height="3dp"
+        android:layout_marginLeft="24dp"
+        android:layout_below="@+id/rmdy1"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_shou_lien" />
+    <ImageView
+        android:id="@+id/btn2_dow"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="24dp"
+        android:src="@drawable/com_icon_down"
+        android:layout_marginBottom="10dp"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/btn2_dow"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:id="@+id/btn2_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+</RelativeLayout>

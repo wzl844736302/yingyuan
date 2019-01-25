@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -220,6 +222,7 @@ public class ListActivity extends AppCompatActivity implements CustomAdapt {
         et_sou.setVisibility(View.GONE);
         tv_sou.setVisibility(View.GONE);
     }
+
     private void onItemClick(final ListAdapter adapter){
         adapter.setOnclickItem(new ListAdapter.OnclickItem() {
             @Override

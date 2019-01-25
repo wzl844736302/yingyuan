@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="153dp"
+    android:layout_marginBottom="10dp"
+    android:background="#fff">
+    <cn.jzvd.JZVideoPlayerStandard
+        android:id="@+id/view_videoplayer"
+        android:layout_width="match_parent"
+        android:layout_height="153dp"/>
+</LinearLayout>
