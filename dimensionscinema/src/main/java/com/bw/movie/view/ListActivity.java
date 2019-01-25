@@ -1,6 +1,7 @@
 package com.bw.movie.view;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,8 +9,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -52,6 +55,8 @@ public class ListActivity extends AppCompatActivity implements CustomAdapt {
     private List<AllUser> users = new ArrayList<>();
     private TextView tv_sou;
     private EditText et_sou;
+    private RadioButton list_mbutton1,list_mbutton2,list_mbutton3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,20 +80,29 @@ public class ListActivity extends AppCompatActivity implements CustomAdapt {
         HotMoviePresenter hotMoviePresenter = new HotMoviePresenter(new HorMovieData());
         hotMoviePresenter.request(userId, sessionId, 1, 500);
         group.check(group.getChildAt(0).getId());
+        list_mbutton1.setTextColor(Color.WHITE);
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i){
                     case R.id.list_mbutton1:
+                        list_mbutton1.setTextColor(Color.WHITE);
+                        list_mbutton2.setTextColor(Color.BLACK);
+                        list_mbutton3.setTextColor(Color.BLACK);
                         HotMoviePresenter hotMoviePresenter = new HotMoviePresenter(new HorMovieData());
                         hotMoviePresenter.request(userId, sessionId, 1, 500);
-
                         break;
                     case R.id.list_mbutton2:
+                        list_mbutton1.setTextColor(Color.BLACK);
+                        list_mbutton2.setTextColor(Color.WHITE);
+                        list_mbutton3.setTextColor(Color.BLACK);
                         ReleasePresenter releasePresenter = new ReleasePresenter(new ReleaseData());
                         releasePresenter.request(userId, sessionId, 1, 500);
                         break;
                     case R.id.list_mbutton3:
+                        list_mbutton1.setTextColor(Color.BLACK);
+                        list_mbutton2.setTextColor(Color.BLACK);
+                        list_mbutton3.setTextColor(Color.WHITE);
                         SoonPresenter soonPresenter = new SoonPresenter(new SoonData());
                         soonPresenter.request(userId, sessionId, 1, 500);
                         break;
@@ -121,6 +135,9 @@ public class ListActivity extends AppCompatActivity implements CustomAdapt {
         mdingwei = findViewById(R.id.mdingwei);
         tv_sou = findViewById(R.id.tv_sou);
         et_sou = findViewById(R.id.et_sou);
+        list_mbutton1 = findViewById(R.id.list_mbutton1);
+        list_mbutton2 = findViewById(R.id.list_mbutton2);
+        list_mbutton3 = findViewById(R.id.list_mbutton3);
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

@@ -55,7 +55,8 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
         findViewById(R.id.details_btn2).setOnClickListener(this);
         findViewById(R.id.details_btn3).setOnClickListener(this);
         findViewById(R.id.details_btn4).setOnClickListener(this);
-         ll = findViewById(R.id.ll);
+        findViewById(R.id.details_return).setOnClickListener(this);
+        ll = findViewById(R.id.ll);
     }
 
 
@@ -73,6 +74,9 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
                 showBottomDialog3();
                 break;
             case R.id.details_btn4:
+                break;
+            case R.id.details_return:
+                finish();
                 break;
         }
     }
