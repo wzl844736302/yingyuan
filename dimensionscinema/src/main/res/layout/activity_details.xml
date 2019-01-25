@@ -58,6 +58,7 @@
        android:layout_above="@+id/details_return"
         android:layout_marginBottom="15dp">
         <TextView
+            android:id="@+id/details_btn1"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="32dp"
@@ -68,6 +69,7 @@
             android:layout_marginLeft="24dp"
             />
         <TextView
+            android:id="@+id/details_btn2"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="32dp"
@@ -78,6 +80,7 @@
             android:layout_marginLeft="24dp"
             />
         <TextView
+            android:id="@+id/details_btn3"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="32dp"
@@ -88,6 +91,7 @@
             android:layout_marginLeft="24dp"
             />
         <TextView
+            android:id="@+id/details_btn4"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="32dp"
