@@ -1,6 +1,8 @@
 package com.bw.movie.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
@@ -19,6 +21,7 @@ import com.bw.movie.bean.User;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
+import com.bw.movie.frag.FragUser;
 import com.bw.movie.presenter.LoginPresenter;
 import com.bw.movie.utils.util.EncryptUtil;
 import com.bw.movie.utils.util.UIUtils;
@@ -31,12 +34,24 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
     private EditText numEd,pwdEd;
     private boolean iseye = true;
     private CheckBox eyeCb;
+    private SharedPreferences sp;
+    private String pwdStr;
+    private String numStr;
+    private CheckBox save_pwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
+        sp = getSharedPreferences("login",Context.MODE_PRIVATE);
+        if (sp.getBoolean("bool",false)){
+            String phone = sp.getString("phone", "");
+            String pwd = sp.getString("pwd", "");
+            numEd.setText(phone);
+            pwdEd.setText(pwd);
+            save_pwd.setChecked(true);
+        }
     }
 
     private void initView() {
@@ -45,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
         numEd = findViewById(R.id.login_number_ed);
         pwdEd = findViewById(R.id.login_password_ed);
         eyeCb = findViewById(R.id.login_eye_cb);
+        save_pwd = findViewById(R.id.save_pwd);
         eyeCb.setOnClickListener(this);
         findViewById(R.id.btn_regirect_tiao).setOnClickListener(this);
     }
@@ -53,13 +69,18 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
     public void onClick(View view) {
         switch(view.getId()){
             case R.id.login_btn:
-                String pwdStr = pwdEd.getText().toString().trim();
-                String numStr = numEd.getText().toString().trim();
+                pwdStr = pwdEd.getText().toString().trim();
+                numStr = numEd.getText().toString().trim();
                 //AES对称加密
                 String encryptStr = EncryptUtil.encrypt(pwdStr);
                // Toast.makeText(this, pwdStr+encryptStr+"", Toast.LENGTH_SHORT).show();
                 LoginPresenter loginPresenter = new LoginPresenter(new LoginData());
                 loginPresenter.request(numStr,encryptStr);
+                SharedPreferences.Editor edit = sp.edit();
+                edit.putString("phone",numStr);
+                edit.putString("pwd",pwdStr);
+                edit.putBoolean("bool",save_pwd.isChecked());
+                edit.commit();
                 break;
             case R.id.login_eye_cb:
                 if (iseye) {
@@ -89,8 +110,6 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
                 AllUser allUser = new AllUser(System.currentTimeMillis(),result.getSessionId(),result.getUserId(),result.getUserInfo().getNickName(),result.getUserInfo().getPhone(),result.getUserInfo().getBirthday(),result.getUserInfo().getSex(),result.getUserInfo().getLastLoginTime(),result.getUserInfo().getHeadPic());
                 AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
                 allUserDao.insertOrReplace(allUser);
-                //跳转
-                startActivity(new Intent(LoginActivity.this,HomeActivity.class));
                 finish();
             }
         }

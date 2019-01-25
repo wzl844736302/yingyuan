@@ -1,9 +1,13 @@
 package com.bw.movie.frag;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +20,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.map.MapView;
 import com.bw.movie.MyApp;
 import com.bw.movie.R;
 import com.bw.movie.adapter.HotAdapter;
@@ -55,6 +64,10 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
     private List<AllUser> users = new ArrayList<>();
     private int userId;
     private String sessionId;
+    private TextView mdingwei;
+    private MapView mMapView = null;
+    public LocationClient mLocationClient = null;
+    private MyLocationListener myListener = new MyLocationListener();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -63,12 +76,15 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
         bind = ButterKnife.bind(this, view);
         tv_sou = view.findViewById(R.id.tv_sou);
         et_sou = view.findViewById(R.id.et_sou);
+        mdingwei = view.findViewById(R.id.mdingwei);
         //查询数据库
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         users.addAll(allUserDao.loadAll());
-        AllUser allUser = users.get(0);
-        userId = allUser.getUserId();
-        sessionId = allUser.getSessionId();
+        if (users.size()>0){
+            AllUser allUser = users.get(0);
+            userId = allUser.getUserId();
+            sessionId = allUser.getSessionId();
+        }
         HotMoviePresenter hotMoviePresenter = new HotMoviePresenter(new HorMovieData());
         hotMoviePresenter.request(userId, sessionId, 1, 500);
 
@@ -100,8 +116,52 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
         onItemClick(hotAdapter);
         onItemClick(hotAdapter1);
         onItemClick(hotAdapter2);
-
+        initData();
         return view;
+    }
+    public void initData(){
+        //定位
+        mLocationClient = new LocationClient(getActivity());
+        //声明LocationClient类
+        mLocationClient.registerLocationListener(myListener);
+        //注册监听函数
+        LocationClientOption option = new LocationClientOption();
+        option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
+        //可选，是否需要位置描述信息，默认为不需要，即参数为false
+        //如果开发者需要获得当前点的位置信息，此处必须为true
+        option.setIsNeedLocationDescribe(true);
+        //可选，设置是否需要地址信息，默认不需要
+        option.setIsNeedAddress(true);
+        //可选，默认false,设置是否使用gps
+        option.setOpenGps(true);
+        //可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
+        option.setLocationNotify(true);
+        mLocationClient.setLocOption(option);
+        mLocationClient.start();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 100) {
+            //定位
+            mLocationClient = new LocationClient(getActivity());
+            //声明LocationClient类
+            mLocationClient.registerLocationListener(myListener);
+            //注册监听函数
+            LocationClientOption option = new LocationClientOption();
+            option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
+            //可选，是否需要位置描述信息，默认为不需要，即参数为false
+            //如果开发者需要获得当前点的位置信息，此处必须为true
+            option.setIsNeedLocationDescribe(true);
+            //可选，设置是否需要地址信息，默认不需要
+            option.setIsNeedAddress(true);
+            //可选，默认false,设置是否使用gps
+            option.setOpenGps(true);
+            //可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
+            option.setLocationNotify(true);
+            mLocationClient.setLocOption(option);
+            mLocationClient.start();
+        }
     }
 
     private void initVist(View view) {
@@ -137,6 +197,19 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
     }
     private void goListActivity(){
         startActivity(new Intent(getActivity(),ListActivity.class));
+    }
+    //定位实现接口
+    public class MyLocationListener implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            //此处的BDLocation为定位结果信息类，通过它的各种get方法可获取定位相关的全部结果
+            //以下只列举部分获取地址相关的结果信息
+            //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
+            String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
+            String addr = location.getAddrStr();    //获取详细地址信息
+            mdingwei.setText(locationDescribe + addr);
+
+        }
     }
     //点击实现搜索
     @OnClick(R.id.sou)

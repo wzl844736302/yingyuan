@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,71 +18,83 @@
                 android:layout_width="match_parent"
                 android:layout_height="186dp"
                 android:background="@drawable/hotmovie_bg">
+
             </LinearLayout>
-            <LinearLayout
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:orientation="horizontal">
+
                 <ImageView
+                    android:id="@+id/miv"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/com_icon_loc_white_default"
-                    android:layout_gravity="center_vertical"/>
+                    android:src="@drawable/com_icon_loc_white_default" />
+
                 <TextView
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/mdingwei"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="北京"
+                    android:layout_toRightOf="@id/miv"
                     android:textColor="#fff"
-                    android:textSize="14sp"
-                    android:layout_gravity="center_vertical"
-                    android:text="北京"/>
+                    android:layout_marginRight="45dp"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_search"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true">
 
                     <ImageView
                         android:id="@+id/sou"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="5dp"
-                        android:paddingLeft="10dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginRight="10dp"
-                        android:src="@drawable/com_icon_search_default"/>
+                        android:layout_marginBottom="5dp"
+                        android:paddingLeft="10dp"
+                        android:src="@drawable/com_icon_search_default" />
+
                     <EditText
                         android:id="@+id/et_sou"
                         android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:textSize="10sp"
                         android:hint="请输入您要搜索的饮片"
                         android:textColorHint="#fff"
-                        android:layout_gravity="center_vertical"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"/>
+                        android:textSize="10sp"
+                        android:visibility="gone" />
+
                     <TextView
                         android:id="@+id/tv_sou"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#ffff"
-                        android:visibility="gone"
                         android:layout_gravity="center_vertical"
-                        android:textSize="12sp"
                         android:layout_marginRight="24dp"
-                        android:text="搜索"/>
+                        android:text="搜索"
+                        android:textColor="#ffff"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
                 </LinearLayout>
-            </LinearLayout>
+            </RelativeLayout>
+
             <com.bw.movie.view.RecyclerCoverFlow
                 android:id="@+id/list"
                 android:layout_width="match_parent"
@@ -89,117 +102,132 @@
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="85dp"
                 android:layout_marginRight="24dp"></com.bw.movie.view.RecyclerCoverFlow>
+
             <RelativeLayout
                 android:id="@+id/ry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/list"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="24dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="24dp">
+
                 <TextView
                     android:id="@+id/rmdy"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:textSize="16sp"
+                    android:text="热门电影"
                     android:textColor="#333"
-                    android:text="热门电影"/>
+                    android:textSize="16sp" />
+
                 <View
                     android:layout_width="30dp"
                     android:layout_height="3dp"
-                    android:background="@drawable/shape_shou_lien"
-                    android:layout_below="@+id/rmdy"/>
+                    android:layout_below="@+id/rmdy"
+                    android:background="@drawable/shape_shou_lien" />
+
                 <ImageView
                     android:id="@+id/movie_image"
-                    android:padding="5dp"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/com_icon_next_default"
-                    android:layout_alignParentRight="true"/>
+                    android:padding="5dp"
+                    android:src="@drawable/com_icon_next_default" />
             </RelativeLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/home_recycler_hotmovie"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="164dp"
-                android:layout_below="@+id/ry"></android.support.v7.widget.RecyclerView>
+                android:layout_below="@+id/ry"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
+
             <RelativeLayout
                 android:id="@+id/zz"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/home_recycler_hotmovie"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="24dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="24dp">
+
                 <TextView
                     android:id="@+id/zzry"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:textSize="16sp"
+                    android:text="正在热映"
                     android:textColor="#333"
-                    android:text="正在热映"/>
+                    android:textSize="16sp" />
+
                 <View
                     android:layout_width="30dp"
                     android:layout_height="3dp"
-                    android:background="@drawable/shape_shou_lien"
-                    android:layout_below="@+id/zzry"/>
+                    android:layout_below="@+id/zzry"
+                    android:background="@drawable/shape_shou_lien" />
+
                 <ImageView
                     android:id="@+id/movie_image1"
-                    android:padding="5dp"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/com_icon_next_default"
-                    android:layout_alignParentRight="true"/>
+                    android:padding="5dp"
+                    android:src="@drawable/com_icon_next_default" />
             </RelativeLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/home_recycler_being"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="164dp"
-                android:layout_below="@+id/zz"></android.support.v7.widget.RecyclerView>
+                android:layout_below="@+id/zz"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
+
             <RelativeLayout
                 android:id="@+id/jj"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/home_recycler_being"
-                android:layout_marginTop="20dp"
                 android:layout_marginLeft="24dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="24dp">
+
                 <TextView
                     android:id="@+id/jjry"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:textSize="16sp"
+                    android:text="即将上映"
                     android:textColor="#333"
-                    android:text="即将上映"/>
+                    android:textSize="16sp" />
+
                 <View
                     android:layout_width="30dp"
                     android:layout_height="3dp"
-                    android:background="@drawable/shape_shou_lien"
-                    android:layout_below="@+id/jjry"/>
+                    android:layout_below="@+id/jjry"
+                    android:background="@drawable/shape_shou_lien" />
+
                 <ImageView
                     android:id="@+id/movie_image2"
-                    android:padding="5dp"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/com_icon_next_default"
-                    android:layout_alignParentRight="true"/>
+                    android:padding="5dp"
+                    android:src="@drawable/com_icon_next_default" />
             </RelativeLayout>
+
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/home_recycler_soon"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="164dp"
-                android:layout_below="@+id/jj"></android.support.v7.widget.RecyclerView>
+                android:layout_below="@+id/jj"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="20dp"></android.support.v7.widget.RecyclerView>
         </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>

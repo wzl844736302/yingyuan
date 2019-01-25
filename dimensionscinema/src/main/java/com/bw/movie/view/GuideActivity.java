@@ -71,7 +71,7 @@ public class GuideActivity extends AppCompatActivity implements CustomAdapt {
         });
         //判断
         if (sp.getBoolean("bool", false)) {
-            Intent intent = new Intent(GuideActivity.this, LoginActivity.class);
+            Intent intent = new Intent(GuideActivity.this, HomeActivity.class);
             startActivity(intent);
             finish();
         }

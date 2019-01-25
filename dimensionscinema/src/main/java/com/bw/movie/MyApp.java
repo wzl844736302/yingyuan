@@ -5,9 +5,15 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.map.MapView;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.dao.DaoMaster;
 import com.bw.movie.dao.DaoSession;
+import com.bw.movie.frag.FragCinema;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 
@@ -20,7 +26,6 @@ public class MyApp extends Application {
     private static Handler mMainThreadHandler;
     /** 主线程Looper */
     private static Looper mMainLooper;
-
     /**
      * context 全局唯一的上下文
      */
@@ -37,7 +42,6 @@ public class MyApp extends Application {
         mMainLooper = getMainLooper();
         Fresco.initialize(this);
         daoSession = DaoMaster.newDevSession(context,AllUserDao.TABLENAME);
-
     }
     /**
      * @author: 康海涛 QQ2541849981
@@ -67,5 +71,4 @@ public class MyApp extends Application {
     public static Looper getMainThreadLooper() {
         return mMainLooper;
     }
-
 }

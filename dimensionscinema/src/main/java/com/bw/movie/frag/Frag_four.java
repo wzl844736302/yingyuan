@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.bw.movie.R;
+import com.bw.movie.view.HomeActivity;
 import com.bw.movie.view.LoginActivity;
 
 import me.jessyan.autosize.internal.CustomAdapt;
@@ -32,7 +33,7 @@ public class Frag_four extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         //点击跳转
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        Intent intent = new Intent(getActivity(), HomeActivity.class);
         startActivity(intent);
         getActivity().finish();
     }
