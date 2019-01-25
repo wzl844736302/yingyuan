@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00ffffff">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1000dp"
+            android:layout_marginTop="30dp"
+            android:background="#fff"></LinearLayout>
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/btn1_image"
+            android:layout_width="111dp"
+            android:layout_height="145dp"
+            android:layout_marginLeft="24dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            android:layout_toRightOf="@+id/btn1_image"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/btn1_lei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="类型:动作动作动作"
+                android:textColor="#333"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/btn1_dao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="类型:动作动作动作"
+                android:textColor="#333"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/btn1_shi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="类型:动作动作动作"
+                android:textColor="#333"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/btn1_chan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="类型:动作动作动作"
+                android:textColor="#333"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btn1_dow"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="24dp"
+            android:src="@drawable/com_icon_down" />
+
+        <TextView
+            android:id="@+id/rmdy"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_below="@+id/btn1_image"
+            android:layout_marginTop="20dp"
+            android:text="剧情介绍"
+            android:layout_marginLeft="24dp"
+            android:textColor="#333"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/xi"
+            android:layout_width="30dp"
+            android:layout_height="3dp"
+            android:layout_marginLeft="24dp"
+            android:layout_below="@+id/rmdy"
+            android:background="@drawable/shape_shou_lien" />
+
+        <TextView
+            android:id="@+id/tn1_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/xi"
+            android:layout_margin="24dp"
+            android:maxLines="4"
+            android:ellipsize="end"
+            android:textColor="#333"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/rmdy1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_below="@+id/tn1_detail"
+            android:layout_marginTop="20dp"
+            android:text="剧情介绍"
+            android:layout_marginLeft="24dp"
+            android:textColor="#333"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/mxi"
+            android:layout_width="30dp"
+            android:layout_height="3dp"
+            android:layout_marginLeft="24dp"
+            android:layout_below="@+id/rmdy1"
+            android:background="@drawable/shape_shou_lien" />
+
+        <TextView
+
+            android:layout_width="75dp"
+            android:layout_height="32dp"
+            android:layout_below="@id/mxi"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:text="演员名字"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:background="@drawable/shape_btn1_text" />
+
+        <TextView
+            android:id="@+id/btn1_btn"
+            android:layout_width="75dp"
+            android:layout_height="32dp"
+            android:layout_below="@id/mxi"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/shape_btn1_text"
+            android:text="扮演角色"
+            android:textColor="#fff"
+            android:textSize="12sp"
+            android:gravity="center"/>
+        <ListView
+            android:id="@+id/list"
+            android:layout_below="@+id/btn1_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+    </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    </RelativeLayout>

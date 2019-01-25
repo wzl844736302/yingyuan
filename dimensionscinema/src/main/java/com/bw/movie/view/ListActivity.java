@@ -1,5 +1,6 @@
 package com.bw.movie.view;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,7 +10,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -71,7 +71,7 @@ public class ListActivity extends AppCompatActivity implements CustomAdapt {
 
         onItemClick(adapter);
         HotMoviePresenter hotMoviePresenter = new HotMoviePresenter(new HorMovieData());
-        hotMoviePresenter.request(userId, sessionId, 1, 500);
+        hotMoviePresenter.request(1770, "15482453997081770", 1, 500);
         group.check(group.getChildAt(0).getId());
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -220,12 +220,16 @@ public class ListActivity extends AppCompatActivity implements CustomAdapt {
         et_sou.setVisibility(View.GONE);
         tv_sou.setVisibility(View.GONE);
     }
-    private void onItemClick(ListAdapter adapter){
+    private void onItemClick(final ListAdapter adapter){
         adapter.setOnclickItem(new ListAdapter.OnclickItem() {
             @Override
             public void OnclickItem(View view) {
-                Toast.makeText(ListActivity.this, recyclerView.getChildAdapterPosition(view)+"", Toast.LENGTH_SHORT).show();
-            }
+                List<HotMovie> list = adapter.getList();
+                Intent intent = new Intent(ListActivity.this,DetailsActivity.class);
+                intent.putExtra("id",list.get(recyclerView.getChildAdapterPosition(view)).getId());
+                startActivity(intent);
+
+             }
         });
     }
 }
