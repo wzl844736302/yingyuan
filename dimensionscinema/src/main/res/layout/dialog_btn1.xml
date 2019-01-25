@@ -4,18 +4,23 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/shape_detail_ll"></LinearLayout>
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
     <RelativeLayout
+        android:id="@+id/lll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#00ffffff">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1000dp"
-            android:layout_marginTop="30dp"
-            android:background="#fff"></LinearLayout>
+
 
         <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/btn1_image"

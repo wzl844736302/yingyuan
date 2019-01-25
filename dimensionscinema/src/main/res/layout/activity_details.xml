@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/xiangqing"
-    tools:context=".view.DetailsActivity">
+    tools:context=".view.DetailsActivity"
+    android:id="@+id/ll">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
