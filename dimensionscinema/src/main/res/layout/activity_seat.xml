@@ -5,20 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.SeatActivity">
-    <ImageView
-        android:id="@+id/seat_a"
-        android:layout_width="172dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="152dp"
-        android:src="@drawable/seat_bg"/>
-
     <LinearLayout
         android:id="@+id/seat_bg"
         android:layout_width="match_parent"
         android:layout_height="186dp"
-        android:background="@drawable/hotmovie_bg"
-        android:orientation="horizontal"></LinearLayout>
+        android:background="@drawable/statbag"
+        android:orientation="horizontal">
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/seat_tit"

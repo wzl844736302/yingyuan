@@ -173,13 +173,14 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
 
     @Override
     public void clickItem(int pos) {
-        
+
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.movie_image:
+
                 goListActivity();
                 break;
             case R.id.movie_image1:
@@ -191,7 +192,8 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
         }
     }
     private void goListActivity(){
-        startActivity(new Intent(getActivity(),ListActivity.class));
+        Intent intent = new Intent(getActivity(), ListActivity.class);
+        startActivity(intent);
     }
     //定位实现接口
     public class MyLocationListener implements BDLocationListener {

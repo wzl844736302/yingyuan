@@ -1,6 +1,8 @@
 package com.bw.movie.frag;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -81,13 +83,22 @@ public class FragUser extends Fragment{
     //点击退出登录
     @OnClick(R.id.tuichudenglu)
     public void tuichu(){
-        SharedPreferences.Editor edit = sp.edit();
-        edit.putBoolean("xian", false);
-        xian = false;
-        edit.commit();
-        //跳转
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivity(intent);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("确定退出吗?");
+        builder.setNegativeButton("取消",null);
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SharedPreferences.Editor edit = sp.edit();
+                edit.putBoolean("xian", false);
+                xian = false;
+                edit.commit();
+                //跳转
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        }).show();
+
     }
     //解绑
     @Override

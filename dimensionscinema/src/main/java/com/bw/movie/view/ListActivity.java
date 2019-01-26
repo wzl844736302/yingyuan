@@ -56,6 +56,7 @@ public class ListActivity extends AppCompatActivity {
     private TextView tv_sou;
     private EditText et_sou;
     private RadioButton list_mbutton1,list_mbutton2,list_mbutton3;
+    private int a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,9 @@ public class ListActivity extends AppCompatActivity {
             userId = allUser.getUserId();
             sessionId = allUser.getSessionId();
         }
+        Intent intent = getIntent();
+        a = intent.getIntExtra("a",0);
+
         adapter = new ListAdapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         recyclerView.setAdapter(adapter);
@@ -109,6 +113,7 @@ public class ListActivity extends AppCompatActivity {
                 }
             }
         });
+
         //定位
         mLocationClient = new LocationClient(this);
         //声明LocationClient类
