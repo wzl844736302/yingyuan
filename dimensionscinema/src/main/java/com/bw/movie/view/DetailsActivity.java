@@ -16,32 +16,45 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bw.movie.MyApp;
 import com.bw.movie.R;
 import com.bw.movie.adapter.Btn2Adapter;
 import com.bw.movie.adapter.Btn3Adapter;
+import com.bw.movie.adapter.Btn4Adapter;
+import com.bw.movie.bean.AllUser;
+import com.bw.movie.bean.Comment;
 import com.bw.movie.bean.MovieDetail;
 import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
+import com.bw.movie.dao.AllUserDao;
+import com.bw.movie.presenter.CommentPresenter;
 import com.bw.movie.presenter.DetailMoviePresenter;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
+
+import java.util.List;
 
 import cn.jzvd.JZVideoPlayerStandard;
 import me.jessyan.autosize.internal.CustomAdapt;
 
 public class DetailsActivity extends AppCompatActivity implements CustomAdapt,View.OnClickListener {
-
+    private int userId;
+    private String sessionId;
     private SimpleDraweeView movieimage;
     private TextView moviename;
     private MovieDetail result;
     private RelativeLayout ll;
+    private int id;
+    private Btn4Adapter btn4Adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        int id = getIntent().getIntExtra("id", 0);
+         id = getIntent().getIntExtra("id", 0);
         DetailMoviePresenter presenter = new DetailMoviePresenter(new DetailData());
         presenter.request(1770, "15482453997081770",id);
 
@@ -74,6 +87,7 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
                 showBottomDialog3();
                 break;
             case R.id.details_btn4:
+                showBottomDialog4();
                 break;
             case R.id.details_return:
                 finish();
@@ -199,8 +213,7 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
             }
         });
         RecyclerView recyclerView2 = dialog.findViewById(R.id.btn2_recycler);
-        LinearLayoutManager layoutManager =
-                new LinearLayoutManager(DetailsActivity.this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(DetailsActivity.this);
          recyclerView2.setLayoutManager(layoutManager);
         Btn2Adapter btn2Adapter = new Btn2Adapter(DetailsActivity.this);
         recyclerView2.setAdapter(btn2Adapter);
@@ -213,7 +226,49 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
             }
         });
     }
+    private void showBottomDialog4(){
+        //1、使用Dialog、设置style
+        final Dialog dialog = new Dialog(this,R.style.DialogTheme);
+        //2、设置布局
+        View view = View.inflate(this,R.layout.dialog_btn4,null);
+        dialog.setContentView(view);
+        Window window = dialog.getWindow();
+        //设置弹出位置
+        window.setGravity(Gravity.BOTTOM);
+        //设置弹出动画
+        window.setWindowAnimations(R.style.main_menu_animStyle);
+        //设置对话框大小
+        Window dialogWindow = dialog.getWindow();
+        WindowManager m = getWindow().getWindowManager();
+        Display d = m.getDefaultDisplay(); // 获取屏幕宽、高度
+        WindowManager.LayoutParams p = dialogWindow.getAttributes(); // 获取对话框当前的参数值
+        p.height = (int) (d.getHeight() * 0.8); // 高度设置为屏幕的0.6，根据实际情况调整
+        p.width = (int) (d.getWidth()); // 宽度设置为屏幕的0.65，根据实际情况调整
+        dialogWindow.setAttributes(p);
+        dialog.show();
+        dialog.findViewById(R.id.btn4_dow).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        XRecyclerView recyclerView = dialog.findViewById(R.id.btn4_recycler);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(DetailsActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+        btn4Adapter = new Btn4Adapter(DetailsActivity.this);
+        recyclerView.setAdapter(btn4Adapter);
 
+        AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
+        List<AllUser> users = allUserDao.loadAll();
+        if (users.size()>0){
+            AllUser allUser = users.get(0);
+            userId = allUser.getUserId();
+            sessionId = allUser.getSessionId();
+        }
+
+        CommentPresenter commentPresenter = new CommentPresenter(new CommentData());
+        commentPresenter.request(userId,sessionId,id);
+    }
     @Override
     public boolean isBaseOnWidth() {
         return false;
@@ -222,5 +277,18 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
     @Override
     public float getSizeInDp() {
         return 720;
+    }
+
+    private class CommentData implements DataCall<Result<List<Comment>>> {
+        @Override
+        public void success(Result<List<Comment>> data) {
+            btn4Adapter.addList(data.getResult());
+            btn4Adapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void fail(ApiException e) {
+
+        }
     }
 }

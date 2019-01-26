@@ -1,11 +1,13 @@
 package com.bw.movie.core;
 
+import com.bw.movie.bean.Comment;
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.MovieDetail;
 import com.bw.movie.bean.MovieList;
 import com.bw.movie.bean.QureyUser;
 import com.bw.movie.bean.Recommend;
 import com.bw.movie.bean.Result;
+import com.bw.movie.bean.UpUser;
 import com.bw.movie.bean.User;
 
 import java.util.List;
@@ -161,4 +163,29 @@ public interface Irequest {
      */
     @GET("movie/v1/findMovieListByCinemaId")
     Observable<Result<List<MovieList>>> findMovieListByCinemaId(@Query("cinemaId")int cinemaId);
+
+    /**
+     * 电影详情列表
+     * @param userId
+     * @param sessionId
+     * @param movieId
+     * @param page
+     * @param count
+     * @return
+     */
+    @GET("movie/v1/findAllMovieComment")
+    Observable<Result<List<Comment>>> findAllMovieComment(@Header("userId") int userId,
+                                                          @Header("sessionId") String sessionId,
+                                                          @Query("movieId") int movieId,
+                                                          @Query("page") int page,
+                                                          @Query("count") int count);
+
+    @POST("user/v1/verify/modifyUserInfo")
+    @FormUrlEncoded
+    Observable<Result<List<UpUser>>> updateUserInfo(@Header("userId") int userId,
+                                                    @Header("sessionId") String sessionId,
+                                                    @Field("nickName") String nickName,
+                                                    @Field("sex") int sex,
+                                                    @Field("email") String email
+    );
 }
