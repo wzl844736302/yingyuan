@@ -40,9 +40,9 @@ public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHo
         clickCb = cb;
     }
 
-  /*  public void setList(List<HotMovie> lists){
-        list.addAll(lists);
-    }*/
+    public List<HotMovie>  getList(){
+        return  list;
+    }
 
     public void setOnClickLstn(onItemClick cb) {
         this.clickCb = cb;
