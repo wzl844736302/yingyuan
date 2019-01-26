@@ -173,7 +173,10 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
 
     @Override
     public void clickItem(int pos) {
-        
+        int id = hotMovieAdapter.getList().get(pos).getId();
+        Intent intent = new Intent(getActivity(),DetailsActivity.class);
+        intent.putExtra("id",id);
+        startActivity(intent);
     }
 
     @Override
