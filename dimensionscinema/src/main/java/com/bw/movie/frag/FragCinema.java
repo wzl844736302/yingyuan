@@ -49,7 +49,7 @@ import butterknife.Unbinder;
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class FragCinema extends Fragment implements CustomAdapt {
+public class FragCinema extends Fragment{
 
     private RadioGroup mradio_cinema;
     private Button mbutton1;
@@ -254,16 +254,6 @@ public class FragCinema extends Fragment implements CustomAdapt {
             mdingwei.setText(locationDescribe + addr);
 
         }
-    }
-
-    @Override
-    public boolean isBaseOnWidth() {
-        return false;
-    }
-
-    @Override
-    public float getSizeInDp() {
-        return 720;
     }
 
     //解绑

@@ -28,7 +28,7 @@ import com.bw.movie.utils.util.UIUtils;
 
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class LoginActivity extends AppCompatActivity implements CustomAdapt,View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button logBtn;
     private EditText numEd,pwdEd;
@@ -119,14 +119,4 @@ public class LoginActivity extends AppCompatActivity implements CustomAdapt,View
             UIUtils.showToastSafe(e.getCode()+" "+e.getDisplayMessage());
         }
     }
-    @Override
-    public boolean isBaseOnWidth() {
-        return false;
-    }
-
-    @Override
-    public float getSizeInDp() {
-        return 720;
-    }
-
 }

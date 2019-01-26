@@ -12,7 +12,7 @@ import com.bw.movie.R;
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class MainActivity extends AppCompatActivity implements CustomAdapt {
+public class MainActivity extends AppCompatActivity{
 
     int i = 3;
     Handler handler = new Handler(){
@@ -38,13 +38,4 @@ public class MainActivity extends AppCompatActivity implements CustomAdapt {
         handler.sendEmptyMessageDelayed(1,1000);
     }
 
-    @Override
-    public boolean isBaseOnWidth() {
-        return false;
-    }
-
-    @Override
-    public float getSizeInDp() {
-        return 720;
-    }
 }

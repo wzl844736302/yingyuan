@@ -2,6 +2,7 @@ package com.bw.movie.view;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,35 +16,52 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.bw.movie.MyApp;
 import com.bw.movie.R;
 import com.bw.movie.adapter.Btn2Adapter;
 import com.bw.movie.adapter.Btn3Adapter;
+import com.bw.movie.bean.AllUser;
 import com.bw.movie.bean.MovieDetail;
 import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
+import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.DetailMoviePresenter;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import cn.jzvd.JZVideoPlayerStandard;
-import me.jessyan.autosize.internal.CustomAdapt;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DetailsActivity extends AppCompatActivity implements CustomAdapt,View.OnClickListener {
+import cn.jzvd.JZVideoPlayerStandard;
+
+
+public class DetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private SimpleDraweeView movieimage;
     private TextView moviename;
     private MovieDetail result;
     private RelativeLayout ll;
-
+    private int id;
+    private String name;
+    private int userId;
+    private String sessionId;
+    private List<AllUser> users = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-
+        //查询数据库
+        AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
+        users.addAll(allUserDao.loadAll());
+        if (users.size()>0) {
+            AllUser allUser = users.get(0);
+            userId = allUser.getUserId();
+            sessionId = allUser.getSessionId();
+        }
         int id = getIntent().getIntExtra("id", 0);
         DetailMoviePresenter presenter = new DetailMoviePresenter(new DetailData());
-        presenter.request(1770, "15482453997081770",id);
+        presenter.request(userId, sessionId,id);
 
         initView();
     }
@@ -57,6 +75,7 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
         findViewById(R.id.details_btn4).setOnClickListener(this);
         findViewById(R.id.details_return).setOnClickListener(this);
         ll = findViewById(R.id.ll);
+        findViewById(R.id.goupiao).setOnClickListener(this);
     }
 
 
@@ -78,6 +97,13 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
             case R.id.details_return:
                 finish();
                 break;
+            case R.id.goupiao:
+                //跳转
+                Intent intent = new Intent(DetailsActivity.this, TicketActivity.class);
+                intent.putExtra("name",name);
+                intent.putExtra("id",id);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -87,7 +113,9 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
          //   Toast.makeText(DetailsActivity.this, data.getResult().getPosterList().toString()+"", Toast.LENGTH_SHORT).show();
              result = data.getResult();
             movieimage.setImageURI(Uri.parse(result.getImageUrl()));
-            moviename.setText(result.getName());
+            name = result.getName();
+            moviename.setText(name);
+            id  = result.getId();
         }
 
         @Override
@@ -212,15 +240,5 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
                 JZVideoPlayerStandard.releaseAllVideos();
             }
         });
-    }
-
-    @Override
-    public boolean isBaseOnWidth() {
-        return false;
-    }
-
-    @Override
-    public float getSizeInDp() {
-        return 720;
     }
 }

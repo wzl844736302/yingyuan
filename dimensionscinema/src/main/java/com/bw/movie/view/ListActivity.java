@@ -41,7 +41,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class ListActivity extends AppCompatActivity implements CustomAdapt {
+public class ListActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RadioGroup group;
@@ -175,15 +175,6 @@ public class ListActivity extends AppCompatActivity implements CustomAdapt {
             mdingwei.setText(locationDescribe + addr);
 
         }
-    }
-    @Override
-    public boolean isBaseOnWidth() {
-        return false;
-    }
-
-    @Override
-    public float getSizeInDp() {
-        return 720;
     }
 
     //热门电影

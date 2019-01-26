@@ -181,7 +181,9 @@ public class CoverFlowLayoutManger extends RecyclerView.LayoutManager {
      */
     private void layoutItems(RecyclerView.Recycler recycler,
                              RecyclerView.State state, int scrollDirection) {
-        if (state.isPreLayout()) return;
+        if (state.isPreLayout()){
+            return;
+        }
 
         Rect displayFrame = new Rect(mOffsetAll, 0, mOffsetAll + getHorizontalSpace(), getVerticalSpace());
 

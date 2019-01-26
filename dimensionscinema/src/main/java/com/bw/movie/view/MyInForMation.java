@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class MyInForMation extends AppCompatActivity implements CustomAdapt {
+public class MyInForMation extends AppCompatActivity {
     @BindView(R.id.msim_my)
     SimpleDraweeView msim_my;
     @BindView(R.id.tv_username)
@@ -100,13 +100,4 @@ public class MyInForMation extends AppCompatActivity implements CustomAdapt {
         finish();
     }
 
-    @Override
-    public boolean isBaseOnWidth() {
-        return false;
-    }
-
-    @Override
-    public float getSizeInDp() {
-        return 720;
-    }
 }

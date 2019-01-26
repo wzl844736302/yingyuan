@@ -26,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class GuideActivity extends AppCompatActivity implements CustomAdapt {
+public class GuideActivity extends AppCompatActivity {
 
     @BindView(R.id.mView)
     ViewPager mview;
@@ -79,15 +79,5 @@ public class GuideActivity extends AppCompatActivity implements CustomAdapt {
         SharedPreferences.Editor edit = sp.edit();
         edit.putBoolean("bool", true);
         edit.commit();
-    }
-
-    @Override
-    public boolean isBaseOnWidth() {
-        return false;
-    }
-
-    @Override
-    public float getSizeInDp() {
-        return 720;
     }
 }

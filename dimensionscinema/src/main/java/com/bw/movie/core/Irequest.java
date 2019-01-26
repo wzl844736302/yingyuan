@@ -1,11 +1,13 @@
 package com.bw.movie.core;
 
+import com.bw.movie.bean.CinemasList;
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.MovieDetail;
 import com.bw.movie.bean.MovieList;
 import com.bw.movie.bean.QureyUser;
 import com.bw.movie.bean.Recommend;
 import com.bw.movie.bean.Result;
+import com.bw.movie.bean.ScheduleList;
 import com.bw.movie.bean.User;
 
 import java.util.List;
@@ -161,4 +163,22 @@ public interface Irequest {
      */
     @GET("movie/v1/findMovieListByCinemaId")
     Observable<Result<List<MovieList>>> findMovieListByCinemaId(@Query("cinemaId")int cinemaId);
+
+    /**
+     * 根据电影ID和影院ID查询电影排期列表
+     * @param cinemasId
+     * @param movieId
+     * @return
+     */
+    @GET("movie/v1/findMovieScheduleList")
+    Observable<Result<List<ScheduleList>>> findMovieScheduleList(@Query("cinemasId")int cinemasId,
+                                                                 @Query("movieId")int movieId);
+
+    /**
+     * 根据电影ID查询当前排片该电影的影院列表
+     * @param movieid
+     * @return
+     */
+    @GET("movie/v1/findCinemasListByMovieId")
+    Observable<Result<List<CinemasList>>> findCinemasListByMovieId(@Query("movieId")int movieid);
 }

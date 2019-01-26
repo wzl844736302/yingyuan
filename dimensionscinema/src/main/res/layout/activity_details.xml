@@ -118,6 +118,7 @@
         android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"/>
     <TextView
+        android:id="@+id/goupiao"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginBottom="20dp"

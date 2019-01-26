@@ -31,7 +31,7 @@ import butterknife.Unbinder;
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class FragUser extends Fragment implements CustomAdapt {
+public class FragUser extends Fragment{
 
     private Unbinder bind;
     private List<AllUser> users = new ArrayList<>();
@@ -117,14 +117,5 @@ public class FragUser extends Fragment implements CustomAdapt {
             String nickName = allUser.getNickName();
             mtext.setText(nickName);
         }
-    }
-
-    @Override
-    public boolean isBaseOnWidth() {
-        return false;
-    }
-    @Override
-    public float getSizeInDp() {
-        return 720;
     }
 }

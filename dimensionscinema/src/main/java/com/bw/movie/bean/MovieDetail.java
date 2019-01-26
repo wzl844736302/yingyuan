@@ -139,7 +139,22 @@ public class MovieDetail {
         this.posterList = posterList;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "MovieDetail{" +
+                "director='" + director + '\'' +
+                ", duration='" + duration + '\'' +
+                ", followMovie=" + followMovie +
+                ", id=" + id +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", movieTypes='" + movieTypes + '\'' +
+                ", name='" + name + '\'' +
+                ", placeOrigin='" + placeOrigin + '\'' +
+                ", rank=" + rank +
+                ", starring='" + starring + '\'' +
+                ", summary='" + summary + '\'' +
+                ", posterList=" + posterList +
+                ", shortFilmList=" + shortFilmList +
+                '}';
+    }
 }

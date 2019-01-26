@@ -56,9 +56,9 @@
             android:enabled="true"
             android:process=":remote" />
 
-        <activity android:name=".view.SeatActivity">
-
-        </activity>
+        <activity android:name=".view.SeatActivity" />
+        <activity android:name=".view.TicketActivity" />
+        <activity android:name=".view.TicketDetailActivity"></activity>
     </application>
 
 </manifest>

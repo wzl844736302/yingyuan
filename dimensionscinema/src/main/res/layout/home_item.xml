@@ -9,8 +9,7 @@
         android:id="@+id/item_home_image"
         android:layout_width="126dp"
         android:layout_height="164dp"
-        app:roundedCornerRadius="8dp"
-        />
+        app:roundedCornerRadius="8dp" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"

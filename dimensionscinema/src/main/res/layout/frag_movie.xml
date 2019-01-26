@@ -101,7 +101,9 @@
                 android:layout_height="223dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="85dp"
-                android:layout_marginRight="24dp"></com.bw.movie.view.RecyclerCoverFlow>
+                android:layout_marginRight="24dp">
+
+            </com.bw.movie.view.RecyclerCoverFlow>
 
             <RelativeLayout
                 android:id="@+id/ry"

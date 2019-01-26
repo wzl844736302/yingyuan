@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class HomeActivity extends AppCompatActivity implements CustomAdapt {
+public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.mFrame_home)
     FrameLayout mframe_home;
     private RadioButton[] buttons;
@@ -93,14 +93,5 @@ public class HomeActivity extends AppCompatActivity implements CustomAdapt {
                 break;
         }
         transaction1.commit();
-    }
-
-    @Override
-    public boolean isBaseOnWidth() {
-        return false;
-    }
-    @Override
-    public float getSizeInDp() {
-        return 720;
     }
 }

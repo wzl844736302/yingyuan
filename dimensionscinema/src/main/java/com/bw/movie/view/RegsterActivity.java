@@ -16,7 +16,7 @@ import com.bw.movie.utils.util.EncryptUtil;
 
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class RegsterActivity extends AppCompatActivity implements CustomAdapt,View.OnClickListener {
+public class RegsterActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText emailEd,numberEd,pwdEd,pwd2Ed,nameEd;
 
@@ -62,14 +62,5 @@ public class RegsterActivity extends AppCompatActivity implements CustomAdapt,Vi
         @Override
         public void fail(ApiException e) {
         }
-    }
-    @Override
-    public boolean isBaseOnWidth() {
-        return false;
-    }
-
-    @Override
-    public float getSizeInDp() {
-        return 720;
     }
 }
