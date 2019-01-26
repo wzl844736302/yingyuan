@@ -83,13 +83,21 @@ public class DetailCinemaActivity extends AppCompatActivity {
                 finish();
             }
         });
+        scheduleAdapter.setBacks(new ScheduleAdapter.CallBacks() {
+            @Override
+            public void call(int pos) {
+                //跳转
+                Intent intent = new Intent(DetailCinemaActivity.this, SeatActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //实现当前电影列表
-    class DetailCall implements DataCall<Result<List<MovieList>>>{
+    class DetailCall implements DataCall<Result<List<MovieList>>> {
         @Override
         public void success(Result<List<MovieList>> data) {
-            if (data.getStatus().equals("0000")){
+            if (data.getStatus().equals("0000")) {
                 result = data.getResult();
                 detailCinemaAdapter.addAll(result);
                 id1 = result.get(0).getId();
@@ -98,31 +106,34 @@ public class DetailCinemaActivity extends AppCompatActivity {
                     public void onItemSelected(int position) {
                         id1 = result.get(position).getId();
                         schedulePresenter = new SchedulePresenter(new ScheduleCall());
-                        schedulePresenter.request(DetailCinemaActivity.this.id,id1);
+                        schedulePresenter.request(DetailCinemaActivity.this.id, id1);
                     }
                 });
                 //获取数据
                 schedulePresenter = new SchedulePresenter(new ScheduleCall());
-                schedulePresenter.request(id,id1);
+                schedulePresenter.request(id, id1);
                 detailCinemaAdapter.notifyDataSetChanged();
             }
         }
+
         @Override
         public void fail(ApiException e) {
 
         }
     }
+
     //实现电影排期列表
-    class ScheduleCall implements DataCall<Result<List<ScheduleList>>>{
+    class ScheduleCall implements DataCall<Result<List<ScheduleList>>> {
 
         @Override
         public void success(Result<List<ScheduleList>> data) {
-            if (data.getStatus().equals("0000")){
+            if (data.getStatus().equals("0000")) {
                 final List<ScheduleList> result = data.getResult();
                 scheduleAdapter.addAll(result);
                 scheduleAdapter.notifyDataSetChanged();
             }
         }
+
         @Override
         public void fail(ApiException e) {
 

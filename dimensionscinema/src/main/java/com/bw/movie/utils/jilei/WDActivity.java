@@ -11,16 +11,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
-
-import com.dingtao.rrmmp.R;
-import com.dingtao.rrmmp.bean.UserInfo;
-import com.dingtao.rrmmp.core.db.DaoMaster;
-import com.dingtao.rrmmp.core.db.UserInfoDao;
-import com.dingtao.rrmmp.util.LogUtils;
-
-import org.greenrobot.greendao.query.WhereCondition;
-
-import java.util.List;
+import com.bw.movie.bean.UserInfo;
+import com.bw.movie.utils.util.LogUtils;
 
 import butterknife.ButterKnife;
 
@@ -45,12 +37,12 @@ public abstract class WDActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //查询登录用户，方便每个页面使用
-        UserInfoDao userInfoDao = DaoMaster.newDevSession(this,UserInfoDao.TABLENAME).getUserInfoDao();
-        List<UserInfo> userInfos = userInfoDao.queryBuilder().where(UserInfoDao.Properties.Status.eq(1)).list();
+       /* //查询登录用户，方便每个页面使用
+        AllUserDao userInfoDao = DaoMaster.newDevSession(this,AllUserDao.TABLENAME).getAllUserDao();
+        List<UserInfo> userInfos = userInfoDao.queryBuilder().where(AllUserDao.Properties.eq(1)).list();
         if (userInfos!=null&&userInfos.size()>0){
             LOGIN_USER = userInfos.get(0);//读取第一项
-        }
+        }*/
         //打印堆栈ID
         LogUtils.e("getTaskId = " + getTaskId());
         initLoad();

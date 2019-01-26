@@ -1,9 +1,6 @@
 package com.bw.movie.utils.jilei;
 
-import com.dingtao.rrmmp.bean.UserInfo;
-import com.dingtao.rrmmp.core.db.DaoMaster;
-import com.dingtao.rrmmp.core.db.UserInfoDao;
-import com.dingtao.rrmmp.util.LogUtils;
+import com.bw.movie.utils.util.LogUtils;
 import com.google.gson.Gson;
 
 import android.content.SharedPreferences;
@@ -20,22 +17,22 @@ import butterknife.Unbinder;
 
 public abstract class WDFragment extends Fragment {
 	public Gson mGson = new Gson();
-	public SharedPreferences mShare = WDApplication.getShare();
+	/*public SharedPreferences mShare = WDApplication.getShare();
 
 	private Unbinder unbinder;
-	public UserInfo LOGIN_USER;
+	public UserInfo LOGIN_USER;*/
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		UserInfoDao userInfoDao = DaoMaster.newDevSession(getActivity(),UserInfoDao.TABLENAME).getUserInfoDao();
+	/*	UserInfoDao userInfoDao = DaoMaster.newDevSession(getActivity(),UserInfoDao.TABLENAME).getUserInfoDao();
 		List<UserInfo> userInfos = userInfoDao.queryBuilder().where(UserInfoDao.Properties.Status.eq(1)).list();
-		LOGIN_USER = userInfos.get(0);//读取第一项
+		LOGIN_USER = userInfos.get(0);//读取第一项*/
 
 		// 每次ViewPager要展示该页面时，均会调用该方法获取显示的View
 		long time = System.currentTimeMillis();
 		View view = inflater.inflate(getLayoutId(),container,false);
-		unbinder = ButterKnife.bind(this,view);
+		/*unbinder = ButterKnife.bind(this,view);*/
 		initView();
 		LogUtils.e(this.toString()+"页面加载使用："+(System.currentTimeMillis()-time));
 		return view;
@@ -44,7 +41,7 @@ public abstract class WDFragment extends Fragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		unbinder.unbind();
+		/*unbinder.unbind();*/
 	}
 
 	//	@Override
