@@ -16,30 +16,23 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.bw.movie.MyApp;
-import android.widget.Toast;
-
 import com.bw.movie.MyApp;
 import com.bw.movie.R;
 import com.bw.movie.adapter.Btn2Adapter;
 import com.bw.movie.adapter.Btn3Adapter;
 import com.bw.movie.bean.AllUser;
 import com.bw.movie.adapter.Btn4Adapter;
-import com.bw.movie.bean.AllUser;
 import com.bw.movie.bean.Comment;
 import com.bw.movie.bean.MovieDetail;
 import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
-import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.CommentPresenter;
 import com.bw.movie.presenter.DetailMoviePresenter;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
-import org.w3c.dom.Comment;
 
 import java.util.List;
 
@@ -52,7 +45,6 @@ import me.jessyan.autosize.internal.CustomAdapt;
 
 public class DetailsActivity extends AppCompatActivity implements View.OnClickListener {
 
-public class DetailsActivity extends AppCompatActivity implements CustomAdapt,View.OnClickListener {
     private int userId;
     private String sessionId;
     private SimpleDraweeView movieimage;
@@ -61,11 +53,7 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
     private RelativeLayout ll;
     private int id;
     private Btn4Adapter btn4Adapter;
-
-    private int id;
     private String name;
-    private int userId;
-    private String sessionId;
     private List<AllUser> users = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +85,7 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
         findViewById(R.id.details_btn4).setOnClickListener(this);
         findViewById(R.id.details_return).setOnClickListener(this);
         ll = findViewById(R.id.ll);
+        findViewById(R.id.goupiao).setOnClickListener(this);
     }
 
 
@@ -305,16 +294,6 @@ public class DetailsActivity extends AppCompatActivity implements CustomAdapt,Vi
         CommentPresenter commentPresenter = new CommentPresenter(new CommentData());
         commentPresenter.request(userId,sessionId,id);
     }
-    @Override
-    public boolean isBaseOnWidth() {
-        return false;
-    }
-
-    @Override
-    public float getSizeInDp() {
-        return 720;
-    }
-
     private class CommentData implements DataCall<Result<List<Comment>>> {
         @Override
         public void success(Result<List<Comment>> data) {

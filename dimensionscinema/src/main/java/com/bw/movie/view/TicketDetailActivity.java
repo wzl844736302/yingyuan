@@ -92,6 +92,15 @@ public class TicketDetailActivity extends AppCompatActivity {
                 finish();
             }
         });
+        //回调接口
+        scheduleAdapter.setBacks(new ScheduleAdapter.CallBacks() {
+            @Override
+            public void call(int pos) {
+                //跳转
+                Intent intent1 = new Intent(TicketDetailActivity.this, SeatActivity.class);
+                startActivity(intent1);
+            }
+        });
     }
     //实现电影排期列表
     class SchedulesCall implements DataCall<Result<List<ScheduleList>>>{

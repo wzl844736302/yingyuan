@@ -1,6 +1,7 @@
 package com.bw.movie.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.bw.movie.R;
 import com.bw.movie.bean.ScheduleList;
+import com.bw.movie.view.SeatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,14 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
     }
+    private CallBacks backs;
+    public interface CallBacks{
+        void call(int pos);
+    }
+
+    public void setBacks(CallBacks backs) {
+        this.backs = backs;
+    }
 
     @NonNull
     @Override
@@ -32,12 +42,19 @@ public class ScheduleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int i) {
         MyHolder myHolder = (MyHolder) holder;
         myHolder.textView.setText(list.get(i).getScreeningHall());
         myHolder.textView2.setText(list.get(i).getBeginTime());
         myHolder.textView3.setText(list.get(i).getEndTime());
         myHolder.textView4.setText(list.get(i).getPrice()+"");
+        //跳转
+        myHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backs.call(i);
+            }
+        });
     }
 
     @Override

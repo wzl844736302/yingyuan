@@ -1,6 +1,7 @@
 package com.bw.movie.core;
 
 import com.bw.movie.bean.CinemasList;
+import com.bw.movie.bean.Comment;
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.MovieDetail;
 import com.bw.movie.bean.MovieList;
@@ -8,6 +9,7 @@ import com.bw.movie.bean.QureyUser;
 import com.bw.movie.bean.Recommend;
 import com.bw.movie.bean.Result;
 import com.bw.movie.bean.ScheduleList;
+import com.bw.movie.bean.UpUser;
 import com.bw.movie.bean.User;
 
 import java.util.List;
