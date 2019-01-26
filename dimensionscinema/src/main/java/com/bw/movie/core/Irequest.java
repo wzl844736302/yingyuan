@@ -165,6 +165,31 @@ public interface Irequest {
     Observable<Result<List<MovieList>>> findMovieListByCinemaId(@Query("cinemaId")int cinemaId);
 
     /**
+     * 电影详情列表
+     * @param userId
+     * @param sessionId
+     * @param movieId
+     * @param page
+     * @param count
+     * @return
+     */
+    @GET("movie/v1/findAllMovieComment")
+    Observable<Result<List<Comment>>> findAllMovieComment(@Header("userId") int userId,
+                                                          @Header("sessionId") String sessionId,
+                                                          @Query("movieId") int movieId,
+                                                          @Query("page") int page,
+                                                          @Query("count") int count);
+
+    @POST("user/v1/verify/modifyUserInfo")
+    @FormUrlEncoded
+    Observable<Result<List<UpUser>>> updateUserInfo(@Header("userId") int userId,
+                                                    @Header("sessionId") String sessionId,
+                                                    @Field("nickName") String nickName,
+                                                    @Field("sex") int sex,
+                                                    @Field("email") String email
+    );
+
+    /**
      * 根据电影ID和影院ID查询电影排期列表
      * @param cinemasId
      * @param movieId
