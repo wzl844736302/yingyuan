@@ -109,6 +109,7 @@ public class TicketDetailActivity extends WDActivity {
                 intent1.putExtra("begin",result.get(pos).getBeginTime());
                 intent1.putExtra("end",result.get(pos).getEndTime());
                 intent1.putExtra("mz",result.get(pos).getScreeningHall());
+                intent1.putExtra("qian",result.get(pos).getPrice());
                 startActivity(intent1);
             }
         });

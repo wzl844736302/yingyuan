@@ -172,10 +172,11 @@
             android:text="￥"
             android:layout_marginRight="6dp"/>
         <TextView
+            android:id="@+id/sumqian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="85.3"
+            android:text="0.00"
             android:textSize="36sp"
             android:textColor="#b11450"
             android:layout_marginRight="36dp"/>

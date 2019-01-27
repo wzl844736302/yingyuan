@@ -27,6 +27,7 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,8 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
     private int userId;
     private String sessionId;
     private TextView mname,address,mname1,begin1,end1,ting1;
+    private double qian;
+    private TextView sumQian;
 
     @Override
     protected void initView() {
@@ -49,6 +52,7 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
         begin1 = findViewById(R.id.begin);
         end1 = findViewById(R.id.end);
         ting1 = findViewById(R.id.ting);
+        sumQian = findViewById(R.id.sumqian);
         //接收值
         String name1 = getIntent().getStringExtra("name1");
         String address1 = getIntent().getStringExtra("address1");
@@ -56,6 +60,8 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
         String begin = getIntent().getStringExtra("begin");
         String end = getIntent().getStringExtra("end");
         String mz = getIntent().getStringExtra("mz");
+         qian = getIntent().getDoubleExtra("qian", 0);
+
         id = getIntent().getIntExtra("id", 0);
         //设置值
         mname.setText(name1);
@@ -78,6 +84,8 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
 
         seatTableView.setSeatChecker(new SeatTable.SeatChecker() {
 
+            private NumberFormat nf;
+
             @Override
             public boolean isValidSeat(int row, int column) {
                 return true;
@@ -93,13 +101,16 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
 
             @Override
             public void checked(int row, int column) {
-
+                 nf = NumberFormat.getNumberInstance();
+                nf.setMaximumFractionDigits(2);
                 checked++;
+                sumQian.setText(nf.format(qian*checked)+"");
             }
 
             @Override
             public void unCheck(int row, int column) {
                 checked--;
+                sumQian.setText(nf.format(qian*checked)+"");
             }
 
             @Override
@@ -128,7 +139,6 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
                 break;
         }
     }
-
     private void showBottomDialog() {
         //1、使用Dialog、设置style
         final Dialog dialog = new Dialog(this, R.style.DialogTheme);
