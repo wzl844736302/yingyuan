@@ -88,8 +88,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.goupiao).setOnClickListener(this);
     }
 
-
-
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -300,7 +298,6 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
             btn4Adapter.addList(data.getResult());
             btn4Adapter.notifyDataSetChanged();
         }
-
         @Override
         public void fail(ApiException e) {
 

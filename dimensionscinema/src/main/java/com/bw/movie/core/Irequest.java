@@ -208,4 +208,36 @@ public interface Irequest {
      */
     @GET("movie/v1/findCinemasListByMovieId")
     Observable<Result<List<CinemasList>>> findCinemasListByMovieId(@Query("movieId")int movieid);
+
+    /**
+     * 下单
+     * @param userId
+     * @param sessionId
+     * @param scheduleId
+     * @param amount
+     * @param sign
+     * @return
+     */
+    @POST("movie/v1/verify/buyMovieTicket")
+    @FormUrlEncoded
+    Observable<Result> buyMovieTicket(@Header("userId") int userId,
+                                                   @Header("sessionId") String sessionId,
+                                                   @Field("scheduleId") int scheduleId,
+                                                   @Field("amount") int amount,
+                                                   @Field("sign") String sign);
+
+    /**
+     * 微信支付
+     * @param userId
+     * @param sessionId
+     * @param payType
+     * @param orderId
+     * @return
+     */
+    @POST("movie/v1/verify/pay")
+    @FormUrlEncoded
+    Observable<Result> pay(@Header("userId") int userId,
+                                                   @Header("sessionId") String sessionId,
+                                                   @Field("payType") int payType,
+                                                   @Field("orderId") String orderId);
 }
