@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'bw_movie'
             keyPassword '123456'
-            storeFile file('C:/Users/王子龙/Desktop/movie.keystore')
+            storeFile file('C:/Users/asus/Desktop/movie.keystore')
             storePassword '123456'
         }
     }
@@ -16,14 +16,17 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
     sourceSets {
@@ -31,6 +34,8 @@ android {
             jni.srcDirs = []
             jniLibs.srcDirs = ['libs']
         }
+    }
+    productFlavors {
     }
 }
 greendao {
@@ -66,4 +71,6 @@ dependencies {
     implementation('com.jcodecraeer:xrecyclerview:1.5.9') {
         exclude group: 'com.android.support'
     }
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+
 }

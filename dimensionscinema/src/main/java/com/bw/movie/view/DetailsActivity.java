@@ -297,7 +297,6 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
             btn4Adapter.addList(data.getResult());
             btn4Adapter.notifyDataSetChanged();
         }
-
         @Override
         public void fail(ApiException e) {
 

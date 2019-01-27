@@ -42,6 +42,7 @@ public class TicketDetailActivity extends WDActivity {
     private ScheduleAdapter scheduleAdapter;
     private RecyclerView mrecycler;
     private ImageView fanhui;
+    private List<ScheduleList> result;
 
     @Override
     protected void initView() {
@@ -97,6 +98,7 @@ public class TicketDetailActivity extends WDActivity {
             public void call(int pos) {
                 //跳转
                 Intent intent1 = new Intent(TicketDetailActivity.this, SeatActivity.class);
+                intent1.putExtra("id",result.get(pos).getId());
                 startActivity(intent1);
             }
         });
@@ -112,7 +114,7 @@ public class TicketDetailActivity extends WDActivity {
         @Override
         public void success(Result<List<ScheduleList>> data) {
             if (data.getStatus().equals("0000")){
-                List<ScheduleList> result = data.getResult();
+                result = data.getResult();
                 scheduleAdapter.addAll(result);
                 scheduleAdapter.notifyDataSetChanged();
             }
