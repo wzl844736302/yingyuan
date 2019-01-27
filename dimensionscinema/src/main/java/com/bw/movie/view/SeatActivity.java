@@ -182,7 +182,6 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
             request.sign = data.getSign();
             msgApi.sendReq(request);
         }
-
         @Override
         public void fail(ApiException e) {
 
