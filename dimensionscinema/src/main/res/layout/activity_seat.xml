@@ -10,55 +10,84 @@
         android:layout_width="match_parent"
         android:layout_height="186dp"
         android:background="@drawable/statbag"
-        android:orientation="horizontal">
-
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/mname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:text="中午的"
+            android:textColor="#fff"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:text="中午的"
+            android:layout_marginTop="5dp"
+            android:textColor="#fff"
+            android:textSize="12sp" />
+        <TextView
+            android:id="@+id/mname1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:text="中午的"
+            android:layout_marginTop="10dp"
+            android:textColor="#fff"
+            android:textSize="18sp" />
+        <LinearLayout
+            android:id="@+id/seat_tit"
+            android:layout_width="match_parent"
+            android:layout_marginRight="24dp"
+            android:layout_height="26dp"
+            android:layout_marginLeft="24dp"
+            android:background="#77ffffff"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/begin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:textSize="12sp"
+                android:textColor="#99ffffff"
+                android:text="哈哈"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textSize="12sp"
+                android:textColor="#99ffffff"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="12sp"
+                android:textColor="#99ffffff"
+                android:text="哈哈"/>
+            <TextView
+                android:id="@+id/ting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="嘻嘻"
+                android:layout_gravity="center"
+                android:layout_marginLeft="50dp"/>
+        </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="10dp"
-        android:text="中午的"
-        android:textColor="#fff"
-        android:textSize="14sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="25dp"
-        android:text="中午的"
-        android:textColor="#fff"
-        android:textSize="12sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="45dp"
-        android:text="中午的"
-        android:textColor="#fff"
-        android:textSize="18sp" />
-    <TextView
-        android:id="@+id/seat_tit"
-        android:layout_width="match_parent"
-        android:layout_marginRight="24dp"
-        android:layout_height="26dp"
-        android:gravity="center"
-        android:layout_marginLeft="24dp"
-        android:text="asdasdasdasdasdad"
-        android:textColor="#fff"
-        android:textSize="13sp"
-        android:layout_marginTop="80dp"
-        android:background="#33ffffff"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="125dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginBottom="44dp"
-        android:layout_below="@id/seat_tit">
+        android:layout_marginBottom="44dp">
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"

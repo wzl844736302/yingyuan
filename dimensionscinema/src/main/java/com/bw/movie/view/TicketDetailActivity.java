@@ -1,8 +1,6 @@
 package com.bw.movie.view;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -20,7 +18,6 @@ import com.bw.movie.bean.ScheduleList;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
-import com.bw.movie.presenter.DetailCinemaPresenter;
 import com.bw.movie.presenter.DetailMoviePresenter;
 import com.bw.movie.presenter.SchedulePresenter;
 import com.bw.movie.utils.jilei.WDActivity;
@@ -43,7 +40,14 @@ public class TicketDetailActivity extends WDActivity {
     private RecyclerView mrecycler;
     private ImageView fanhui;
     private List<ScheduleList> result;
+    private String name;
+    private String address;
+    private String resultName;
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_ticket_detail;
+    }
     @Override
     protected void initView() {
         //初始化控件
@@ -61,8 +65,8 @@ public class TicketDetailActivity extends WDActivity {
         Intent intent = getIntent();
         int id1 = intent.getIntExtra("id1", 0);
         int id = intent.getIntExtra("id", 0);
-        String name = intent.getStringExtra("name");
-        String address = intent.getStringExtra("address");
+        name = intent.getStringExtra("name");
+        address = intent.getStringExtra("address");
         //设置值
         tname.setText(name);
         taddress.setText(address);
@@ -97,17 +101,20 @@ public class TicketDetailActivity extends WDActivity {
             @Override
             public void call(int pos) {
                 //跳转
-                Intent intent1 = new Intent(TicketDetailActivity.this, SeatActivity.class);
+                Intent intent1 = new Intent(TicketDetailActivity.this,SeatActivity.class);
+                intent1.putExtra("name1", name);
+                intent1.putExtra("address1", address);
+                intent1.putExtra("dname",resultName);
                 intent1.putExtra("id",result.get(pos).getId());
+                intent1.putExtra("begin",result.get(pos).getBeginTime());
+                intent1.putExtra("end",result.get(pos).getEndTime());
+                intent1.putExtra("mz",result.get(pos).getScreeningHall());
                 startActivity(intent1);
             }
         });
     }
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_ticket_detail;
-    }
+
     //实现电影排期列表
     class SchedulesCall implements DataCall<Result<List<ScheduleList>>>{
 
@@ -131,7 +138,8 @@ public class TicketDetailActivity extends WDActivity {
             if (data.getStatus().equals("0000")){
                 MovieDetail result = data.getResult();
                 msim.setImageURI(result.getImageUrl());
-                dname.setText(result.getName());
+                resultName = result.getName();
+                dname.setText(resultName);
                 leixing.setText(result.getMovieTypes());
                 daoyan.setText(result.getDirector());
                 shichang.setText(result.getDuration());

@@ -1,6 +1,7 @@
 package com.bw.movie.view;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.bw.movie.MyApp;
 import com.bw.movie.R;
@@ -19,6 +21,7 @@ import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.MoviekeyPresenter;
 import com.bw.movie.presenter.WxPresenter;
+import com.bw.movie.utils.jilei.WDActivity;
 import com.bw.movie.utils.util.MD5Utils;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -27,18 +30,41 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SeatActivity extends AppCompatActivity implements View.OnClickListener {
+public class SeatActivity extends WDActivity implements View.OnClickListener {
     public SeatTable seatTableView;
     private int checked = 0;
     int id;
     private List<AllUser> users = new ArrayList<>();
     private int userId;
     private String sessionId;
+    private TextView mname,address,mname1,begin1,end1,ting1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seat);
+    protected void initView() {
+        //初始化控件
+        findViewById(R.id.seat_v).setOnClickListener(this);
+        mname = findViewById(R.id.mname);
+        address = findViewById(R.id.address);
+        mname1 = findViewById(R.id.mname1);
+        begin1 = findViewById(R.id.begin);
+        end1 = findViewById(R.id.end);
+        ting1 = findViewById(R.id.ting);
+        //接收值
+        String name1 = getIntent().getStringExtra("name1");
+        String address1 = getIntent().getStringExtra("address1");
+        String dname = getIntent().getStringExtra("dname");
+        String begin = getIntent().getStringExtra("begin");
+        String end = getIntent().getStringExtra("end");
+        String mz = getIntent().getStringExtra("mz");
+        id = getIntent().getIntExtra("id", 0);
+        //设置值
+        mname.setText(name1);
+        address.setText(address1);
+        mname1.setText(dname);
+        begin1.setText(begin);
+        end1.setText(end);
+        ting1.setText(mz);
+        //查询数据库
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         users.addAll(allUserDao.loadAll());
         if (users.size() > 0) {
@@ -46,9 +72,6 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
             userId = allUser.getUserId();
             sessionId = allUser.getSessionId();
         }
-
-        id = getIntent().getIntExtra("id", 0);
-        Toast.makeText(this, id + "排期表", Toast.LENGTH_SHORT).show();
         seatTableView = findViewById(R.id.seat_seat);
         seatTableView.setScreenName("8号厅荧幕");//设置屏幕名称
         seatTableView.setMaxSelected(8);//设置最多选中
@@ -86,11 +109,11 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
 
         });
         seatTableView.setData(10, 10);
-        initView();
     }
 
-    private void initView() {
-        findViewById(R.id.seat_v).setOnClickListener(this);
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_seat;
     }
 
     @Override
@@ -141,8 +164,6 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
         dialog.findViewById(R.id.wx_qd).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SeatActivity.this, id + "", Toast.LENGTH_SHORT).show();
-
                 MoviekeyPresenter moviekeyPresenter = new MoviekeyPresenter(new KeyData());
                 String s = MD5Utils.MD5(userId + "" + id + "" + checked + "movie");
                 moviekeyPresenter.request(userId, sessionId, id, checked, s);
@@ -151,20 +172,16 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     class KeyData implements DataCall<Result> {
-
         @Override
         public void success(Result data) {
-            Toast.makeText(SeatActivity.this, data.getOrderId() + "", Toast.LENGTH_SHORT).show();
             WxPresenter wxPresenter = new WxPresenter(new WxData());
             wxPresenter.request(userId, sessionId, 1, data.getOrderId());
         }
-
         @Override
         public void fail(ApiException e) {
 
         }
     }
-
     class WxData implements DataCall<Result> {
         @Override
         public void success(Result data) {
@@ -182,7 +199,6 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
             request.sign = data.getSign();
             msgApi.sendReq(request);
         }
-
         @Override
         public void fail(ApiException e) {
 
