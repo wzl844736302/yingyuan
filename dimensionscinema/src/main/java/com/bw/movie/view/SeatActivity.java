@@ -10,11 +10,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import com.bw.movie.MyApp;
-
 import com.bw.movie.R;
-import com.bw.movie.utils.jilei.WDActivity;
 import com.bw.movie.bean.AllUser;
 import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
@@ -30,10 +27,6 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SeatActivity extends WDActivity {
-import java.util.ArrayList;
-import java.util.List;
-
 public class SeatActivity extends AppCompatActivity implements View.OnClickListener {
     public SeatTable seatTableView;
     private int checked = 0;
@@ -43,7 +36,6 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
     private String sessionId;
 
     @Override
-    protected void initView() {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seat);
@@ -56,7 +48,7 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         id = getIntent().getIntExtra("id", 0);
-        Toast.makeText(this, id+"排期表", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, id + "排期表", Toast.LENGTH_SHORT).show();
         seatTableView = findViewById(R.id.seat_seat);
         seatTableView.setScreenName("8号厅荧幕");//设置屏幕名称
         seatTableView.setMaxSelected(8);//设置最多选中
@@ -158,42 +150,42 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-     class KeyData implements DataCall<Result>{
+    class KeyData implements DataCall<Result> {
 
         @Override
         public void success(Result data) {
-            Toast.makeText(SeatActivity.this,  data.getOrderId()+"", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SeatActivity.this, data.getOrderId() + "", Toast.LENGTH_SHORT).show();
             WxPresenter wxPresenter = new WxPresenter(new WxData());
-            wxPresenter.request(userId,sessionId,1,data.getOrderId());
+            wxPresenter.request(userId, sessionId, 1, data.getOrderId());
         }
-        seatTableView.setData(10,15);
-    }
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_seat;
         @Override
         public void fail(ApiException e) {
 
         }
     }
 
-    private class WxData implements DataCall<Result> {
+    class WxData implements DataCall<Result> {
         @Override
         public void success(Result data) {
-            Toast.makeText(SeatActivity.this, data.getMessage()+"", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SeatActivity.this, data.getMessage() + "", Toast.LENGTH_SHORT).show();
             final IWXAPI msgApi = WXAPIFactory.createWXAPI(SeatActivity.this, null);
-
-// 将该app注册到微信
-
+            // 将该app注册到微信
             msgApi.registerApp("wxb3852e6a6b7d9516");
             PayReq request = new PayReq();
             request.appId = data.getAppId();
             request.partnerId = data.getPartnerId();
-            request.prepayId= data.getPrepayId();
+            request.prepayId = data.getPrepayId();
             request.packageValue = data.getPackageValue();
-            request.nonceStr= data.getNonceStr();
-            request.timeStamp= data.getTimeStamp();
-            request.sign= data.getSign();
+            request.nonceStr = data.getNonceStr();
+            request.timeStamp = data.getTimeStamp();
+            request.sign = data.getSign();
             msgApi.sendReq(request);
         }
+
+        @Override
+        public void fail(ApiException e) {
+
+        }
+    }
+}
