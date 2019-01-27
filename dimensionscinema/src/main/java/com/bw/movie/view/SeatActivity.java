@@ -1,16 +1,13 @@
 package com.bw.movie.view;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import com.bw.movie.R;
 
-public class SeatActivity extends AppCompatActivity  {
+import com.bw.movie.R;
+import com.bw.movie.utils.jilei.WDActivity;
+
+public class SeatActivity extends WDActivity {
     public SeatTable seatTableView;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seat);
-
+    protected void initView() {
         seatTableView = findViewById(R.id.seat_seat);
         seatTableView.setScreenName("8号厅荧幕");//设置屏幕名称
         seatTableView.setMaxSelected(3);//设置最多选中
@@ -50,7 +47,10 @@ public class SeatActivity extends AppCompatActivity  {
 
         });
         seatTableView.setData(10,15);
+    }
 
-
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_seat;
     }
 }

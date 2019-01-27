@@ -23,12 +23,13 @@ import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.DetailCinemaPresenter;
 import com.bw.movie.presenter.DetailMoviePresenter;
 import com.bw.movie.presenter.SchedulePresenter;
+import com.bw.movie.utils.jilei.WDActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketDetailActivity extends AppCompatActivity {
+public class TicketDetailActivity extends WDActivity {
 
     private TextView tname,taddress;
     private DetailMoviePresenter moviePresenter;
@@ -43,9 +44,7 @@ public class TicketDetailActivity extends AppCompatActivity {
     private ImageView fanhui;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticket_detail);
+    protected void initView() {
         //初始化控件
         tname = findViewById(R.id.name);
         taddress = findViewById(R.id.address);
@@ -101,6 +100,11 @@ public class TicketDetailActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_ticket_detail;
     }
     //实现电影排期列表
     class SchedulesCall implements DataCall<Result<List<ScheduleList>>>{

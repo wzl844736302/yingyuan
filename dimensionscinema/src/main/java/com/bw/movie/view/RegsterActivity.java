@@ -1,39 +1,34 @@
 package com.bw.movie.view;
 
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.bw.movie.R;
 import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.presenter.RegsterPresenter;
+import com.bw.movie.utils.jilei.WDActivity;
 import com.bw.movie.utils.util.EncryptUtil;
 
-import me.jessyan.autosize.internal.CustomAdapt;
-
-public class RegsterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegsterActivity extends WDActivity implements View.OnClickListener {
 
     private EditText emailEd,numberEd,pwdEd,pwd2Ed,nameEd;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_regster);
-        initView();
-    }
-
-    private void initView() {
+    protected void initView() {
         emailEd = findViewById(R.id.edit_register_email);
         numberEd = findViewById(R.id.edit_register_number);
         pwdEd = findViewById(R.id.edit_register_pwd);
-       /* pwd2Ed = findViewById(R.id.edit_register_pwd2);*/
+        /* pwd2Ed = findViewById(R.id.edit_register_pwd2);*/
         nameEd = findViewById(R.id.edit_regiter_name);
         findViewById(R.id.btn_register).setOnClickListener(this);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_regster;
     }
 
     @Override

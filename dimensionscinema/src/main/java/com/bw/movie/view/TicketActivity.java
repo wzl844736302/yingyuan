@@ -17,10 +17,11 @@ import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.presenter.CinemasPresenter;
+import com.bw.movie.utils.jilei.WDActivity;
 
 import java.util.List;
 
-public class TicketActivity extends AppCompatActivity {
+public class TicketActivity extends WDActivity {
     private CinemasPresenter cinemasPresenter;
     private TextView mname;
     private RecyclerView recycler;
@@ -30,9 +31,7 @@ public class TicketActivity extends AppCompatActivity {
     private int id;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ticket);
+    protected void initView() {
         //初始化控件
         mname = findViewById(R.id.mName);
         recycler = findViewById(R.id.recycler);
@@ -72,6 +71,11 @@ public class TicketActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_ticket;
     }
     //实现根据电影ID查询当前排片该电影的影院列表
     class CinemasCall implements DataCall<Result<List<CinemasList>>> {

@@ -23,12 +23,13 @@ import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.frag.FragUser;
 import com.bw.movie.presenter.LoginPresenter;
+import com.bw.movie.utils.jilei.WDActivity;
 import com.bw.movie.utils.util.EncryptUtil;
 import com.bw.movie.utils.util.UIUtils;
 
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends WDActivity implements View.OnClickListener {
 
     private Button logBtn;
     private EditText numEd,pwdEd;
@@ -40,10 +41,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CheckBox save_pwd;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        initView();
+    protected int getLayoutId() {
+        return R.layout.activity_login;
+    }
+    @Override
+    protected void initView() {
         sp = getSharedPreferences("login",Context.MODE_PRIVATE);
         if (sp.getBoolean("bool",false)){
             String phone = sp.getString("phone", "");
@@ -52,9 +54,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             pwdEd.setText(pwd);
             save_pwd.setChecked(true);
         }
-    }
-
-    private void initView() {
         logBtn = findViewById(R.id.login_btn);
         logBtn.setOnClickListener(this);
         numEd = findViewById(R.id.login_number_ed);
@@ -64,7 +63,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         eyeCb.setOnClickListener(this);
         findViewById(R.id.btn_regirect_tiao).setOnClickListener(this);
     }
-
     @Override
     public void onClick(View view) {
         switch(view.getId()){

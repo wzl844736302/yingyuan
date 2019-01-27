@@ -15,6 +15,7 @@ import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.QureyUserPresenter;
+import com.bw.movie.utils.jilei.WDActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class MyInForMation extends AppCompatActivity {
+public class MyInForMation extends WDActivity {
     @BindView(R.id.msim_my)
     SimpleDraweeView msim_my;
     @BindView(R.id.tv_username)
@@ -46,9 +47,7 @@ public class MyInForMation extends AppCompatActivity {
     private boolean xian;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_in_for_mation);
+    protected void initView() {
         //绑定
         ButterKnife.bind(this);
         //查询数据库
@@ -59,11 +58,13 @@ public class MyInForMation extends AppCompatActivity {
             userId = allUser.getUserId();
             sessionId = allUser.getSessionId();
         }
-
         //设置数据
         qureyUserPresenter = new QureyUserPresenter(new QureyUserCall());
         qureyUserPresenter.request(userId, sessionId);
-
+    }
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_my_in_for_mation;
     }
 
     //实现查询用户信息

@@ -18,6 +18,7 @@ import com.bw.movie.frag.Frag_four;
 import com.bw.movie.frag.Frag_one;
 import com.bw.movie.frag.Frag_three;
 import com.bw.movie.frag.Frag_two;
+import com.bw.movie.utils.jilei.WDActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends WDActivity {
 
     @BindView(R.id.mView)
     ViewPager mview;
@@ -36,11 +37,7 @@ public class GuideActivity extends AppCompatActivity {
     private SharedPreferences sp;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guide);
-        //绑定
-        ButterKnife.bind(this);
+    protected void initView() {
         sp = getSharedPreferences("welcome", Context.MODE_PRIVATE);
         //添加到list里面
         list.add(new Frag_one());
@@ -58,12 +55,10 @@ public class GuideActivity extends AppCompatActivity {
             public void onPageScrolled(int i, float v, int i1) {
 
             }
-
             @Override
             public void onPageSelected(int i) {
                 mradio.check(mradio.getChildAt(i).getId());
             }
-
             @Override
             public void onPageScrollStateChanged(int i) {
 
@@ -80,4 +75,10 @@ public class GuideActivity extends AppCompatActivity {
         edit.putBoolean("bool", true);
         edit.commit();
     }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_guide;
+    }
+
 }
