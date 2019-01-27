@@ -18,6 +18,7 @@ import com.bw.movie.MyApp;
 import com.bw.movie.R;
 import com.bw.movie.bean.AllUser;
 import com.bw.movie.dao.AllUserDao;
+import com.bw.movie.view.BuyTicketActivity;
 import com.bw.movie.view.FeedBackActivity;
 import com.bw.movie.view.FocusOnActivity;
 import com.bw.movie.view.LoginActivity;
@@ -87,6 +88,13 @@ public class FragUser extends Fragment{
     public void guanzhu(){
         //跳转
         Intent intent = new Intent(getActivity(), FocusOnActivity.class);
+        getActivity().startActivity(intent);
+    }
+    //点击跳转购票记录
+    @OnClick(R.id.goupiaojilu)
+    public void jilu(){
+        //跳转
+        Intent intent = new Intent(getActivity(), BuyTicketActivity.class);
         getActivity().startActivity(intent);
     }
     //点击跳转意见反馈

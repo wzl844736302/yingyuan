@@ -1,5 +1,6 @@
 package com.bw.movie.core;
 
+import com.bw.movie.bean.BuyTicketList;
 import com.bw.movie.bean.CinemasList;
 import com.bw.movie.bean.Comment;
 import com.bw.movie.bean.FocusList;
@@ -314,7 +315,23 @@ public interface Irequest {
     @POST("movie/v1/verify/pay")
     @FormUrlEncoded
     Observable<Result> pay(@Header("userId") int userId,
-                                                   @Header("sessionId") String sessionId,
-                                                   @Field("payType") int payType,
-                                                   @Field("orderId") String orderId);
+                           @Header("sessionId") String sessionId,
+                           @Field("payType") int payType,
+                           @Field("orderId") String orderId);
+
+    /**
+     * 用户购票记录查询列表
+     * @param userId
+     * @param sessionId
+     * @param page
+     * @param count
+     * @param status
+     * @return
+     */
+    @GET("user/v1/verify/findUserBuyTicketRecordList")
+    Observable<Result<List<BuyTicketList>>> findUserBuyTicketRecordList(@Header("userId") int userId,
+                                                                        @Header("sessionId") String sessionId,
+                                                                        @Query("page")int page,
+                                                                        @Query("count")int count,
+                                                                        @Query("status")int status);
 }
