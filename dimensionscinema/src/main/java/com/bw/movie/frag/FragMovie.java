@@ -220,6 +220,10 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
     public void et_sou(){
         et_sou.setVisibility(View.GONE);
         tv_sou.setVisibility(View.GONE);
+
+
+
+
     }
     //热门电影
     private class HorMovieData implements DataCall<Result<List<HotMovie>>> {
