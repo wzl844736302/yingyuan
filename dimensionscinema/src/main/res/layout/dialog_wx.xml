@@ -40,8 +40,8 @@
         android:layout_marginLeft="10dp"/>
     <ImageView
         android:id="@+id/wx_zhi"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
         android:src="@drawable/pay_icon_zhifubao"
         android:layout_marginLeft="24dp"
         android:layout_below="@id/wx_wx"
@@ -68,7 +68,8 @@
         <RadioButton
             android:id="@+id/wx_but1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:checked="true"/>
         <RadioButton
             android:id="@+id/wx_but2"
             android:layout_width="match_parent"
@@ -81,9 +82,9 @@
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/shape_wx"
-        android:layout_below="@+id/wx_group"
         android:text="微信支付"
         android:gravity="center"
         android:textSize="16sp"
-        android:textColor="#fff"/>
+        android:textColor="#fff"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>
