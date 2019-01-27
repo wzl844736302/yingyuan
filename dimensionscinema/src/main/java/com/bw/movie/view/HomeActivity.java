@@ -16,13 +16,14 @@ import com.bw.movie.R;
 import com.bw.movie.frag.FragCinema;
 import com.bw.movie.frag.FragMovie;
 import com.bw.movie.frag.FragUser;
+import com.bw.movie.utils.jilei.WDActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends WDActivity {
     @BindView(R.id.mFrame_home)
     FrameLayout mframe_home;
     private RadioButton[] buttons;
@@ -34,11 +35,7 @@ public class HomeActivity extends AppCompatActivity {
     private RadioGroup mradio_home;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        //绑定
-        ButterKnife.bind(this);
+    protected void initView() {
         //定义RadioButton数组用来装RadioButton，改变drawableTop大小
         buttons = new RadioButton[3];
         mradio_home = findViewById(R.id.mRadio_home);
@@ -72,6 +69,12 @@ public class HomeActivity extends AppCompatActivity {
         //默认选中第一个
         mradio_home.check(mradio_home.getChildAt(0).getId());
     }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_home;
+    }
+
     @OnClick({R.id.movie,R.id.cinema,R.id.user})
     public void onView(View view){
         FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();

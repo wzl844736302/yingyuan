@@ -12,7 +12,9 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.bw.movie.MyApp;
+
 import com.bw.movie.R;
+import com.bw.movie.utils.jilei.WDActivity;
 import com.bw.movie.bean.AllUser;
 import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
@@ -28,6 +30,10 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+public class SeatActivity extends WDActivity {
+import java.util.ArrayList;
+import java.util.List;
+
 public class SeatActivity extends AppCompatActivity implements View.OnClickListener {
     public SeatTable seatTableView;
     private int checked = 0;
@@ -37,6 +43,7 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
     private String sessionId;
 
     @Override
+    protected void initView() {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seat);
@@ -151,7 +158,7 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private class KeyData implements DataCall<Result>{
+     class KeyData implements DataCall<Result>{
 
         @Override
         public void success(Result data) {
@@ -159,7 +166,12 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
             WxPresenter wxPresenter = new WxPresenter(new WxData());
             wxPresenter.request(userId,sessionId,1,data.getOrderId());
         }
+        seatTableView.setData(10,15);
+    }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_seat;
         @Override
         public void fail(ApiException e) {
 
@@ -185,10 +197,3 @@ public class SeatActivity extends AppCompatActivity implements View.OnClickListe
             request.sign= data.getSign();
             msgApi.sendReq(request);
         }
-
-        @Override
-        public void fail(ApiException e) {
-
-        }
-    }
-}

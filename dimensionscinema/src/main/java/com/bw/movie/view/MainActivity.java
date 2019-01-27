@@ -8,11 +8,12 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.bw.movie.R;
+import com.bw.movie.utils.jilei.WDActivity;
 
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends WDActivity {
 
     int i = 3;
     Handler handler = new Handler(){
@@ -32,10 +33,11 @@ public class MainActivity extends AppCompatActivity{
         }
     };
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+    @Override
+    protected void initView() {
         handler.sendEmptyMessageDelayed(1,1000);
     }
-
 }

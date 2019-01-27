@@ -20,6 +20,7 @@ import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.presenter.DetailCinemaPresenter;
 import com.bw.movie.presenter.SchedulePresenter;
+import com.bw.movie.utils.jilei.WDActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ import java.util.List;
 
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class DetailCinemaActivity extends AppCompatActivity {
+public class DetailCinemaActivity extends WDActivity {
 
     private DetailCinemaPresenter cinemaPresenter;
     private SimpleDraweeView msim;
@@ -44,9 +45,7 @@ public class DetailCinemaActivity extends AppCompatActivity {
     private ImageView mreturn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_cinema);
+    protected void initView() {
         //初始化控件
         msim = findViewById(R.id.msim);
         mname = findViewById(R.id.mname);
@@ -93,6 +92,10 @@ public class DetailCinemaActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_detail_cinema;
+    }
     //实现当前电影列表
     class DetailCall implements DataCall<Result<List<MovieList>>> {
         @Override

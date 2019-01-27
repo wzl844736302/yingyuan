@@ -30,6 +30,7 @@ import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.CommentPresenter;
 import com.bw.movie.presenter.DetailMoviePresenter;
+import com.bw.movie.utils.jilei.WDActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -43,7 +44,7 @@ import cn.jzvd.JZVideoPlayerStandard;
 import me.jessyan.autosize.internal.CustomAdapt;
 
 
-public class DetailsActivity extends AppCompatActivity implements View.OnClickListener {
+public class DetailsActivity extends WDActivity implements View.OnClickListener {
 
     private int userId;
     private String sessionId;
@@ -56,27 +57,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private String name;
     private List<AllUser> users = new ArrayList<>();
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
-        //查询数据库
-        AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
-        users.addAll(allUserDao.loadAll());
-        if (users.size()>0) {
-            AllUser allUser = users.get(0);
-            userId = allUser.getUserId();
-            sessionId = allUser.getSessionId();
-        }
-        int id = getIntent().getIntExtra("id", 0);
-
-         id = getIntent().getIntExtra("id", 0);
-        DetailMoviePresenter presenter = new DetailMoviePresenter(new DetailData());
-        presenter.request(userId, sessionId,id);
-
-        initView();
-    }
-
-    private void initView() {
+    protected void initView() {
         movieimage = findViewById(R.id.details_image);
         moviename = findViewById(R.id.details_name);
         findViewById(R.id.details_btn1).setOnClickListener(this);
@@ -86,6 +67,23 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.details_return).setOnClickListener(this);
         ll = findViewById(R.id.ll);
         findViewById(R.id.goupiao).setOnClickListener(this);
+        //查询数据库
+        AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
+        users.addAll(allUserDao.loadAll());
+        if (users.size()>0) {
+            AllUser allUser = users.get(0);
+            userId = allUser.getUserId();
+            sessionId = allUser.getSessionId();
+        }
+
+        id = getIntent().getIntExtra("id", 0);
+        DetailMoviePresenter presenter = new DetailMoviePresenter(new DetailData());
+        presenter.request(userId, sessionId,id);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_details;
     }
 
     @Override
@@ -119,8 +117,7 @@ public class DetailsActivity extends AppCompatActivity implements View.OnClickLi
     private class DetailData implements DataCall<Result<MovieDetail>> {
         @Override
         public void success(Result<MovieDetail> data) {
-         //   Toast.makeText(DetailsActivity.this, data.getResult().getPosterList().toString()+"", Toast.LENGTH_SHORT).show();
-             result = data.getResult();
+            result = data.getResult();
             movieimage.setImageURI(Uri.parse(result.getImageUrl()));
             name = result.getName();
             moviename.setText(name);

@@ -8,14 +8,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -33,6 +29,7 @@ import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.HotMoviePresenter;
 import com.bw.movie.presenter.ReleasePresenter;
 import com.bw.movie.presenter.SoonPresenter;
+import com.bw.movie.utils.jilei.WDActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +38,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends WDActivity {
 
     private RecyclerView recyclerView;
     private RadioGroup group;
@@ -59,12 +56,15 @@ public class ListActivity extends AppCompatActivity {
     private int a;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
-        //绑定
-        ButterKnife.bind(this);
-        initView();
+    protected void initView() {
+        recyclerView = findViewById(R.id.list_recycer);
+        group = findViewById(R.id.list_mRadio_cinema);
+        mdingwei = findViewById(R.id.mdingwei);
+        tv_sou = findViewById(R.id.tv_sou);
+        et_sou = findViewById(R.id.et_sou);
+        list_mbutton1 = findViewById(R.id.list_mbutton1);
+        list_mbutton2 = findViewById(R.id.list_mbutton2);
+        list_mbutton3 = findViewById(R.id.list_mbutton3);
         //查询数据库
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         users.addAll(allUserDao.loadAll());
@@ -134,16 +134,11 @@ public class ListActivity extends AppCompatActivity {
         mLocationClient.start();
     }
 
-    private void initView() {
-        recyclerView = findViewById(R.id.list_recycer);
-        group = findViewById(R.id.list_mRadio_cinema);
-        mdingwei = findViewById(R.id.mdingwei);
-        tv_sou = findViewById(R.id.tv_sou);
-        et_sou = findViewById(R.id.et_sou);
-        list_mbutton1 = findViewById(R.id.list_mbutton1);
-        list_mbutton2 = findViewById(R.id.list_mbutton2);
-        list_mbutton3 = findViewById(R.id.list_mbutton3);
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_list;
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
