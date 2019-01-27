@@ -35,6 +35,8 @@ import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
+import com.bw.movie.presenter.CancelFocusPresenter;
+import com.bw.movie.presenter.FocusOnPresenter;
 import com.bw.movie.presenter.FuJinPresenter;
 import com.bw.movie.presenter.RecommendPresenter;
 import com.bw.movie.utils.util.UIUtils;
@@ -49,7 +51,7 @@ import butterknife.Unbinder;
 import me.jessyan.autosize.AutoSizeConfig;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class FragCinema extends Fragment{
+public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
 
     private RadioGroup mradio_cinema;
     private Button mbutton1;
@@ -70,7 +72,8 @@ public class FragCinema extends Fragment{
     private MyLocationListener myListener = new MyLocationListener();
     private double latitude;
     private double longitude;
-
+    private FocusOnPresenter focusOnPresenter;
+    private CancelFocusPresenter cancelFocusPresenter;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -99,6 +102,7 @@ public class FragCinema extends Fragment{
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         mrecycler_cinema.setLayoutManager(linearLayoutManager);
         mrecycler_cinema.setAdapter(recommendAdapter);
+        recommendAdapter.setCallLove(this);
         //设置数据
         recommendPresenter = new RecommendPresenter(new RecommendCall());
         recommendPresenter.request(userId, sessionId, 1, 10);
@@ -205,7 +209,43 @@ public class FragCinema extends Fragment{
         et_sou.setVisibility(View.GONE);
         tv_sou.setVisibility(View.GONE);
     }
+    //关注
+    @Override
+    public void love(int id, int ischeck) {
+        if (ischeck == 1){
+            focusOnPresenter = new FocusOnPresenter(new FoucsOnCall());
+            focusOnPresenter.request(userId,sessionId,id);
+        }else {
+           cancelFocusPresenter = new CancelFocusPresenter(new CancelCall());
+           cancelFocusPresenter.request(userId,sessionId,id);
+        }
+    }
+    //实现取消关注影院
+    class CancelCall implements DataCall<Result>{
+        @Override
+        public void success(Result data) {
+            if (data.getStatus().equals("0000")){
+                Toast.makeText(getActivity(), ""+data.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        @Override
+        public void fail(ApiException e) {
 
+        }
+    }
+    //实现关注影院接口
+    class FoucsOnCall implements DataCall<Result>{
+        @Override
+        public void success(Result data) {
+            if (data.getStatus().equals("0000")){
+                Toast.makeText(getActivity(), ""+data.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        @Override
+        public void fail(ApiException e) {
+
+        }
+    }
     //实现附近影院接口
     class FuJinCall implements DataCall<Result<List<Recommend>>> {
         @Override

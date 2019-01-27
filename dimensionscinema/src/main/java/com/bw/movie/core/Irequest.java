@@ -2,6 +2,7 @@ package com.bw.movie.core;
 
 import com.bw.movie.bean.CinemasList;
 import com.bw.movie.bean.Comment;
+import com.bw.movie.bean.FocusList;
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.MovieDetail;
 import com.bw.movie.bean.MovieList;
@@ -208,4 +209,80 @@ public interface Irequest {
      */
     @GET("movie/v1/findCinemasListByMovieId")
     Observable<Result<List<CinemasList>>> findCinemasListByMovieId(@Query("movieId")int movieid);
+
+    /**
+     * 关注影院
+     * @param userId
+     * @param sessionId
+     * @param movieId
+     * @return
+     */
+    @GET("cinema/v1/verify/followCinema")
+    Observable<Result> followCinema(@Header("userId")int userId,
+                                   @Header("sessionId")String sessionId,
+                                   @Query("cinemaId")int movieId);
+
+    /**
+     * 取消关注影院
+     * @param userId
+     * @param sessionId
+     * @param movieId
+     * @return
+     */
+    @GET("cinema/v1/verify/cancelFollowCinema")
+    Observable<Result> cancelFollowCinema(@Header("userId")int userId,
+                                          @Header("sessionId")String sessionId,
+                                          @Query("cinemaId")int movieId);
+
+    /**
+     * 查询用户关注的影院信息
+     * @param userId
+     * @param sessionId
+     * @param page
+     * @param count
+     * @return
+     */
+    @GET("cinema/v1/verify/findCinemaPageList")
+    Observable<Result<List<FocusList>>> findCinemaPageList(@Header("userId")int userId,
+                                                           @Header("sessionId")String sessionId,
+                                                           @Query("page")int page,
+                                                           @Query("count")int count);
+
+    /**
+     * 关注电影
+     * @param userId
+     * @param sessionId
+     * @param movieId
+     * @return
+     */
+    @GET("movie/v1/verify/followMovie")
+    Observable<Result> followMovie(@Header("userId")int userId,
+                                   @Header("sessionId")String sessionId,
+                                   @Query("movieId")int movieId);
+
+    /**
+     * 取消关注电影
+     * @param userId
+     * @param sessionId
+     * @param movieId
+     * @return
+     */
+    @GET("movie/v1/verify/cancelFollowMovie")
+    Observable<Result> cancelFollowMovie(@Header("userId")int userId,
+                                         @Header("sessionId")String sessionId,
+                                         @Query("movieId")int movieId);
+
+    /**
+     * 查询用户关注的影片列表
+     * @param userId
+     * @param sessionId
+     * @param page
+     * @param count
+     * @return
+     */
+    @GET("movie/v1/verify/findMoviePageList")
+    Observable<Result<List<MovieList>>> findMoviePageList(@Header("userId")int userId,
+                                         @Header("sessionId")String sessionId,
+                                         @Query("page")int page,
+                                         @Query("count")int count);
 }

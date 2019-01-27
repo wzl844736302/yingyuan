@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +28,14 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         this.activity = activity;
         inflater = LayoutInflater.from(activity);
     }
+    private CallLove callLove;
+    public interface CallLove{
+        void love(int id,int ischeck);
+    }
+
+    public void setCallLove(CallLove callLove) {
+        this.callLove = callLove;
+    }
 
     @NonNull
     @Override
@@ -39,11 +48,13 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int i) {
         MyHolder myHolder = (MyHolder) holder;
+        final Recommend recommend = list.get(i);
         String logo = list.get(i).getLogo();
         myHolder.imageView.setImageURI(Uri.parse(logo));
         myHolder.textView.setText(list.get(i).getName());
         myHolder.textView2.setText(list.get(i).getAddress());
-        myHolder.textView3.setText(list.get(i).getFollowCinema()+""+"km");
+        myHolder.textView3.setText("0km");
+        final int id = recommend.getId();
         //点击跳转
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +68,22 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 activity.startActivity(intent);
             }
         });
+        //是否关注
+        myHolder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox checkBox = (CheckBox) v;
+                boolean checked = checkBox.isChecked();
+                recommend.setIscheck(checked?1:0);
+                callLove.love(id,recommend.getIscheck());
+            }
+        });
+        if (recommend.getIscheck()==0){
+            myHolder.checkBox.setChecked(false);
+        }else {
+            myHolder.checkBox.setChecked(true);
+        }
+        myHolder.checkBox.setChecked(recommend.getFollowCinema()==1?true:false);
     }
 
     @Override

@@ -18,6 +18,8 @@ import com.bw.movie.MyApp;
 import com.bw.movie.R;
 import com.bw.movie.bean.AllUser;
 import com.bw.movie.dao.AllUserDao;
+import com.bw.movie.view.FeedBackActivity;
+import com.bw.movie.view.FocusOnActivity;
 import com.bw.movie.view.LoginActivity;
 import com.bw.movie.view.MyInForMation;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -79,6 +81,20 @@ public class FragUser extends Fragment{
         }
         Intent intent = new Intent(getActivity(), MyInForMation.class);
         startActivity(intent);
+    }
+    //点击跳转我的关注
+    @OnClick(R.id.wodeguanzhu)
+    public void guanzhu(){
+        //跳转
+        Intent intent = new Intent(getActivity(), FocusOnActivity.class);
+        getActivity().startActivity(intent);
+    }
+    //点击跳转意见反馈
+    @OnClick(R.id.yijianfankui)
+    public void fankui(){
+        //跳转
+        Intent intent = new Intent(getActivity(), FeedBackActivity.class);
+        getActivity().startActivity(intent);
     }
     //点击退出登录
     @OnClick(R.id.tuichudenglu)

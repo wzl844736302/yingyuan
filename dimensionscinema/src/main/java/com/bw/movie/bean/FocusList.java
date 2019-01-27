@@ -1,16 +1,16 @@
 package com.bw.movie.bean;
 
 
-public class Recommend {
+public class FocusList {
 
         /**
-         * address : 东城区滨河路乙1号雍和航星园74-76号楼
-         * commentTotal : 183
+         * address : 北京市育知东路30号华联商厦4层
+         * commentTotal : 0
          * distance : 0
-         * followCinema : 2
-         * id : 1
-         * logo : http://172.17.8.100/images/movie/logo/qcgx.jpg
-         * name : 青春光线电影院
+         * followCinema : 0
+         * id : 20
+         * logo : http://mobile.bwstudent.com/images/movie/logo/wmyc.jpg
+         * name : 北京沃美影城（回龙观店）
          */
 
         private String address;
@@ -20,17 +20,8 @@ public class Recommend {
         private int id;
         private String logo;
         private String name;
-        private int ischeck;
 
-        public int getIscheck() {
-            return ischeck;
-        }
-
-         public void setIscheck(int ischeck) {
-            this.ischeck = ischeck;
-        }
-
-    public String getAddress() {
+        public String getAddress() {
             return address;
         }
 
@@ -88,7 +79,7 @@ public class Recommend {
 
     @Override
     public String toString() {
-        return "Recommend{" +
+        return "FocusList{" +
                 "address='" + address + '\'' +
                 ", commentTotal=" + commentTotal +
                 ", distance=" + distance +

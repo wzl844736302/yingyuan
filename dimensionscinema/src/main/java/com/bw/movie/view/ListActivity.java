@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -26,6 +28,8 @@ import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
+import com.bw.movie.presenter.CancelMoviePresenter;
+import com.bw.movie.presenter.FocusMoviePresenter;
 import com.bw.movie.presenter.HotMoviePresenter;
 import com.bw.movie.presenter.ReleasePresenter;
 import com.bw.movie.presenter.SoonPresenter;
@@ -38,7 +42,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import me.jessyan.autosize.internal.CustomAdapt;
 
-public class ListActivity extends WDActivity {
+public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
 
     private RecyclerView recyclerView;
     private RadioGroup group;
@@ -54,7 +58,8 @@ public class ListActivity extends WDActivity {
     private EditText et_sou;
     private RadioButton list_mbutton1,list_mbutton2,list_mbutton3;
     private int a;
-
+    private FocusMoviePresenter moviePresenter;
+    private CancelMoviePresenter cancelMoviePresenter;
     @Override
     protected void initView() {
         recyclerView = findViewById(R.id.list_recycer);
@@ -132,6 +137,7 @@ public class ListActivity extends WDActivity {
         option.setLocationNotify(true);
         mLocationClient.setLocOption(option);
         mLocationClient.start();
+        adapter.setItemBack(this);
     }
 
     @Override
@@ -161,6 +167,44 @@ public class ListActivity extends WDActivity {
             option.setLocationNotify(true);
             mLocationClient.setLocOption(option);
             mLocationClient.start();
+        }
+    }
+
+    //是否关注电影
+    @Override
+    public void back(int id, int ischeck) {
+        if (ischeck == 1){
+            moviePresenter = new FocusMoviePresenter(new MovieCalls());
+            moviePresenter.request(userId,sessionId,id);
+        }else {
+            cancelMoviePresenter = new CancelMoviePresenter(new CancelCall());
+            cancelMoviePresenter.request(userId,sessionId,id);
+        }
+    }
+    //实现取消电影接口
+    class CancelCall implements DataCall<Result>{
+        @Override
+        public void success(Result data) {
+            if (data.getStatus().equals("0000")){
+                Toast.makeText(ListActivity.this, ""+data.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        @Override
+        public void fail(ApiException e) {
+
+        }
+    }
+    //实现关注电影接口
+    class MovieCalls implements DataCall<Result>{
+        @Override
+        public void success(Result data) {
+            if (data.getStatus().equals("0000")){
+                Toast.makeText(ListActivity.this, ""+data.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        @Override
+        public void fail(ApiException e) {
+
         }
     }
     //定位实现接口

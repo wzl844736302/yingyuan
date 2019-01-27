@@ -17,6 +17,15 @@ public class HotMovie {
     private String name;
     private int rank;
     private String summary;
+    private int ischeck;
+
+    public int getIscheck() {
+        return ischeck;
+    }
+
+    public void setIscheck(int ischeck) {
+        this.ischeck = ischeck;
+    }
 
     public int isFollowMovie() {
         return followMovie;

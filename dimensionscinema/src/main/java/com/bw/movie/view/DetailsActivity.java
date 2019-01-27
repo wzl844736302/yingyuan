@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bw.movie.MyApp;
@@ -56,6 +57,7 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
     private Btn4Adapter btn4Adapter;
     private String name;
     private List<AllUser> users = new ArrayList<>();
+
     @Override
     protected void initView() {
         movieimage = findViewById(R.id.details_image);

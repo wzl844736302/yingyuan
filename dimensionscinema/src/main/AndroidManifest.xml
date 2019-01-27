@@ -58,7 +58,9 @@
 
         <activity android:name=".view.SeatActivity" />
         <activity android:name=".view.TicketActivity" />
-        <activity android:name=".view.TicketDetailActivity"></activity>
+        <activity android:name=".view.TicketDetailActivity" />
+        <activity android:name=".view.FocusOnActivity" />
+        <activity android:name=".view.FeedBackActivity"></activity>
     </application>
 
 </manifest>
