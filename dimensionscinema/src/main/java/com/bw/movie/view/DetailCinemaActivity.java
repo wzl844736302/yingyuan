@@ -43,6 +43,7 @@ public class DetailCinemaActivity extends WDActivity {
     private List<MovieList> result;
     private int id1;
     private ImageView mreturn;
+    private List<ScheduleList> result1;
 
     @Override
     protected void initView() {
@@ -57,8 +58,8 @@ public class DetailCinemaActivity extends WDActivity {
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 0);
         String tupian = intent.getStringExtra("tupian");
-        String name = intent.getStringExtra("name");
-        String weizhi = intent.getStringExtra("weizhi");
+        final String name = intent.getStringExtra("name");
+        final String weizhi = intent.getStringExtra("weizhi");
         //设置值
         msim.setImageURI(tupian);
         mname.setText(name);
@@ -87,6 +88,12 @@ public class DetailCinemaActivity extends WDActivity {
             public void call(int pos) {
                 //跳转
                 Intent intent = new Intent(DetailCinemaActivity.this, SeatActivity.class);
+                intent.putExtra("name1",name);
+                intent.putExtra("address1",weizhi);
+                intent.putExtra("dname",result.get(pos).getName());
+                intent.putExtra("begin",result1.get(pos).getBeginTime());
+                intent.putExtra("end",result1.get(pos).getEndTime());
+                intent.putExtra("mz",result1.get(pos).getScreeningHall());
                 startActivity(intent);
             }
         });
@@ -131,8 +138,8 @@ public class DetailCinemaActivity extends WDActivity {
         @Override
         public void success(Result<List<ScheduleList>> data) {
             if (data.getStatus().equals("0000")) {
-                final List<ScheduleList> result = data.getResult();
-                scheduleAdapter.addAll(result);
+                result1 = data.getResult();
+                scheduleAdapter.addAll(result1);
                 scheduleAdapter.notifyDataSetChanged();
             }
         }
