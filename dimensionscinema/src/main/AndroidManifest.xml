@@ -14,7 +14,7 @@
     <uses-permission xmlns:tools="http://schemas.android.com/tools"
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
         tools:ignore="ProtectedPermissions" />
-
+    <uses-permission android:name="android.permission.READ_LOGS" />
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -74,6 +74,14 @@
             android:exported="true"
             android:launchMode="singleTask">
         </activity>
+       <!-- &lt;!&ndash; 友盟统计 &ndash;&gt;
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5c4eed73f1f556f6a9000ecf" />
+          &lt;!&ndash;  // key&ndash;&gt;
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />-->
     </application>
 
 </manifest>

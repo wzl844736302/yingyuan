@@ -268,6 +268,7 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
         @Override
         public void success(Result<List<Recommend>> data) {
             if (data.getStatus().equals("0000")) {
+                recommendAdapter.clear();
                 List<Recommend> result = data.getResult();
                 recommendAdapter.addAll(result);
                 recommendAdapter.notifyDataSetChanged();

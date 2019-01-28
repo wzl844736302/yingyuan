@@ -1,7 +1,9 @@
 package com.bw.movie.view;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
@@ -41,6 +43,8 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
     private TextView mname,address,mname1,begin1,end1,ting1;
     private double qian;
     private TextView sumQian;
+    private SharedPreferences sp;
+    private boolean xian;
 
     @Override
     protected void initView() {
@@ -120,6 +124,7 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
 
         });
         seatTableView.setData(10, 10);
+
     }
 
     @Override
@@ -175,6 +180,22 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
         dialog.findViewById(R.id.wx_qd).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                sp = getSharedPreferences("login",Context.MODE_PRIVATE);
+                xian = sp.getBoolean("xian", false);
+                if (!xian){
+                    Intent intent = new Intent(SeatActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+                //查询数据库
+                AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
+                users.clear();
+                users.addAll(allUserDao.loadAll());
+                if (users.size() > 0) {
+                    AllUser allUser = users.get(0);
+                    userId = allUser.getUserId();
+                    sessionId = allUser.getSessionId();
+                }
                 MoviekeyPresenter moviekeyPresenter = new MoviekeyPresenter(new KeyData());
                 String s = MD5Utils.MD5(userId + "" + id + "" + checked + "movie");
                 moviekeyPresenter.request(userId, sessionId, id, checked, s);
@@ -208,7 +229,6 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
             request.timeStamp = data.getTimeStamp();
             request.sign = data.getSign();
             msgApi.sendReq(request);
-            finish();
         }
         @Override
         public void fail(ApiException e) {
