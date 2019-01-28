@@ -334,4 +334,9 @@ public interface Irequest {
                                                                         @Query("page")int page,
                                                                         @Query("count")int count,
                                                                         @Query("status")int status);
+
+    @POST("user/v1/weChatBindingLogin")
+    @FormUrlEncoded
+    Observable<Result<User>> wxlogin(@Field("code") String code);
+
 }
