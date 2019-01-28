@@ -139,6 +139,7 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
                 break;
         }
     }
+
     private void showBottomDialog() {
         //1、使用Dialog、设置style
         final Dialog dialog = new Dialog(this, R.style.DialogTheme);
@@ -161,7 +162,7 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch (radioGroup.getId()) {
+                switch (i) {
                     case R.id.wx_but1:
                         Toast.makeText(SeatActivity.this, "微信", Toast.LENGTH_SHORT).show();
                         break;

@@ -76,10 +76,6 @@ public class FragUser extends Fragment{
     //点击跳转我的信息
     @OnClick(R.id.wodexinxi)
     public void xinxi(){
-        if (!xian){
-            Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
-            return;
-        }
         Intent intent = new Intent(getActivity(), MyInForMation.class);
         startActivity(intent);
     }

@@ -15,6 +15,8 @@ import com.bw.movie.dao.DaoMaster;
 import com.bw.movie.dao.DaoSession;
 import com.bw.movie.frag.FragCinema;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 
 public class MyApp extends Application {
@@ -42,7 +44,9 @@ public class MyApp extends Application {
         mMainLooper = getMainLooper();
         Fresco.initialize(this);
         daoSession = DaoMaster.newDevSession(context,AllUserDao.TABLENAME);
+
     }
+
     /**
      * @author: 康海涛 QQ2541849981
      * @describe: 获取全局Application的上下文

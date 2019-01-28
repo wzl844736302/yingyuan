@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         save_pwd = findViewById(R.id.save_pwd);
         eyeCb.setOnClickListener(this);
         findViewById(R.id.btn_regirect_tiao).setOnClickListener(this);
+        findViewById(R.id.weixin_login).setOnClickListener(this);
     }
 
     @Override
@@ -95,6 +96,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btn_regirect_tiao:
                 startActivity(new Intent(LoginActivity.this,RegsterActivity.class));
+                break;
+            case R.id.weixin_login:
+                startActivity(new Intent(LoginActivity.this,WxLoginActivity.class));
+                finish();
                 break;
         }
     }

@@ -65,7 +65,14 @@
         <activity android:name=".view.TicketDetailActivity" />
         <activity android:name=".view.FocusOnActivity" />
         <activity android:name=".view.FeedBackActivity" />
-        <activity android:name=".view.BuyTicketActivity"></activity>
+        <activity android:name=".view.BuyTicketActivity" />
+        <activity android:name=".view.WxLoginActivity">
+        </activity>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+        </activity>
     </application>
 
 </manifest>

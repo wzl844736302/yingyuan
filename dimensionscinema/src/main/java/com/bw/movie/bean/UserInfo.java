@@ -8,6 +8,25 @@ public class UserInfo {
     long lastLoginTime;
     String headPic;
 
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "nickName='" + nickName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", birthday=" + birthday +
+                ", sex=" + sex +
+                ", lastLoginTime=" + lastLoginTime +
+                ", headPic='" + headPic + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    /**
+     * id : 3
+     */
+
+    private int id;
+
     public String getNickName() {
         return nickName;
     }
@@ -54,4 +73,11 @@ public class UserInfo {
         this.headPic = headPic;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
