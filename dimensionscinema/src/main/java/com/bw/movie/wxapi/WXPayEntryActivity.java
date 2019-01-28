@@ -14,12 +14,6 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-/**
- * @author happy_movie
- * @date 2019/1/27 11:35
- * QQ:45198565
- * 佛曰：永无BUG 盘他！
- */
 public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
     private IWXAPI api;
 
@@ -29,10 +23,7 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pay_result);
-       // LogUtils.e("com.bw.movie.wxapi包哈哈哈啊");
-
         payResult = findViewById(R.id.pay_result);
-
         api = WXAPIFactory.createWXAPI(this, "wxb3852e6a6b7d9516");
         api.handleIntent(getIntent(), this);
     }
@@ -55,29 +46,24 @@ public class WXPayEntryActivity extends AppCompatActivity implements IWXAPIEvent
             switch (resp.errCode) {
                 case BaseResp.ErrCode.ERR_OK:
                     //支付成功后的逻辑
-                    result = "微信支付成功";
                     Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
                     finish();
                     break;
                 case BaseResp.ErrCode.ERR_COMM:
-                    result = "微信支付失败：" + resp.errCode + "，" + resp.errStr;
                     Toast.makeText(this, "微信支付失败", Toast.LENGTH_SHORT).show();
                     finish();
                     break;
                 case BaseResp.ErrCode.ERR_USER_CANCEL:
-                    result = "微信支付取消：" + resp.errCode + "，" + resp.errStr;
                     Toast.makeText(this, "微信支付取消", Toast.LENGTH_SHORT).show();
                     finish();
                     break;
                 default:
-                    result = "微信支付未知异常：" + resp.errCode + "，" + resp.errStr;
                     Toast.makeText(this, "微信支付未知异常", Toast.LENGTH_SHORT).show();
                     finish();
                     break;
             }
             payResult.setText(result);
         }
-        Toast.makeText(this, result, Toast.LENGTH_LONG).show();
     }
 
 }

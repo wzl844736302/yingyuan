@@ -196,7 +196,6 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
     class WxData implements DataCall<Result> {
         @Override
         public void success(Result data) {
-            Toast.makeText(SeatActivity.this, data.getMessage() + "", Toast.LENGTH_SHORT).show();
             final IWXAPI msgApi = WXAPIFactory.createWXAPI(SeatActivity.this, null);
             // 将该app注册到微信
             msgApi.registerApp("wxb3852e6a6b7d9516");
@@ -209,6 +208,7 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
             request.timeStamp = data.getTimeStamp();
             request.sign = data.getSign();
             msgApi.sendReq(request);
+            finish();
         }
         @Override
         public void fail(ApiException e) {

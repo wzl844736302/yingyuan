@@ -29,12 +29,13 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
     private IWXAPI api;
     private SharedPreferences sp;
+    private boolean xian;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wxlogin);
-        sp = getSharedPreferences("xian",Context.MODE_PRIVATE);
+        sp = getSharedPreferences("login",Context.MODE_PRIVATE);
         api = WXAPIFactory.createWXAPI(this, "wxb3852e6a6b7d9516");
         api.handleIntent(getIntent(), this);
     }
@@ -53,10 +54,8 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
     public void onResp(BaseResp baseResp) {
         switch (baseResp.errCode) {
             case BaseResp.ErrCode.ERR_OK:
-                Log.e("flag", "-----code:ok");
                 if (baseResp instanceof SendAuth.Resp) {
                     SendAuth.Resp sendAuthResp = (SendAuth.Resp) baseResp;
-                    //Toast.makeText(this, sendAuthResp.code+"", Toast.LENGTH_SHORT).show();
                     WxLoginPresenter wxLoginPresenter = new WxLoginPresenter(new WxLogin());
                     wxLoginPresenter.request(sendAuthResp.code);
                 }
@@ -81,9 +80,6 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
     private class WxLogin implements DataCall<Result<User>> {
         @Override
         public void success(Result<User> data) {
-            Toast.makeText(WXEntryActivity.this, data.getResult().getUserInfo().toString()+"", Toast.LENGTH_SHORT).show();
-            Log.e("LL",data.getResult().getUserInfo().toString());
-            Log.e("LL",data.getResult().getUserId()+"----"+data.getResult().getSessionId());
             if(data.getStatus().equals("0000")){
                 SharedPreferences.Editor edit = sp.edit();
                 edit.putBoolean("xian",true);

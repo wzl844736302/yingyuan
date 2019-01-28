@@ -45,7 +45,8 @@
         <activity android:name=".view.GuideActivity" />
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.RegsterActivity" />
-        <activity android:name=".view.HomeActivity" />
+        <activity android:name=".view.HomeActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"   />
         <activity android:name=".view.MyInForMation" />
         <activity android:name=".view.ListActivity" />
         <activity android:name=".view.DetailsActivity" />

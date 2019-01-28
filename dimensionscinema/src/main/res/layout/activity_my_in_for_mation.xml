@@ -136,12 +136,6 @@
                     android:textSize="14sp"
                     android:textColor="#333333"/>
             </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="#ddd"/>
         </LinearLayout>
 
         <LinearLayout
@@ -233,11 +227,12 @@
                     android:textColor="#333333"/>
                 <ImageView
                     android:id="@+id/img_resetpwd"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
                     android:src="@drawable/com_icon_next_default"
                     android:layout_marginRight="20dp"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

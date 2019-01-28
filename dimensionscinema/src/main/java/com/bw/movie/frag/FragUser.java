@@ -18,6 +18,8 @@ import com.bw.movie.MyApp;
 import com.bw.movie.R;
 import com.bw.movie.bean.AllUser;
 import com.bw.movie.dao.AllUserDao;
+import com.bw.movie.dao.DaoMaster;
+import com.bw.movie.dao.DaoSession;
 import com.bw.movie.view.BuyTicketActivity;
 import com.bw.movie.view.FeedBackActivity;
 import com.bw.movie.view.FocusOnActivity;
@@ -44,6 +46,7 @@ public class FragUser extends Fragment{
     private AllUserDao allUserDao;
     private SharedPreferences sp;
     private boolean xian;
+    private String nickName;
 
     @Nullable
     @Override
@@ -76,6 +79,10 @@ public class FragUser extends Fragment{
     //点击跳转我的信息
     @OnClick(R.id.wodexinxi)
     public void xinxi(){
+        if (!xian){
+            Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Intent intent = new Intent(getActivity(), MyInForMation.class);
         startActivity(intent);
     }
@@ -135,14 +142,17 @@ public class FragUser extends Fragment{
             mtext.setText("登录/注册");
             return;
         }
+        mtext.setText(nickName);
         //查询数据库
-        AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
+        DaoSession daoSession = DaoMaster.newDevSession(getActivity(), AllUserDao.TABLENAME);
+        AllUserDao allUserDao = daoSession.getAllUserDao();
+        users.clear();
         users.addAll(allUserDao.loadAll());
         if (users.size()>0) {
             AllUser allUser = users.get(0);
             String headPic = allUser.getHeadPic();
             msim_user.setImageURI(headPic);
-            String nickName = allUser.getNickName();
+            nickName = allUser.getNickName();
             mtext.setText(nickName);
         }
     }

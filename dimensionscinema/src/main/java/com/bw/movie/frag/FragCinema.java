@@ -302,4 +302,20 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
         super.onDestroy();
         bind = null;
     }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        users.clear();
+        //查询数据库
+        AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
+        users.addAll(allUserDao.loadAll());
+        if (users.size()>0) {
+            AllUser allUser = users.get(0);
+            userId = allUser.getUserId();
+            sessionId = allUser.getSessionId();
+        }
+        recommendPresenter = new RecommendPresenter(new RecommendCall());
+        recommendPresenter.request(userId, sessionId, 1, 10);
+    }
 }

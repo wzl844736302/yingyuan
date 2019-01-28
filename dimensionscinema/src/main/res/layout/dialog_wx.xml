@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/shape_detail_ll">
+
     <TextView
         android:id="@+id/wx_text"
         android:layout_width="wrap_content"
@@ -13,6 +14,62 @@
         android:textColor="#666"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="14dp"/>
+    <LinearLayout
+        android:id="@+id/mll"
+        android:layout_below="@id/wx_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginLeft="24dp">
+
+        <ImageView
+            android:id="@+id/wx_wx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/log_icon_weixin"
+            android:layout_weight="1"
+            android:layout_below="@id/wx_text"
+            android:layout_marginTop="20dp"/>
+        <ImageView
+            android:id="@+id/wx_zhi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/pay_icon_zhifubao"
+            android:layout_below="@id/wx_wx"
+            android:layout_marginTop="15dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@id/wx_text"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:layout_toRightOf="@id/mll"
+        android:gravity="center"
+        android:layout_marginLeft="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="微信支付"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:textColor="#666"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/wx_wx"
+            android:layout_below="@id/wx_text" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="支付宝支付"
+            android:textSize="14sp"
+            android:textColor="#666"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:layout_toRightOf="@id/wx_zhi"
+            android:layout_below="@id/wx_wx" />
+    </LinearLayout>
     <ImageView
         android:layout_width="34dp"
         android:layout_height="34dp"
@@ -20,42 +77,9 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="24dp"
         android:layout_marginTop="14dp"/>
-    <ImageView
-        android:id="@+id/wx_wx"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/log_icon_weixin"
-        android:layout_marginLeft="24dp"
-        android:layout_below="@id/wx_text"
-        android:layout_marginTop="20dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="微信支付"
-        android:textSize="14sp"
-        android:textColor="#666"
-        android:layout_toRightOf="@id/wx_wx"
-        android:layout_below="@id/wx_text"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"/>
-    <ImageView
-        android:id="@+id/wx_zhi"
-        android:layout_width="29dp"
-        android:layout_height="29dp"
-        android:src="@drawable/pay_icon_zhifubao"
-        android:layout_marginLeft="24dp"
-        android:layout_below="@id/wx_wx"
-        android:layout_marginTop="15dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="支付宝支付"
-        android:textSize="14sp"
-        android:textColor="#666"
-        android:layout_toRightOf="@id/wx_zhi"
-        android:layout_below="@id/wx_wx"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="10dp"/>
+
+
+
     <RadioGroup
         android:id="@+id/wx_group"
         android:layout_marginTop="20dp"
