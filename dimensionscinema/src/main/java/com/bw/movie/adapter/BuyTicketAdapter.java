@@ -154,4 +154,8 @@ public class BuyTicketAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             textView7 = itemView.findViewById(R.id.rccordmoney);
         }
     }
+
+
+
+
 }
