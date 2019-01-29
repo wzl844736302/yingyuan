@@ -1,14 +1,19 @@
 package com.bw.movie.view;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -60,6 +65,8 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
     private int a;
     private FocusMoviePresenter moviePresenter;
     private CancelMoviePresenter cancelMoviePresenter;
+    private ImageView miv;
+
     @Override
     protected void initView() {
         recyclerView = findViewById(R.id.list_recycer);
@@ -67,6 +74,7 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
         mdingwei = findViewById(R.id.mdingwei);
         tv_sou = findViewById(R.id.tv_sou);
         et_sou = findViewById(R.id.et_sou);
+        miv = findViewById(R.id.miv);
         list_mbutton1 = findViewById(R.id.list_mbutton1);
         list_mbutton2 = findViewById(R.id.list_mbutton2);
         list_mbutton3 = findViewById(R.id.list_mbutton3);
@@ -118,38 +126,27 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
                 }
             }
         });
-
-        //定位
-        mLocationClient = new LocationClient(this);
-        //声明LocationClient类
-        mLocationClient.registerLocationListener(myListener);
-        //注册监听函数
-        LocationClientOption option = new LocationClientOption();
-        option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
-        //可选，是否需要位置描述信息，默认为不需要，即参数为false
-        //如果开发者需要获得当前点的位置信息，此处必须为true
-        option.setIsNeedLocationDescribe(true);
-        //可选，设置是否需要地址信息，默认不需要
-        option.setIsNeedAddress(true);
-        //可选，默认false,设置是否使用gps
-        option.setOpenGps(true);
-        //可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
-        option.setLocationNotify(true);
-        mLocationClient.setLocOption(option);
-        mLocationClient.start();
         adapter.setItemBack(this);
+        initData();
+        //点击定位
+        miv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initData();
+            }
+        });
     }
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_list;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 100) {
-            //定位
+    private void initData(){
+        if (ContextCompat.checkSelfPermission(ListActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            //权限还没有授予，需要在这里写申请权限的代码
+            ActivityCompat.requestPermissions(ListActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.CAMERA,
+                            Manifest.permission.READ_PHONE_STATE},0);
+        }else {
             mLocationClient = new LocationClient(this);
             //声明LocationClient类
             mLocationClient.registerLocationListener(myListener);
@@ -168,6 +165,10 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
             mLocationClient.setLocOption(option);
             mLocationClient.start();
         }
+    }
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_list;
     }
 
     //是否关注电影

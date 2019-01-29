@@ -1,17 +1,22 @@
 package com.bw.movie.frag;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
@@ -63,6 +68,8 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
     private MapView mMapView = null;
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
+    private ImageView miv;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,6 +79,7 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
         tv_sou = view.findViewById(R.id.tv_sou);
         et_sou = view.findViewById(R.id.et_sou);
         mdingwei = view.findViewById(R.id.mdingwei);
+        miv = view.findViewById(R.id.miv);
         //查询数据库
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         users.addAll(allUserDao.loadAll());
@@ -112,28 +120,16 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
         onItemClick(hotAdapter1);
         onItemClick(hotAdapter2);
         initData();
+        //点击定位
+        miv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initData();
+            }
+        });
         return view;
     }
-    public void initData(){
-        //定位
-        mLocationClient = new LocationClient(getActivity());
-        //声明LocationClient类
-        mLocationClient.registerLocationListener(myListener);
-        //注册监听函数
-        LocationClientOption option = new LocationClientOption();
-        option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
-        //可选，是否需要位置描述信息，默认为不需要，即参数为false
-        //如果开发者需要获得当前点的位置信息，此处必须为true
-        option.setIsNeedLocationDescribe(true);
-        //可选，设置是否需要地址信息，默认不需要
-        option.setIsNeedAddress(true);
-        //可选，默认false,设置是否使用gps
-        option.setOpenGps(true);
-        //可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
-        option.setLocationNotify(true);
-        mLocationClient.setLocOption(option);
-        mLocationClient.start();
-    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -177,6 +173,40 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
         Intent intent = new Intent(getActivity(),DetailsActivity.class);
         intent.putExtra("id",id);
         startActivity(intent);
+    }
+    private void initData() {
+
+        if (ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            //权限还没有授予，需要在这里写申请权限的代码
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.CAMERA,
+                            Manifest.permission.READ_PHONE_STATE},0);
+        }else {
+
+
+
+            mLocationClient = new LocationClient(getContext());
+            //声明LocationClient类
+            mLocationClient.registerLocationListener(myListener);
+            //注册监听函数
+            LocationClientOption option = new LocationClientOption();
+            option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
+            //可选，是否需要位置描述信息，默认为不需要，即参数为false
+            //如果开发者需要获得当前点的位置信息，此处必须为true
+            option.setIsNeedLocationDescribe(true);
+            //可选，设置是否需要地址信息，默认不需要
+            option.setIsNeedAddress(true);
+            //可选，默认false,设置是否使用gps
+            option.setOpenGps(true);
+            //可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
+            option.setLocationNotify(true);
+            mLocationClient.setLocOption(option);
+            mLocationClient.start();
+        }
     }
 
     @Override

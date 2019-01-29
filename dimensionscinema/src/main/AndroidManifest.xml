@@ -74,14 +74,13 @@
             android:exported="true"
             android:launchMode="singleTask">
         </activity>
-       <!-- &lt;!&ndash; 友盟统计 &ndash;&gt;
+       <!--友盟统计 -->
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5c4eed73f1f556f6a9000ecf" />
-          &lt;!&ndash;  // key&ndash;&gt;
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="${UMENG_CHANNEL_VALUE}" />-->
+            android:value="${UMENG_CHANNEL_VALUE}" />
     </application>
 
 </manifest>

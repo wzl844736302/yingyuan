@@ -184,14 +184,22 @@ public interface Irequest {
                                                           @Query("page") int page,
                                                           @Query("count") int count);
 
+    /**
+     * 修改用户信息
+     * @param userId
+     * @param sessionId
+     * @param nickName
+     * @param sex
+     * @param email
+     * @return
+     */
     @POST("user/v1/verify/modifyUserInfo")
     @FormUrlEncoded
-    Observable<Result<List<UpUser>>> updateUserInfo(@Header("userId") int userId,
-                                                    @Header("sessionId") String sessionId,
-                                                    @Field("nickName") String nickName,
-                                                    @Field("sex") int sex,
-                                                    @Field("email") String email
-    );
+    Observable<Result<UpUser>> updateUserInfo(@Header("userId") int userId,
+                                              @Header("sessionId") String sessionId,
+                                              @Field("nickName") String nickName,
+                                              @Field("sex") int sex,
+                                              @Field("email") String email);
 
     /**
      * 根据电影ID和影院ID查询电影排期列表

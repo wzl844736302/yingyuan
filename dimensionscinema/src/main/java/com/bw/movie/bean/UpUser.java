@@ -35,4 +35,13 @@ public class UpUser {
     public void setSex(int sex) {
         this.sex = sex;
     }
+
+    @Override
+    public String toString() {
+        return "UpUser{" +
+                "id=" + id +
+                ", nickName='" + nickName + '\'' +
+                ", sex=" + sex +
+                '}';
+    }
 }

@@ -4,6 +4,8 @@ public class Result<T> {
     private String message;
     private String status;
     private T result;
+
+
     /**
      * appId : wxb3852e6a6b7d9516
      * nonceStr : WQ72A7mNfUaA05Gw

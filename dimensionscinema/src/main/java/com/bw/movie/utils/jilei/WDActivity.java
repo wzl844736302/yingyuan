@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.bw.movie.MyApp;
 import com.bw.movie.dao.AllUserDao;
+import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 
@@ -44,5 +45,16 @@ public abstract class WDActivity extends AppCompatActivity {
         Intent intent = new Intent(this, myClass);
         intent.putExtras(bundle);
         startActivity(intent);
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
