@@ -1,6 +1,7 @@
 package com.bw.movie.core;
 
 import com.bw.movie.bean.BuyTicketList;
+import com.bw.movie.bean.CinemaInfo;
 import com.bw.movie.bean.CinemasList;
 import com.bw.movie.bean.Comment;
 import com.bw.movie.bean.FocusList;
@@ -338,5 +339,13 @@ public interface Irequest {
     @POST("user/v1/weChatBindingLogin")
     @FormUrlEncoded
     Observable<Result<User>> wxlogin(@Field("code") String code);
+
+
+
+
+    @GET("cinema/v1/findCinemaInfo")
+    Observable<Result<CinemaInfo>> findCinemaInfo(@Header("userId") int userId,
+                                                        @Header("sessionId") String sessionId,
+                                                        @Query("cinemaId")int cinemaId);
 
 }

@@ -181,20 +181,26 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
 
     @Override
     public void onClick(View view) {
+        int i ;
         switch (view.getId()){
             case R.id.movie_image:
-                goListActivity();
+                i = 0;
+                goListActivity(i);
                 break;
             case R.id.movie_image1:
-                goListActivity();
+                i = 1;
+                goListActivity(i);
                 break;
             case R.id.movie_image2:
-                goListActivity();
+                i = 2;
+                goListActivity(i);
                 break;
         }
     }
-    private void goListActivity(){
-        startActivity(new Intent(getActivity(),ListActivity.class));
+    private void goListActivity(int i){
+        Intent intent = new Intent(getActivity(), ListActivity.class);
+        intent.putExtra("id", i);
+        startActivity(intent);
     }
     //定位实现接口
     public class MyLocationListener implements BDLocationListener {
