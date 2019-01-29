@@ -166,7 +166,6 @@ public class BuyTicketActivity extends AppCompatActivity implements BuyTicketAda
             request.timeStamp = data.getTimeStamp();
             request.sign = data.getSign();
             msgApi.sendReq(request);
-            finish();
         }
         @Override
         public void fail(ApiException e) {

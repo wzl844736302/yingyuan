@@ -75,7 +75,7 @@ public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return Integer.MAX_VALUE;
+        return list.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

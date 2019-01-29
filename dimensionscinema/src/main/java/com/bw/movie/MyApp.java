@@ -15,6 +15,7 @@ import com.bw.movie.dao.DaoMaster;
 import com.bw.movie.dao.DaoSession;
 import com.bw.movie.frag.FragCinema;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
@@ -44,7 +45,7 @@ public class MyApp extends Application {
         mMainLooper = getMainLooper();
         Fresco.initialize(this);
         daoSession = DaoMaster.newDevSession(context,AllUserDao.TABLENAME);
-
+        CrashReport.initCrashReport(getApplicationContext(), "ab4f6dba48", false);
     }
 
     /**
