@@ -65,7 +65,7 @@ public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHo
                 public void onClick(View v) {
 //                Toast.makeText(mContext, "点击了："+position, Toast.LENGTH_SHORT).show();
                     if (clickCb != null) {
-                        clickCb.clickItem(position);
+                        clickCb.clickItem(position%list.size());
                     }
                 }
             });
@@ -75,7 +75,7 @@ public class HotMovieAdapter extends RecyclerView.Adapter<HotMovieAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return Integer.MAX_VALUE;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

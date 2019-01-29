@@ -94,10 +94,34 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
         recyclerView.setAdapter(adapter);
 
         onItemClick(adapter);
-        HotMoviePresenter hotMoviePresenter = new HotMoviePresenter(new HorMovieData());
-        hotMoviePresenter.request(userId, sessionId, 1, 500);
-        group.check(group.getChildAt(0).getId());
-        list_mbutton1.setTextColor(Color.WHITE);
+       /* HotMoviePresenter hotMoviePresenter = new HotMoviePresenter(new HorMovieData());
+        hotMoviePresenter.request(userId, sessionId, 1, 500);*/
+        int id = getIntent().getIntExtra("id", 0);
+        switch (id){
+            case 0:
+                list_mbutton1.setTextColor(Color.WHITE);
+                list_mbutton2.setTextColor(Color.BLACK);
+                list_mbutton3.setTextColor(Color.BLACK);
+                HotMoviePresenter hotMoviePresenter = new HotMoviePresenter(new HorMovieData());
+                hotMoviePresenter.request(userId, sessionId, 1, 500);
+                break;
+            case 1:
+                list_mbutton1.setTextColor(Color.BLACK);
+                list_mbutton2.setTextColor(Color.WHITE);
+                list_mbutton3.setTextColor(Color.BLACK);
+                SoonPresenter soonPresenter = new SoonPresenter(new SoonData());
+                soonPresenter.request(userId, sessionId, 1, 500);
+                break;
+            case 2:
+                list_mbutton1.setTextColor(Color.BLACK);
+                list_mbutton2.setTextColor(Color.BLACK);
+                list_mbutton3.setTextColor(Color.WHITE);
+                ReleasePresenter releasePresenter = new ReleasePresenter(new ReleaseData());
+                releasePresenter.request(userId, sessionId, 1, 500);
+                break;
+        }
+
+        group.check(group.getChildAt(id).getId());
         group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -113,15 +137,16 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
                         list_mbutton1.setTextColor(Color.BLACK);
                         list_mbutton2.setTextColor(Color.WHITE);
                         list_mbutton3.setTextColor(Color.BLACK);
-                        ReleasePresenter releasePresenter = new ReleasePresenter(new ReleaseData());
-                        releasePresenter.request(userId, sessionId, 1, 500);
+
+                        SoonPresenter soonPresenter = new SoonPresenter(new SoonData());
+                        soonPresenter.request(userId, sessionId, 1, 500);
                         break;
                     case R.id.list_mbutton3:
                         list_mbutton1.setTextColor(Color.BLACK);
                         list_mbutton2.setTextColor(Color.BLACK);
                         list_mbutton3.setTextColor(Color.WHITE);
-                        SoonPresenter soonPresenter = new SoonPresenter(new SoonData());
-                        soonPresenter.request(userId, sessionId, 1, 500);
+                        ReleasePresenter releasePresenter = new ReleasePresenter(new ReleaseData());
+                        releasePresenter.request(userId, sessionId, 1, 500);
                         break;
                 }
             }
