@@ -54,12 +54,14 @@ public abstract class WDActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        MobclickAgent.onPageStart("页面开始");
         MobclickAgent.onResume(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        MobclickAgent.onPageEnd("页面结束");
         MobclickAgent.onPause(this);
     }
 }

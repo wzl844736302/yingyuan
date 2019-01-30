@@ -119,7 +119,6 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
         onItemClick(hotAdapter);
         onItemClick(hotAdapter1);
         onItemClick(hotAdapter2);
-        initData();
         //点击定位
         miv.setOnClickListener(new View.OnClickListener() {
             @Override

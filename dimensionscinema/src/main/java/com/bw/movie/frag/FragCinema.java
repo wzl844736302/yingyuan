@@ -135,7 +135,6 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
                 }
             }
         });
-        initData();
         //点击定位
         miv.setOnClickListener(new View.OnClickListener() {
             @Override

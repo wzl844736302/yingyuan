@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bw.movie.MyApp;
@@ -49,6 +50,8 @@ public class FragUser extends Fragment{
     SimpleDraweeView msim_user;
     @BindView(R.id.textLoginRegist)
     TextView mtext;
+    @BindView(R.id.mbt)
+    Button mbt;
     private AllUserDao allUserDao;
     private SharedPreferences sp;
     private boolean xian;
@@ -73,6 +76,8 @@ public class FragUser extends Fragment{
         }
         sp = getActivity().getSharedPreferences("login",Context.MODE_PRIVATE);
         xian = sp.getBoolean("xian", false);
+        msim_user.setImageURI("");
+        mbt.setVisibility(View.GONE);
         return view;
     }
     //点击登录
@@ -81,6 +86,7 @@ public class FragUser extends Fragment{
         //跳转
         Intent intent = new Intent(getActivity(), LoginActivity.class);
         startActivity(intent);
+        mbt.setVisibility(View.VISIBLE);
     }
     //点击跳转我的信息
     @OnClick(R.id.wodexinxi)
@@ -95,6 +101,10 @@ public class FragUser extends Fragment{
     //点击跳转我的关注
     @OnClick(R.id.wodeguanzhu)
     public void guanzhu(){
+        if (!xian){
+            Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
+            return;
+        }
         //跳转
         Intent intent = new Intent(getActivity(), FocusOnActivity.class);
         getActivity().startActivity(intent);
@@ -102,6 +112,10 @@ public class FragUser extends Fragment{
     //点击跳转购票记录
     @OnClick(R.id.goupiaojilu)
     public void jilu(){
+        if (!xian){
+            Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
+            return;
+        }
         //跳转
         Intent intent = new Intent(getActivity(), BuyTicketActivity.class);
         getActivity().startActivity(intent);
@@ -109,6 +123,10 @@ public class FragUser extends Fragment{
     //点击跳转意见反馈
     @OnClick(R.id.yijianfankui)
     public void fankui(){
+        if (!xian){
+            Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
+            return;
+        }
         //跳转
         Intent intent = new Intent(getActivity(), FeedBackActivity.class);
         getActivity().startActivity(intent);
@@ -127,6 +145,8 @@ public class FragUser extends Fragment{
                 xian = false;
                 edit.commit();
                 mtext.setText("登录/注册");
+                msim_user.setImageURI("");
+                mbt.setVisibility(View.GONE);
             }
         }).show();
 
@@ -134,6 +154,10 @@ public class FragUser extends Fragment{
     //点击跳转系统消息
     @OnClick(R.id.ming_remind)
     public void ming(){
+        if (!xian){
+            Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
+            return;
+        }
         //跳转
         Intent intent = new Intent(getActivity(), MessageActivity.class);
         startActivity(intent);

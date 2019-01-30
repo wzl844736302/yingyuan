@@ -5,20 +5,10 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.LocationClient;
-import com.baidu.location.LocationClientOption;
-import com.baidu.mapapi.map.MapView;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.dao.DaoMaster;
 import com.bw.movie.dao.DaoSession;
-import com.bw.movie.frag.FragCinema;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.tencent.bugly.crashreport.CrashReport;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
 
 public class MyApp extends Application {
     /** 主线程ID */
@@ -45,7 +35,24 @@ public class MyApp extends Application {
         mMainLooper = getMainLooper();
         Fresco.initialize(this);
         daoSession = DaoMaster.newDevSession(context,AllUserDao.TABLENAME);
-        CrashReport.initCrashReport(getApplicationContext(), "ab4f6dba48", false);
+       /* CrashReport.initCrashReport(getApplicationContext(), "ab4f6dba48", false);
+        XGPushConfig.enableOtherPush(getApplicationContext(), true);
+        XGPushConfig.setMiPushAppId(getApplicationContext(), "APPID");
+        XGPushConfig.setMiPushAppKey(getApplicationContext(), "APPKEY");
+        XGPushConfig.setMzPushAppId(this, "APPID");
+        XGPushConfig.setMzPushAppKey(this, "APPKEY");
+        XGPushManager.registerPush(this, new XGIOperateCallback() {
+            @Override
+            public void onSuccess(Object data, int flag) {
+                //token在设备卸载重装的时候有可能会变
+                Log.d("TPush", "注册成功，设备token为：" + data);
+            }
+            @Override
+            public void onFail(Object data, int errCode, String msg) {
+                Log.d("TPush", "注册失败，错误码：" + errCode + ",错误信息：" + msg);
+            }
+        });
+*/
     }
 
     /**
