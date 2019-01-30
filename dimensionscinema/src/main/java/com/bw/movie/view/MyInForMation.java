@@ -54,10 +54,13 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
     private SharedPreferences sp;
     private boolean xian;
     private UpUserPresenter upUserPresenter;
-    private AllUser allUser;
-    private EditText editText;
     private String trim;
-    QureyUser qureyUser = new QureyUser();
+    private int index = 0;// 记录单选对话框的下标
+    private String newsex;
+    private String nickName;
+    private int sex;
+    private QureyUser result;
+
     @Override
     protected void initView() {
         //绑定
@@ -66,7 +69,7 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         users.addAll(allUserDao.loadAll());
         if (users.size() > 0) {
-            allUser = users.get(0);
+            AllUser allUser = users.get(0);
             userId = allUser.getUserId();
             sessionId = allUser.getSessionId();
         }
@@ -81,6 +84,7 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
         findViewById(R.id.tv_username).setOnClickListener(this);
         findViewById(R.id.tv_sex).setOnClickListener(this);
         findViewById(R.id.tv_email).setOnClickListener(this);
+        upUserPresenter = new UpUserPresenter(new UpUserCall());
     }
 
     @Override
@@ -92,24 +96,57 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_username:
-                editText = new EditText(this);
-                editText.setText(qureyUser.getNickName());
-                AlertDialog dialog = new AlertDialog.Builder(this)
-                        .setTitle("修改用户名称")
-                        .setView(editText)
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                trim = editText.getText().toString().trim();
-                                users.get(0).setNickName(trim);
-                                tv_username.setText(trim);
-                                upUserPresenter = new UpUserPresenter(new UpUserCall());
-                                upUserPresenter.request(userId,sessionId,trim,qureyUser.getSex(),"136@qq.com");
-                            }
-                        }).setNegativeButton("取消",null).create();
-                dialog.show();
+                final EditText editText = new EditText(this);
+                editText.setText(result.getNickName());
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("修改用户名称");
+                builder.setView(editText);
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String s = editText.getText().toString().trim();
+                        users.get(0).setNickName(s);
+                        tv_username.setText(s);
+                        upUserPresenter.request(userId,sessionId,s,result.getSex(),result.getEmail());
+                        Toast.makeText(MyInForMation.this, ""+userId+"  "+sessionId+"  "+s+"  "+result.getSex()+"  "+result.getEmail(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton("取消",null);
+                builder.show();
                 break;
             case R.id.tv_sex:
+                final int sex1 = result.getSex();
+                int sexid = 0;
+                if (sex1 == 1) {
+                    sexid = 0;
+                } else {
+                    sexid = 1;
+                }
+                final String[] sex = {"男", "女"};
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+                builder2.setSingleChoiceItems(sex, sexid, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        index = which;
+                    }
+                });
+                builder2.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        newsex = sex[index];
+                        tv_sex.setText(newsex);
+                        if (newsex.equals("男")) {
+                            upUserPresenter = new UpUserPresenter(new UpUserCall());
+                            upUserPresenter.request(userId,sessionId,nickName,1,result.getEmail());
+                        } else {
+                            upUserPresenter = new UpUserPresenter(new UpUserCall());
+                            upUserPresenter.request(userId, sessionId, nickName,2, result.getEmail());
+
+                        }
+                    }
+                });
+                // 显示对话框
+                builder2.show();
                 break;
             case R.id.tv_email:
                 break;
@@ -121,12 +158,12 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
         @Override
         public void success(Result<QureyUser> data) {
             if (data.getStatus().equals("0000")) {
-                QureyUser result = data.getResult();
+                result = data.getResult();
                 String headPic = result.getHeadPic();
                 msim_my.setImageURI(headPic);
-                String nickName = result.getNickName();
+                nickName = result.getNickName();
                 tv_username.setText(nickName);
-                int sex = result.getSex();
+                sex = result.getSex();
                 String s = sex == 1 ? "男" : "女";
                 tv_sex.setText(s);
                 long birthday = result.getBirthday();
@@ -149,8 +186,7 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
         @Override
         public void success(Result<UpUser> data) {
             if (data.getStatus().equals("0000")){
-                UpUser result = data.getResult();
-                Toast.makeText(MyInForMation.this, ""+result.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyInForMation.this, ""+data.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
 

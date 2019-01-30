@@ -29,6 +29,7 @@ import com.bw.movie.view.BuyTicketActivity;
 import com.bw.movie.view.FeedBackActivity;
 import com.bw.movie.view.FocusOnActivity;
 import com.bw.movie.view.LoginActivity;
+import com.bw.movie.view.MessageActivity;
 import com.bw.movie.view.MyInForMation;
 import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.ArrayList;
@@ -125,14 +126,18 @@ public class FragUser extends Fragment{
                 edit.putBoolean("xian", false);
                 xian = false;
                 edit.commit();
-                //跳转
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+                mtext.setText("登录/注册");
             }
         }).show();
 
     }
-
+    //点击跳转系统消息
+    @OnClick(R.id.ming_remind)
+    public void ming(){
+        //跳转
+        Intent intent = new Intent(getActivity(), MessageActivity.class);
+        startActivity(intent);
+    }
     //解绑
     @Override
     public void onDestroy() {

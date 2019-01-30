@@ -6,6 +6,7 @@ import com.bw.movie.bean.CinemasList;
 import com.bw.movie.bean.Comment;
 import com.bw.movie.bean.FocusList;
 import com.bw.movie.bean.HotMovie;
+import com.bw.movie.bean.MessageList;
 import com.bw.movie.bean.MovieDetail;
 import com.bw.movie.bean.MovieList;
 import com.bw.movie.bean.QureyUser;
@@ -22,6 +23,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -196,11 +198,11 @@ public interface Irequest {
      */
     @POST("user/v1/verify/modifyUserInfo")
     @FormUrlEncoded
-    Observable<Result<UpUser>> updateUserInfo(@Header("userId") int userId,
-                                              @Header("sessionId") String sessionId,
-                                              @Field("nickName") String nickName,
-                                              @Field("sex") int sex,
-                                              @Field("email") String email);
+    Observable<Result<UpUser>> updateUserInfo(@Header("userId")int userId,
+                                              @Header("sessionId")String sessionId,
+                                              @Field("nickName")String nickName,
+                                              @Field("sex")int sex,
+                                              @Field("email")String email);
 
     /**
      * 根据电影ID和影院ID查询电影排期列表
@@ -356,4 +358,17 @@ public interface Irequest {
                                                         @Header("sessionId") String sessionId,
                                                         @Query("cinemaId")int cinemaId);
 
+    /**
+     * 查询系统消息列表
+     * @param userId
+     * @param sessionId
+     * @param page
+     * @param count
+     * @return
+     */
+    @GET("tool/v1/verify/findAllSysMsgList")
+    Observable<Result<List<MessageList>>> findAllSysMsgList(@Header("userId") int userId,
+                                                            @Header("sessionId") String sessionId,
+                                                            @Query("page")int page,
+                                                            @Query("count")int count);
 }
