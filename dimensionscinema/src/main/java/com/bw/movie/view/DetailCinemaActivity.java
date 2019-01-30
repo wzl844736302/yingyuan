@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Display;
@@ -20,10 +21,12 @@ import android.widget.Toast;
 import com.bw.movie.MyApp;
 import com.bw.movie.R;
 import com.bw.movie.adapter.Btn2Adapter;
+import com.bw.movie.adapter.Btn4Adapter;
 import com.bw.movie.adapter.DetailCinemaAdapter;
 import com.bw.movie.adapter.ScheduleAdapter;
 import com.bw.movie.bean.AllUser;
 import com.bw.movie.bean.CinemaInfo;
+import com.bw.movie.bean.Comment;
 import com.bw.movie.bean.MovieList;
 import com.bw.movie.bean.Result;
 import com.bw.movie.bean.ScheduleList;
@@ -31,6 +34,7 @@ import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.CinemaInfoPresenter;
+import com.bw.movie.presenter.CinemaplPresenter;
 import com.bw.movie.presenter.DetailCinemaPresenter;
 import com.bw.movie.presenter.SchedulePresenter;
 import com.bw.movie.utils.jilei.WDActivity;
@@ -71,6 +75,8 @@ public class DetailCinemaActivity extends WDActivity {
     private TextView zn;
     private TextView gj;
     private TextView zj;
+    private RecyclerView myRecyc;
+    private Btn4Adapter btn4Adapter;
 
     @Override
     protected void initView() {
@@ -246,8 +252,13 @@ public class DetailCinemaActivity extends WDActivity {
         dt = dialog.findViewById(R.id.dc_dt);
         dh = dialog.findViewById(R.id.dc_dh);
          zn = dialog.findViewById(R.id.dc_zn);
-        gj = dialog.findViewById(R.id.dc_gj);
-        zj = dialog.findViewById(R.id.dc_zj);
+        myRecyc = dialog.findViewById(R.id.dc_recyc);
+        CinemaplPresenter cinemaplPresenter = new CinemaplPresenter(new Cinemapl());
+        cinemaplPresenter.request(userId,sessionId,id1);
+        btn4Adapter = new Btn4Adapter(this);
+        LinearLayoutManager layoutManager = new GridLayoutManager(this,LinearLayoutManager.VERTICAL);
+        myRecyc.setLayoutManager(layoutManager);
+        myRecyc.setAdapter(btn4Adapter);
     }
     private class CinemaInfoData implements DataCall<Result<CinemaInfo>> {
         @Override
@@ -258,6 +269,19 @@ public class DetailCinemaActivity extends WDActivity {
             zn.setText("乘车路线");
             dt.setText(data.getResult().getVehicleRoute());
         }
+        @Override
+        public void fail(ApiException e) {
+
+        }
+    }
+
+    private class Cinemapl implements DataCall<Result<List<Comment>>>  {
+        @Override
+        public void success(Result<List<Comment>> data) {
+            btn4Adapter.addList(data.getResult());
+            btn4Adapter.notifyDataSetChanged();
+        }
+
         @Override
         public void fail(ApiException e) {
 

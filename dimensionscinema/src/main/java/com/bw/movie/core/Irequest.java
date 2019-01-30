@@ -371,4 +371,10 @@ public interface Irequest {
                                                             @Header("sessionId") String sessionId,
                                                             @Query("page")int page,
                                                             @Query("count")int count);
+    @GET("movie/v1/findAllMovieComment")
+    Observable<Result<List<Comment>>> findMovieComment(@Header("userId") int userId,
+                                                          @Header("sessionId") String sessionId,
+                                                          @Query("movieId") int movieId,
+                                                          @Query("page") int page,
+                                                          @Query("count") int count);
 }

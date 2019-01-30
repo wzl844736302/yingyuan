@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import com.bw.movie.MyApp;
 import com.bw.movie.R;
 import com.bw.movie.bean.AllUser;
@@ -21,12 +19,9 @@ import com.bw.movie.bean.User;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
-import com.bw.movie.frag.FragUser;
 import com.bw.movie.presenter.LoginPresenter;
 import com.bw.movie.utils.util.EncryptUtil;
 import com.bw.movie.utils.util.UIUtils;
-
-import me.jessyan.autosize.internal.CustomAdapt;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 

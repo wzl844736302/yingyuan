@@ -3,6 +3,7 @@ package com.bw.movie.utils.jilei;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 
 import com.bw.movie.MyApp;
 import com.bw.movie.dao.AllUserDao;
@@ -18,6 +19,10 @@ public abstract class WDActivity extends AppCompatActivity {
         setContentView(getLayoutId());
         ButterKnife.bind(this);//绑定布局
         initView();
+        //透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        //透明导航栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
     }
     /**
      * 设置layoutId
