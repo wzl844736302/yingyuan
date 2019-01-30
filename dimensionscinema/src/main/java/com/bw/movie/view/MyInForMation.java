@@ -2,12 +2,19 @@ package com.bw.movie.view;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +29,7 @@ import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.frag.FragUser;
 import com.bw.movie.presenter.QureyUserPresenter;
+import com.bw.movie.presenter.UpHeadPresenter;
 import com.bw.movie.presenter.UpUserPresenter;
 import com.bw.movie.utils.jilei.WDActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -60,6 +68,9 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
     private String nickName;
     private int sex;
     private QureyUser result;
+    private List<Object> objects = new ArrayList<>();
+    private SimpleDraweeView simpleDraweeView;
+    private AllUser allUser;
 
     @Override
     protected void initView() {
@@ -69,7 +80,7 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         users.addAll(allUserDao.loadAll());
         if (users.size() > 0) {
-            AllUser allUser = users.get(0);
+            allUser = users.get(0);
             userId = allUser.getUserId();
             sessionId = allUser.getSessionId();
         }
@@ -81,10 +92,12 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
     }
 
     private void myupdate() {
+        findViewById(R.id.my_head).setOnClickListener(this);
         findViewById(R.id.tv_username).setOnClickListener(this);
         findViewById(R.id.tv_sex).setOnClickListener(this);
         findViewById(R.id.tv_email).setOnClickListener(this);
         upUserPresenter = new UpUserPresenter(new UpUserCall());
+        simpleDraweeView = findViewById(R.id.msim_my);
     }
 
     @Override
@@ -94,7 +107,7 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tv_username:
                 final EditText editText = new EditText(this);
                 editText.setText(result.getNickName());
@@ -107,11 +120,11 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
                         String s = editText.getText().toString().trim();
                         users.get(0).setNickName(s);
                         tv_username.setText(s);
-                        upUserPresenter.request(userId,sessionId,s,result.getSex(),result.getEmail());
-                        Toast.makeText(MyInForMation.this, ""+userId+"  "+sessionId+"  "+s+"  "+result.getSex()+"  "+result.getEmail(), Toast.LENGTH_SHORT).show();
+                        upUserPresenter.request(userId, sessionId, s, result.getSex(), result.getEmail());
+                        Toast.makeText(MyInForMation.this, "" + userId + "  " + sessionId + "  " + s + "  " + result.getSex() + "  " + result.getEmail(), Toast.LENGTH_SHORT).show();
                     }
                 });
-                builder.setNegativeButton("取消",null);
+                builder.setNegativeButton("取消", null);
                 builder.show();
                 break;
             case R.id.tv_sex:
@@ -137,10 +150,10 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
                         tv_sex.setText(newsex);
                         if (newsex.equals("男")) {
                             upUserPresenter = new UpUserPresenter(new UpUserCall());
-                            upUserPresenter.request(userId,sessionId,nickName,1,result.getEmail());
+                            upUserPresenter.request(userId, sessionId, nickName, 1, result.getEmail());
                         } else {
                             upUserPresenter = new UpUserPresenter(new UpUserCall());
-                            upUserPresenter.request(userId, sessionId, nickName,2, result.getEmail());
+                            upUserPresenter.request(userId, sessionId, nickName, 2, result.getEmail());
 
                         }
                     }
@@ -149,6 +162,11 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
                 builder2.show();
                 break;
             case R.id.tv_email:
+                break;
+            case R.id.my_head:
+                Intent intent1 = new Intent(Intent.ACTION_PICK);
+                intent1.setType("image/*");
+                startActivityForResult(intent1, 0);
                 break;
         }
     }
@@ -180,13 +198,14 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
 
         }
     }
+
     //实现修改资料的接口
-    class UpUserCall implements DataCall<Result<UpUser>>{
+    class UpUserCall implements DataCall<Result<UpUser>> {
 
         @Override
         public void success(Result<UpUser> data) {
-            if (data.getStatus().equals("0000")){
-                Toast.makeText(MyInForMation.this, ""+data.getMessage(), Toast.LENGTH_SHORT).show();
+            if (data.getStatus().equals("0000")) {
+                Toast.makeText(MyInForMation.this, "" + data.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -195,10 +214,60 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
             Toast.makeText(MyInForMation.this, "222", Toast.LENGTH_SHORT).show();
         }
     }
+
     //点击返回
     @OnClick(R.id.mreturn)
     public void mreturn() {
         finish();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data == null) {
+            return;
+        }
+        if (requestCode == 0) {
+            String filePath = getFilePath(null, requestCode, data);
+            objects.add(filePath);
+            Uri data1 = data.getData();
+            simpleDraweeView.setImageURI(data1);
+            users.get(0).setHeadPic(data1.toString());
+            UpHeadPresenter upHeadPresenter = new UpHeadPresenter(new UpHeadC());
+            upHeadPresenter.request(userId, sessionId, objects);
+            objects.clear();
+            allUser.setHeadPic(data1.toString());
+        }
+    }
+    public String getFilePath(String fileName, int requestCode, Intent data) {
+        if (requestCode == 1) {
+            return fileName;
+        } else if (requestCode == 0) {
+            Uri uri = data.getData();
+            String[] proj = {MediaStore.Images.Media.DATA};
+            Cursor actualimagecursor = managedQuery(uri, proj, null, null, null);
+            int actual_image_column_index = actualimagecursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            actualimagecursor.moveToFirst();
+            String img_path = actualimagecursor
+                    .getString(actual_image_column_index);
+            // 4.0以上平台会自动关闭cursor,所以加上版本判断,OK
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+                actualimagecursor.close();
+            return img_path;
+        }
+        return null;
+    }
+
+    private class UpHeadC implements DataCall<Result> {
+        @Override
+        public void success(Result data) {
+            Toast.makeText(MyInForMation.this, data.getMessage()+"", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void fail(ApiException e) {
+
+        }
+    }
 }

@@ -1,14 +1,19 @@
 package com.bw.movie.utils.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -167,6 +172,7 @@ public class UIUtils {
 	public static void showToastSafe(final int resId) {
 		showToastSafe(getString(resId));
 	}
+
 
 	/** 对toast的简易封装。线程安全，可以在非UI线程调用。 */
 	public static void showToastSafe(final String str) {

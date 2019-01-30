@@ -19,6 +19,8 @@ import com.bw.movie.bean.User;
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -377,4 +379,9 @@ public interface Irequest {
                                                           @Query("movieId") int movieId,
                                                           @Query("page") int page,
                                                           @Query("count") int count);
+    @POST("user/v1/verify/uploadHeadPic")
+    Observable<Result> uploadHeadPic(@Header("userId") int userId,
+                                     @Header("sessionId") String sessionId,
+                                     @Body MultipartBody body);
+
 }
