@@ -14,7 +14,6 @@ import com.bw.movie.bean.QureyUser;
 import com.bw.movie.bean.Recommend;
 import com.bw.movie.bean.Result;
 import com.bw.movie.bean.ScheduleList;
-import com.bw.movie.bean.UpUser;
 import com.bw.movie.bean.User;
 
 import java.util.List;

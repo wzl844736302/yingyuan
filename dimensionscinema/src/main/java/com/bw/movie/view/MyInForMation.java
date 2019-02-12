@@ -10,8 +10,6 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,8 +45,6 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
     TextView tv_sex;
     @BindView(R.id.tv_birthdate)
     TextView tv_birthdate;
-    @BindView(R.id.in_for_mm)
-    LinearLayout mm;
     @BindView(R.id.tv_telephone)
     TextView tv_telphone;
     @BindView(R.id.tv_email)
@@ -85,29 +81,10 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
         myupdate();
     }
 
-    private void myupdate() {
-        findViewById(R.id.my_head).setOnClickListener(this);
-        findViewById(R.id.tv_username).setOnClickListener(this);
-        findViewById(R.id.tv_sex).setOnClickListener(this);
-        findViewById(R.id.tv_email).setOnClickListener(this);
-        upUserPresenter = new UpUserPresenter(new UpUserCall());
-        simpleDraweeView = findViewById(R.id.msim_my);
-        mm.setOnClickListener(this);
-    }
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_my_in_for_mation;
-    }
-
     @Override
     public void onClick(View v) {
 
         switch (v.getId()){
-        switch (v.getId()) {
-            case R.id.in_for_mm:
-                startActivity(new Intent(this,MmActivity.class));
-                break;
             case R.id.tv_username:
                 final EditText editText = new EditText(this);
                 editText.setText(result.getNickName());
@@ -150,11 +127,11 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
                         newsex = sex[index];
                         tv_sex.setText(newsex);
                         if (newsex.equals("男")) {
-                            upUserPresenter = new UpUserPresenter(new UpUserCall());
-                            upUserPresenter.request(userId, sessionId, nickName, 1, result.getEmail());
+                            modifyUserPresenter = new ModifyUserPresenter(new UpHeadC());
+                            modifyUserPresenter.request(userId, sessionId, nickName, 1, result.getEmail());
                         } else {
-                            upUserPresenter = new UpUserPresenter(new UpUserCall());
-                            upUserPresenter.request(userId, sessionId, nickName, 2, result.getEmail());
+                            modifyUserPresenter = new ModifyUserPresenter(new UpHeadC());
+                            modifyUserPresenter.request(userId, sessionId, nickName, 2, result.getEmail());
 
                         }
                     }
@@ -163,11 +140,38 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
                 builder2.show();
                 break;
             case R.id.tv_email:
+                final EditText editemail = new EditText(this);
+                editemail.setText(result.getEmail());
+                AlertDialog builder3 = new AlertDialog.Builder(this)
+                        .setTitle("修改邮箱")
+                        .setView(editemail)//设置输入框
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String trim = editemail.getText().toString().trim();
+                                /*boolean email = isEmail(trim + "");*/
+                                /*if (email) {*/
+                                tv_email.setText(trim);
+                                modifyUserPresenter = new ModifyUserPresenter(new UpHeadC());
+                                modifyUserPresenter.request(userId, sessionId, nickName, result.getSex(), trim);
+                                /*} else {
+                                    UIUtils.showToastSafe("请输入正确的邮箱");
+                                    return;
+                                }*/
+                            }
+                        }).setNegativeButton("取消", null).create();
+                builder3.show();
+
                 break;
             case R.id.my_head:
                 Intent intent1 = new Intent(Intent.ACTION_PICK);
                 intent1.setType("image/*");
                 startActivityForResult(intent1, 0);
+                break;
+            case R.id.in_for_mm:
+                //跳转
+                Intent intent = new Intent(MyInForMation.this, MmActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -191,6 +195,7 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
         findViewById(R.id.tv_username).setOnClickListener(this);
         findViewById(R.id.tv_sex).setOnClickListener(this);
         findViewById(R.id.tv_email).setOnClickListener(this);
+        findViewById(R.id.in_for_mm).setOnClickListener(this);
         simpleDraweeView = findViewById(R.id.msim_my);
     }
 
