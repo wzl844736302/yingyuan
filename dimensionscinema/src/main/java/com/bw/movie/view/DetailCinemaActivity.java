@@ -35,6 +35,7 @@ import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.CinemaInfoPresenter;
 import com.bw.movie.presenter.CinemaplPresenter;
+import com.bw.movie.presenter.CommentGreatPresenter;
 import com.bw.movie.presenter.DetailCinemaPresenter;
 import com.bw.movie.presenter.SchedulePresenter;
 import com.bw.movie.utils.jilei.WDActivity;
@@ -42,9 +43,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cn.jzvd.JZVideoPlayerStandard;
-import me.jessyan.autosize.internal.CustomAdapt;
 
 public class DetailCinemaActivity extends WDActivity {
 
@@ -77,11 +75,9 @@ public class DetailCinemaActivity extends WDActivity {
     private TextView zj;
     private RecyclerView myRecyc;
     private Btn4Adapter btn4Adapter;
-
+    private CommentGreatPresenter commentGreatPresenter;
     @Override
     protected void initView() {
-
-
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         users.addAll(allUserDao.loadAll());
         if (users.size()>0) {
@@ -146,12 +142,43 @@ public class DetailCinemaActivity extends WDActivity {
                 showBottomDialog2();
             }
         });
+        /*btn4Adapter.setCallLove1(this);*/
+      /*  btn4Adapter.setCallLove1(new Btn4Adapter.CallLove1() {
+            @Override
+            public void love(int id, int ischeck) {
+                if (ischeck == 1){
+                    Toast.makeText(DetailCinemaActivity.this, "111", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });*/
     }
 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_detail_cinema;
     }
+
+   /* @Override
+    public void love(int id, int ischeck) {
+        if (ischeck == 1){
+            commentGreatPresenter = new CommentGreatPresenter(new Great());
+            commentGreatPresenter.request(userId,sessionId,id);
+        }
+    }*/
+
+   /* //实现影院点赞接口
+    class Great implements DataCall<Result>{
+        @Override
+        public void success(Result data) {
+            if (data.getStatus().equals("0000")){
+                Toast.makeText(DetailCinemaActivity.this, ""+data.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        @Override
+        public void fail(ApiException e) {
+
+        }
+    }*/
     //实现当前电影列表
     class DetailCall implements DataCall<Result<List<MovieList>>> {
         @Override
@@ -251,7 +278,7 @@ public class DetailCinemaActivity extends WDActivity {
         wz = dialog.findViewById(R.id.dc_wz);
         dt = dialog.findViewById(R.id.dc_dt);
         dh = dialog.findViewById(R.id.dc_dh);
-         zn = dialog.findViewById(R.id.dc_zn);
+        zn = dialog.findViewById(R.id.dc_zn);
         myRecyc = dialog.findViewById(R.id.dc_recyc);
         CinemaplPresenter cinemaplPresenter = new CinemaplPresenter(new Cinemapl());
         cinemaplPresenter.request(userId,sessionId,id1);
@@ -278,8 +305,11 @@ public class DetailCinemaActivity extends WDActivity {
     private class Cinemapl implements DataCall<Result<List<Comment>>>  {
         @Override
         public void success(Result<List<Comment>> data) {
-            btn4Adapter.addList(data.getResult());
-            btn4Adapter.notifyDataSetChanged();
+            if (data.getStatus().equals("0000")){
+                List<Comment> result = data.getResult();
+                btn4Adapter.addList(result);
+                btn4Adapter.notifyDataSetChanged();
+            }
         }
 
         @Override

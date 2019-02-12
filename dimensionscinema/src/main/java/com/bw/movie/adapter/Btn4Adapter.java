@@ -28,60 +28,75 @@ public class Btn4Adapter extends RecyclerView.Adapter {
     private Context context;
 
 
-    private OnclickItem onclickItem;
-    private  LayoutInflater from;
-
-    public void setOnclickItem(OnclickItem onclickItem) {
-        this.onclickItem = onclickItem;
-    }
+    private LayoutInflater from;
 
     public Btn4Adapter(Context context) {
         this.context = context;
         from = LayoutInflater.from(context);
     }
-    public void addList(List<Comment> data){
+
+    public void addList(List<Comment> data) {
         mList.addAll(data);
     }
-    public List<Comment> getList(){
+
+    public List<Comment> getList() {
         return mList;
     }
-    public void clearList(){
+
+    public void clearList() {
         mList.clear();
         notifyDataSetChanged();
     }
-    public void delList(int i){
+
+    public void delList(int i) {
         mList.remove(i);
         notifyDataSetChanged();
     }
-
+    /*private CallLove1 callLove1;
+    public interface CallLove1{
+        void love(int id,int ischeck);
+    }
+    public void setCallLove1(CallLove1 callLove) {
+        this.callLove1 = callLove;
+    }*/
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = from.inflate(R.layout.item_btn4,viewGroup,false);
+        View view = from.inflate(R.layout.item_btn4, viewGroup, false);
         MyHodler myHodler = new MyHodler(view);
         return myHodler;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder  viewHolder,final int  i) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int i) {
         MyHodler myHodler = new MyHodler(viewHolder.itemView);
-        Date date = new Date((long)mList.get(i).getCommentTime());
+        final Comment comment = mList.get(i);
+        Date date = new Date((long) mList.get(i).getCommentTime());
         SimpleDateFormat fomat2 = new SimpleDateFormat("MM-dd  hh:mm");
         String mydate = fomat2.format(date);
         myHodler.time.setText(mydate);
         myHodler.detail.setText(mList.get(i).getMovieComment());
         myHodler.imageView.setImageURI(Uri.parse(mList.get(i).getCommentHeadPic()));
         myHodler.name.setText(mList.get(i).getCommentUserName());
-        myHodler.good.setText(mList.get(i).getGreatNum()+"");
-        myHodler.comentext.setText(mList.get(i).getReplyNum()+"");
-        if (onclickItem != null){
-           viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View view) {
-                   onclickItem.OnclickItem(view);
-               }
-           });
+        myHodler.good.setText(mList.get(i).getGreatNum() + "");
+        myHodler.comentext.setText(mList.get(i).getReplyNum() + "");
+        final int id = mList.get(i).getCommentId();
+       //点赞
+        myHodler.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox checkBox = (CheckBox) v;
+                boolean checked = checkBox.isChecked();
+                comment.setIscheck(checked?1:0);
+                /*callLove1.love(id,comment.getIscheck());*/
+            }
+        });
+        if (comment.getIscheck()==0){
+            myHodler.checkBox.setChecked(false);
+        }else {
+            myHodler.checkBox.setChecked(true);
         }
-        }
+    }
+
     @Override
     public int getItemCount() {
         return mList.size();
@@ -90,21 +105,20 @@ public class Btn4Adapter extends RecyclerView.Adapter {
     class MyHodler extends RecyclerView.ViewHolder {
 
         private SimpleDraweeView imageView;
-        private  TextView detail,name,time,comentext;
-        private CheckBox good;
+        private TextView detail, name, time, comentext, good;
+        private CheckBox checkBox;
         private ImageView coment;
+
         public MyHodler(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.item_btn4_image);
-             detail = itemView.findViewById(R.id.item_btn4_detail);
-             name = itemView.findViewById(R.id.item_btn4_name);
-             time = itemView.findViewById(R.id.item_btn4_time);
-             good = itemView.findViewById(R.id.item_btn4_good);
-             coment = itemView.findViewById(R.id.item_btn4_coment);
-             comentext = itemView.findViewById(R.id.item_btn4_coment_sum);
+            detail = itemView.findViewById(R.id.item_btn4_detail);
+            name = itemView.findViewById(R.id.item_btn4_name);
+            time = itemView.findViewById(R.id.item_btn4_time);
+            good = itemView.findViewById(R.id.mText);
+            checkBox = itemView.findViewById(R.id.item_btn4_good);
+            coment = itemView.findViewById(R.id.item_btn4_coment);
+            comentext = itemView.findViewById(R.id.item_btn4_coment_sum);
         }
-    }
-   public  interface OnclickItem{
-        void OnclickItem(View view);
     }
 }

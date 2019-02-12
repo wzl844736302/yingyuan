@@ -25,6 +25,15 @@ public class Comment {
     private String movieComment;
     private int commentUserId;
     private String commentUserName;
+    private int ischeck;
+
+    public int getIscheck() {
+        return ischeck;
+    }
+
+    public void setIscheck(int ischeck) {
+        this.ischeck = ischeck;
+    }
 
     public int getCommentId() {
         return commentId;

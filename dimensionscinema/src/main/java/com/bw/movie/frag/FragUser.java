@@ -125,6 +125,11 @@ public class FragUser extends Fragment{
         Intent intent = new Intent(getActivity(), FeedBackActivity.class);
         getActivity().startActivity(intent);
     }
+    //点击最新版本
+    @OnClick(R.id.zuixinbanben)
+    public void banben(){
+        Toast.makeText(getActivity(), "已经是最新版本", Toast.LENGTH_SHORT).show();
+    }
     //点击退出登录
     @OnClick(R.id.tuichudenglu)
     public void tuichu(){

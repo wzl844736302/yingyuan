@@ -420,4 +420,30 @@ public interface Irequest {
                                     @Header("sessionId")String sessionId,
                                     @Field("commentId")int comment,
                                     @Field("replyContent")String reply);
+
+    /**
+     * 意见反馈
+     * @param userid
+     * @param sessionId
+     * @param content
+     * @return
+     */
+    @POST("tool/v1/verify/recordFeedBack")
+    @FormUrlEncoded
+    Observable<Result> recordFeedBack(@Header("userId")int userid,
+                                      @Header("sessionId")String sessionId,
+                                      @Field("content") String content);
+
+    /**
+     * 影院评论点赞
+     * @param userid
+     * @param sessionId
+     * @param commentId
+     * @return
+     */
+    @POST("cinema/v1/verify/cinemaCommentGreat")
+    @FormUrlEncoded
+    Observable<Result> cinemaCommentGreat(@Header("userId")int userid,
+                                          @Header("sessionId")String sessionId,
+                                          @Field("commentId")int commentId);
 }

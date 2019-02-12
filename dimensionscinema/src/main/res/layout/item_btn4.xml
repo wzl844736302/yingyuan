@@ -49,10 +49,16 @@
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:drawableLeft="@drawable/select_good"
-            android:text="123123"
             android:button="@null"
             android:textSize="12sp"
             android:textColor="#999"
+            android:layout_marginRight="5dp"/>
+        <TextView
+            android:id="@+id/mText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12"
+            android:gravity="center"
             android:layout_marginRight="18dp"/>
         <ImageView
             android:id="@+id/item_btn4_coment"

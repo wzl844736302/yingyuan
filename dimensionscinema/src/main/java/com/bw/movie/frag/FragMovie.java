@@ -37,11 +37,15 @@ import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.HotMoviePresenter;
 import com.bw.movie.presenter.ReleasePresenter;
 import com.bw.movie.presenter.SoonPresenter;
+import com.bw.movie.utils.util.CacheManager;
 import com.bw.movie.view.CoverFlowLayoutManger;
 import com.bw.movie.view.DetailsActivity;
 import com.bw.movie.view.ListActivity;
 import com.bw.movie.view.RecyclerCoverFlow;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +73,7 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
     private ImageView miv;
-
+    private CacheManager cacheManager = new CacheManager();
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -265,36 +269,66 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick,V
             hotMovieAdapter.notifyDataSetChanged();
             hotAdapter.addList(data.getResult());
             hotAdapter.notifyDataSetChanged();
+            List<HotMovie> result = data.getResult();
+            Gson gson = new Gson();
+            String s = gson.toJson(result);
+            cacheManager.saveDataToFile(getContext(),s,"rm");
         }
         @Override
         public void fail(ApiException e) {
-
+            String s = cacheManager.loadDataFromFile(getContext(), "rm");
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<HotMovie>>() {}.getType();
+            List<HotMovie> movies =gson.fromJson(s,type);
+            list.addAll(movies);
+            hotMovieAdapter.notifyDataSetChanged();
+            hotAdapter.addList(movies);
+            hotAdapter.notifyDataSetChanged();
         }
     }
     //正在热销
     private class ReleaseData implements DataCall<Result<List<HotMovie>>> {
         @Override
         public void success(Result<List<HotMovie>> data) {
-
             hotAdapter1.addList(data.getResult());
             hotAdapter1.notifyDataSetChanged();
+            List<HotMovie> result = data.getResult();
+            Gson gson = new Gson();
+            String s = gson.toJson(result);
+            cacheManager.saveDataToFile(getContext(),s,"rx");
         }
 
         @Override
         public void fail(ApiException e) {
-
+            String s = cacheManager.loadDataFromFile(getContext(), "rx");
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<HotMovie>>() {}.getType();
+            List<HotMovie> movies =gson.fromJson(s,type);
+            hotAdapter1.addList(movies);
+            hotAdapter1.notifyDataSetChanged();
         }
     }
     //即将上映
     private class SoonData implements DataCall<Result<List<HotMovie>>> {
         @Override
         public void success(Result<List<HotMovie>> data) {
+
             hotAdapter2.addList(data.getResult());
             hotAdapter2.notifyDataSetChanged();
+            List<HotMovie> result = data.getResult();
+            Gson gson = new Gson();
+            String s = gson.toJson(result);
+            cacheManager.saveDataToFile(getContext(),s,"sy");
         }
         @Override
 
         public void fail(ApiException e) {
+            String s = cacheManager.loadDataFromFile(getContext(), "sy");
+            Gson gson = new Gson();
+            Type type = new TypeToken<List<HotMovie>>() {}.getType();
+            List<HotMovie> movies =gson.fromJson(s,type);
+            hotAdapter2.addList(movies);
+            hotAdapter2.notifyDataSetChanged();
         }
     }
     private void onItemClick(final HotAdapter adapter){
