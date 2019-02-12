@@ -21,7 +21,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.MainActivity">
@@ -48,7 +48,8 @@
         <activity android:name=".view.RegsterActivity" />
         <activity
             android:name=".view.HomeActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".view.MyInForMation" />
         <activity android:name=".view.ListActivity" />
         <activity android:name=".view.DetailsActivity" />

@@ -18,14 +18,9 @@ import android.widget.Toast;
 import com.bw.movie.MyApp;
 import com.bw.movie.R;
 import com.bw.movie.bean.AllUser;
-import com.bw.movie.bean.Result;
-import com.bw.movie.bean.UpUser;
-import com.bw.movie.core.DataCall;
-import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.dao.DaoMaster;
 import com.bw.movie.dao.DaoSession;
-import com.bw.movie.presenter.UpUserPresenter;
 import com.bw.movie.view.BuyTicketActivity;
 import com.bw.movie.view.FeedBackActivity;
 import com.bw.movie.view.FocusOnActivity;
@@ -40,7 +35,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import me.jessyan.autosize.AutoSizeConfig;
-import me.jessyan.autosize.internal.CustomAdapt;
 
 public class FragUser extends Fragment{
 

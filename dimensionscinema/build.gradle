@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'bw_movie'
             keyPassword '123456'
-            storeFile file('C:/Users/asus/Desktop/movie.keystore')
+            storeFile file('C:/Users/王子龙/Desktop/movie.keystore')
             storePassword '123456'
         }
     }
@@ -17,6 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
         flavorDimensions "versionCode"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.config
         ndk {
@@ -28,6 +29,9 @@ android {
                 XG_ACCESS_ID:"2100300660",
                 XG_ACCESS_KEY : "A44FJ9N7N9EY",
         ]
+    }
+    dexOptions{
+        javaMaxHeapSize "4g"
     }
     buildTypes {
         release {
@@ -97,12 +101,21 @@ dependencies {
         exclude group: 'com.android.support'
     }
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
-    implementation 'com.tencent.bugly:crashreport:latest.release'
+    implementation 'com.tencent.bugly:crashreport:2.8.6'
     //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
-    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+    implementation 'com.tencent.bugly:nativecrashreport:3.6.0'
     //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
     // 友盟统计
-    implementation 'com.umeng.analytics:analytics:latest.integration'
-
+    implementation 'com.umeng.analytics:analytics:6.1.4'
+    //信鸽普通版本jar，不包含厂商通道
+   implementation  'com.tencent.xinge:xinge:4.0.5-release'
+    //implementation'com.tencent.xinge:xinge:4.3.1-beta'
+    //jg包
+    implementation'com.tencent.jg:jg:1.1'
+    //wup包
+    implementation 'com.tencent.wup:wup:1.0.0.E-release'
+    //mid包，minSdkVersion 14
+    implementation 'com.tencent.mid:mid:4.0.7-Release'
+/*    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.0.2'*/
 
 }
