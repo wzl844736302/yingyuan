@@ -1,17 +1,13 @@
 package com.bw.movie.view;
 
-import android.content.Context;
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -25,15 +21,14 @@ import com.bw.movie.adapter.MmActivity;
 import com.bw.movie.bean.AllUser;
 import com.bw.movie.bean.QureyUser;
 import com.bw.movie.bean.Result;
-import com.bw.movie.bean.UpUser;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
-import com.bw.movie.frag.FragUser;
+import com.bw.movie.presenter.ModifyUserPresenter;
 import com.bw.movie.presenter.QureyUserPresenter;
 import com.bw.movie.presenter.UpHeadPresenter;
-import com.bw.movie.presenter.UpUserPresenter;
 import com.bw.movie.utils.jilei.WDActivity;
+import com.bw.movie.utils.util.UIUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -42,7 +37,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import me.jessyan.autosize.internal.CustomAdapt;
 
 public class MyInForMation extends WDActivity implements View.OnClickListener {
     @BindView(R.id.msim_my)
@@ -63,19 +57,15 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
     private List<AllUser> users = new ArrayList<>();
     private int userId;
     private String sessionId;
-    private SharedPreferences sp;
-    private boolean xian;
-    private UpUserPresenter upUserPresenter;
-    private String trim;
-    private int index = 0;// 记录单选对话框的下标
-    private String newsex;
     private String nickName;
     private int sex;
     private QureyUser result;
     private List<Object> objects = new ArrayList<>();
     private SimpleDraweeView simpleDraweeView;
     private AllUser allUser;
-
+    private ModifyUserPresenter modifyUserPresenter;
+    private int index = 0;// 记录单选对话框的下标
+    private String newsex;
     @Override
     protected void initView() {
         //绑定
@@ -112,6 +102,8 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+        switch (v.getId()){
         switch (v.getId()) {
             case R.id.in_for_mm:
                 startActivity(new Intent(this,MmActivity.class));
@@ -128,7 +120,8 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
                         String s = editText.getText().toString().trim();
                         users.get(0).setNickName(s);
                         tv_username.setText(s);
-                        upUserPresenter.request(userId, sessionId, s, result.getSex(), result.getEmail());
+                        modifyUserPresenter = new ModifyUserPresenter(new UpHeadC());
+                        modifyUserPresenter.request(userId, sessionId, s, result.getSex(), result.getEmail());
                         Toast.makeText(MyInForMation.this, "" + userId + "  " + sessionId + "  " + s + "  " + result.getSex() + "  " + result.getEmail(), Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -179,6 +172,34 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
         }
     }
 
+    //实现修改用户接口
+    class ModifyCall implements DataCall<Result>{
+        @Override
+        public void success(Result data) {
+            if (data.getStatus().equals("0000")){
+                Toast.makeText(MyInForMation.this, ""+data.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void fail(ApiException e) {
+
+        }
+    }
+    private void myupdate() {
+        findViewById(R.id.my_head).setOnClickListener(this);
+        findViewById(R.id.tv_username).setOnClickListener(this);
+        findViewById(R.id.tv_sex).setOnClickListener(this);
+        findViewById(R.id.tv_email).setOnClickListener(this);
+        simpleDraweeView = findViewById(R.id.msim_my);
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_my_in_for_mation;
+    }
+
+
     //实现查询用户信息
     class QureyUserCall implements DataCall<Result<QureyUser>> {
         @Override
@@ -207,28 +228,13 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
         }
     }
 
-    //实现修改资料的接口
-    class UpUserCall implements DataCall<Result<UpUser>> {
-
-        @Override
-        public void success(Result<UpUser> data) {
-            if (data.getStatus().equals("0000")) {
-                Toast.makeText(MyInForMation.this, "" + data.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        @Override
-        public void fail(ApiException e) {
-            Toast.makeText(MyInForMation.this, "222", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     //点击返回
     @OnClick(R.id.mreturn)
     public void mreturn() {
         finish();
     }
 
+    //上传用户头像
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -266,7 +272,6 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
         }
         return null;
     }
-
     private class UpHeadC implements DataCall<Result> {
         @Override
         public void success(Result data) {

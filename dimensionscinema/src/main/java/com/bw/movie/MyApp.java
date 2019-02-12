@@ -4,11 +4,16 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.dao.DaoMaster;
 import com.bw.movie.dao.DaoSession;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.tencent.android.tpush.XGIOperateCallback;
+import com.tencent.android.tpush.XGPushConfig;
+import com.tencent.android.tpush.XGPushManager;
+import com.tencent.bugly.crashreport.CrashReport;
 
 public class MyApp extends Application {
     /** 主线程ID */
@@ -35,7 +40,7 @@ public class MyApp extends Application {
         mMainLooper = getMainLooper();
         Fresco.initialize(this);
         daoSession = DaoMaster.newDevSession(context,AllUserDao.TABLENAME);
-       /* CrashReport.initCrashReport(getApplicationContext(), "ab4f6dba48", false);
+        CrashReport.initCrashReport(getApplicationContext(), "ab4f6dba48", false);
         XGPushConfig.enableOtherPush(getApplicationContext(), true);
         XGPushConfig.setMiPushAppId(getApplicationContext(), "APPID");
         XGPushConfig.setMiPushAppKey(getApplicationContext(), "APPKEY");
@@ -52,7 +57,6 @@ public class MyApp extends Application {
                 Log.d("TPush", "注册失败，错误码：" + errCode + ",错误信息：" + msg);
             }
         });
-*/
     }
 
     /**

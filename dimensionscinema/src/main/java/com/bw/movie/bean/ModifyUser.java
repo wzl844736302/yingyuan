@@ -1,6 +1,6 @@
 package com.bw.movie.bean;
 
-public class UpUser {
+public class ModifyUser {
 
     /**
      * id : 0
@@ -38,7 +38,7 @@ public class UpUser {
 
     @Override
     public String toString() {
-        return "UpUser{" +
+        return "ModifyUser{" +
                 "id=" + id +
                 ", nickName='" + nickName + '\'' +
                 ", sex=" + sex +

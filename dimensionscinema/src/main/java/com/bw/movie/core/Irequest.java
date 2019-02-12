@@ -7,6 +7,7 @@ import com.bw.movie.bean.Comment;
 import com.bw.movie.bean.FocusList;
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.MessageList;
+import com.bw.movie.bean.ModifyUser;
 import com.bw.movie.bean.MovieDetail;
 import com.bw.movie.bean.MovieList;
 import com.bw.movie.bean.QureyUser;
@@ -25,7 +26,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Multipart;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -188,24 +189,6 @@ public interface Irequest {
                                                           @Query("movieId") int movieId,
                                                           @Query("page") int page,
                                                           @Query("count") int count);
-
-    /**
-     * 修改用户信息
-     * @param userId
-     * @param sessionId
-     * @param nickName
-     * @param sex
-     * @param email
-     * @return
-     */
-    @POST("user/v1/verify/modifyUserInfo")
-    @FormUrlEncoded
-    Observable<Result<UpUser>> updateUserInfo(@Header("userId")int userId,
-                                              @Header("sessionId")String sessionId,
-                                              @Field("nickName")String nickName,
-                                              @Field("sex")int sex,
-                                              @Field("email")String email);
-
     /**
      * 根据电影ID和影院ID查询电影排期列表
      * @param cinemasId
@@ -379,10 +362,65 @@ public interface Irequest {
                                                           @Query("movieId") int movieId,
                                                           @Query("page") int page,
                                                           @Query("count") int count);
+
+    /**
+     * 上传头像
+     * @param userId
+     * @param sessionId
+     * @param body
+     * @return
+     */
     @POST("user/v1/verify/uploadHeadPic")
     Observable<Result> uploadHeadPic(@Header("userId") int userId,
                                      @Header("sessionId") String sessionId,
                                      @Body MultipartBody body);
+
+    /**
+     * 修改用户信息
+     * @param userId
+     * @param sessionId
+     * @param sex
+     * @param email
+     * @return
+     */
+    @POST("user/v1/verify/modifyUserInfo")
+    @FormUrlEncoded
+    @Headers("Content-Type:application/x-www-form-urlencoded; charset=utf-8")
+    Observable<Result> modifyUserInfo(@Header("userId")int userId,
+                                                  @Header("sessionId")String sessionId,
+                                                  @Field("nickName")String nickName,
+                                                  @Field("sex")int sex,
+                                                  @Field("email")String email);
+
+    /**
+     * 添加用户对影片的评论
+     * @param userid
+     * @param sessionId
+     * @param movieId
+     * @param comment
+     * @return
+     */
+    @POST("movie/v1/verify/movieComment")
+    @FormUrlEncoded
+    Observable<Result> movieComment(@Header("userId")int userid,
+                                    @Header("sessionId")String sessionId,
+                                    @Field("movieId")int movieId,
+                                    @Field("commentContent")String comment);
+
+    /**
+     * 添加用户对评论的回复
+     * @param userid
+     * @param sessionId
+     * @param comment
+     * @param reply
+     * @return
+     */
+    @POST("movie/v1/verify/commentReply")
+    @FormUrlEncoded
+    Observable<Result> commentReply(@Header("userId")int userid,
+                                    @Header("sessionId")String sessionId,
+                                    @Field("commentId")int comment,
+                                    @Field("replyContent")String reply);
     @POST("user/v1/verify/modifyUserPwd")
     @FormUrlEncoded
     Observable<Result> modifyUserPwd(@Header("userId") int userId,
