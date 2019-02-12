@@ -52,7 +52,6 @@ public class FocusOnAdapter1 extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return list.size();
     }
 
-
     public void addAll(List<MovieList> result) {
         if (result!=null){
             list.addAll(result);

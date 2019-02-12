@@ -14,6 +14,7 @@ import com.bw.movie.bean.QureyUser;
 import com.bw.movie.bean.Recommend;
 import com.bw.movie.bean.Result;
 import com.bw.movie.bean.ScheduleList;
+import com.bw.movie.bean.UpUser;
 import com.bw.movie.bean.User;
 
 import java.util.List;
@@ -446,4 +447,11 @@ public interface Irequest {
     Observable<Result> cinemaCommentGreat(@Header("userId")int userid,
                                           @Header("sessionId")String sessionId,
                                           @Field("commentId")int commentId);
+    @POST("user/v1/verify/modifyUserPwd")
+    @FormUrlEncoded
+    Observable<Result> modifyUserPwd(@Header("userId") int userId,
+                           @Header("sessionId") String sessionId,
+                           @Field("oldPwd") String oldPwd,
+                           @Field("newPwd") String newPwd,
+                           @Field("newPwd2") String newPwd2);
 }

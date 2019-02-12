@@ -148,7 +148,6 @@ public class FragUser extends Fragment{
                 mbt.setVisibility(View.GONE);
             }
         }).show();
-
     }
     //点击跳转系统消息
     @OnClick(R.id.ming_remind)
@@ -167,7 +166,6 @@ public class FragUser extends Fragment{
         super.onDestroy();
         bind = null;
     }
-
     @Override
     public void onResume() {
         super.onResume();
