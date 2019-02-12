@@ -69,11 +69,11 @@
         <activity android:name=".view.FocusOnActivity" />
         <activity android:name=".view.FeedBackActivity" />
         <activity android:name=".view.BuyTicketActivity" />
-        <activity android:name=".view.WxLoginActivity"></activity>
+        <activity android:name=".view.WxLoginActivity" />
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask" />
         <!-- 友盟统计 -->
         <meta-data
             android:name="UMENG_APPKEY"
@@ -82,7 +82,8 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
 
-        <activity android:name=".view.MessageActivity"></activity>
+        <activity android:name=".view.MessageActivity" />
+        <activity android:name=".adapter.MmActivity"></activity>
     </application>
 
 </manifest>

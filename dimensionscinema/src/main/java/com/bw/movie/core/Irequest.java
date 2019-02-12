@@ -383,5 +383,11 @@ public interface Irequest {
     Observable<Result> uploadHeadPic(@Header("userId") int userId,
                                      @Header("sessionId") String sessionId,
                                      @Body MultipartBody body);
-
+    @POST("user/v1/verify/modifyUserPwd")
+    @FormUrlEncoded
+    Observable<Result> modifyUserPwd(@Header("userId") int userId,
+                           @Header("sessionId") String sessionId,
+                           @Field("oldPwd") String oldPwd,
+                           @Field("newPwd") String newPwd,
+                           @Field("newPwd2") String newPwd2);
 }

@@ -204,6 +204,7 @@
             </RelativeLayout>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/in_for_mm"
             android:background="@drawable/me_back"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"

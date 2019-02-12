@@ -14,12 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bw.movie.MyApp;
 import com.bw.movie.R;
+import com.bw.movie.adapter.MmActivity;
 import com.bw.movie.bean.AllUser;
 import com.bw.movie.bean.QureyUser;
 import com.bw.movie.bean.Result;
@@ -51,6 +53,8 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
     TextView tv_sex;
     @BindView(R.id.tv_birthdate)
     TextView tv_birthdate;
+    @BindView(R.id.in_for_mm)
+    LinearLayout mm;
     @BindView(R.id.tv_telephone)
     TextView tv_telphone;
     @BindView(R.id.tv_email)
@@ -98,6 +102,7 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
         findViewById(R.id.tv_email).setOnClickListener(this);
         upUserPresenter = new UpUserPresenter(new UpUserCall());
         simpleDraweeView = findViewById(R.id.msim_my);
+        mm.setOnClickListener(this);
     }
 
     @Override
@@ -108,6 +113,9 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.in_for_mm:
+                startActivity(new Intent(this,MmActivity.class));
+                break;
             case R.id.tv_username:
                 final EditText editText = new EditText(this);
                 editText.setText(result.getNickName());
