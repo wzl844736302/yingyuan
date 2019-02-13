@@ -14,7 +14,7 @@ public class Comment {
      * commentUserId : 6
      * commentUserName : 谁的益达
      */
-
+    private String commentContent;
     private int commentId;
     private long commentTime;
     private int greatNum;
@@ -26,6 +26,14 @@ public class Comment {
     private int commentUserId;
     private String commentUserName;
     private int ischeck;
+
+    public String getCommentContent() {
+        return commentContent;
+    }
+
+    public void setCommentContent(String commentContent) {
+        this.commentContent = commentContent;
+    }
 
     public int getIscheck() {
         return ischeck;

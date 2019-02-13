@@ -453,4 +453,10 @@ public interface Irequest {
                            @Field("oldPwd") String oldPwd,
                            @Field("newPwd") String newPwd,
                            @Field("newPwd2") String newPwd2);
+    @POST("movie/v1/verify/movieComment")
+    @FormUrlEncoded
+    Observable<Result> Comment1(@Header("userId") int userId,
+                                     @Header("sessionId") String sessionId,
+                                     @Field("movieId") int movieId,
+                                     @Field("commentContent") String commentContent);
 }
