@@ -3,15 +3,8 @@ package com.bw.movie.view;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.Toast;
-
 import com.bw.movie.R;
 import com.bw.movie.utils.jilei.WDActivity;
-
-import me.jessyan.autosize.AutoSizeConfig;
-import me.jessyan.autosize.internal.CustomAdapt;
 
 public class MainActivity extends WDActivity {
 
@@ -38,6 +31,6 @@ public class MainActivity extends WDActivity {
     }
     @Override
     protected void initView() {
-        handler.sendEmptyMessageDelayed(1,1000);
+     handler.sendEmptyMessageDelayed(1,1000);
     }
 }
