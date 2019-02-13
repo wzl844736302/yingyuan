@@ -114,8 +114,6 @@ public class TicketDetailActivity extends WDActivity {
             }
         });
     }
-
-
     //实现电影排期列表
     class SchedulesCall implements DataCall<Result<List<ScheduleList>>>{
 

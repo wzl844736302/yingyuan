@@ -1,6 +1,7 @@
 package com.bw.movie.view;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,9 +15,15 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bw.movie.MyApp;
 import com.bw.movie.R;
 import com.bw.movie.adapter.Btn2Adapter;
@@ -31,6 +38,7 @@ import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.CommentPresenter;
 import com.bw.movie.presenter.DetailMoviePresenter;
+import com.bw.movie.presenter.MovieCommentPresenter;
 import com.bw.movie.utils.jilei.WDActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -57,6 +65,9 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
     private Btn4Adapter btn4Adapter;
     private String name;
     private List<AllUser> users = new ArrayList<>();
+    private LinearLayout pinglun;
+    private ImageView xie;
+    private EditText plEd;
 
     @Override
     protected void initView() {
@@ -274,12 +285,35 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
                 dialog.dismiss();
             }
         });
+        pinglun = dialog.findViewById(R.id.btn4_ping);
+        plEd = dialog.findViewById(R.id.btn4_pinged);
+        xie = dialog.findViewById(R.id.btn4_xie);
+        xie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pinglun.setVisibility(View.VISIBLE);
+                xie.setVisibility(View.GONE);
+            }
+        });
+        dialog.findViewById(R.id.btn4_fs).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String trim = plEd.getText().toString().trim();
+                MovieCommentPresenter movieCommentPresenter = new MovieCommentPresenter(new plData());
+                movieCommentPresenter.request(userId,sessionId,id,trim);
+                plEd.setText("");
+                CommentPresenter commentPresenter = new CommentPresenter(new CommentData());
+                commentPresenter.request(userId,sessionId,id);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+
+            }
+        });
         XRecyclerView recyclerView = dialog.findViewById(R.id.btn4_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(DetailsActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         btn4Adapter = new Btn4Adapter(DetailsActivity.this);
         recyclerView.setAdapter(btn4Adapter);
-
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         List<AllUser> users = allUserDao.loadAll();
         if (users.size()>0){
@@ -294,9 +328,22 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
     private class CommentData implements DataCall<Result<List<Comment>>> {
         @Override
         public void success(Result<List<Comment>> data) {
+            btn4Adapter.clearList();
             btn4Adapter.addList(data.getResult());
             btn4Adapter.notifyDataSetChanged();
         }
+        @Override
+        public void fail(ApiException e) {
+
+        }
+    }
+
+    private class plData implements DataCall<Result> {
+        @Override
+        public void success(Result data) {
+            Toast.makeText(DetailsActivity.this, data.getMessage()+"", Toast.LENGTH_SHORT).show();
+        }
+
         @Override
         public void fail(ApiException e) {
 

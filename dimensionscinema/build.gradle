@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'bw_movie'
             keyPassword '123456'
-            storeFile file('C:/Users/王子龙/Desktop/movie.keystore')
+            storeFile file('C:/Users/asus/Desktop/movie.keystore')
             storePassword '123456'
         }
     }
@@ -108,14 +108,13 @@ dependencies {
     // 友盟统计
     implementation 'com.umeng.analytics:analytics:6.1.4'
     //信鸽普通版本jar，不包含厂商通道
-   implementation  'com.tencent.xinge:xinge:4.0.5-release'
+    implementation 'com.tencent.xinge:xinge:4.0.5-release'
     //implementation'com.tencent.xinge:xinge:4.3.1-beta'
     //jg包
-    implementation'com.tencent.jg:jg:1.1'
+    implementation 'com.tencent.jg:jg:1.1'
     //wup包
     implementation 'com.tencent.wup:wup:1.0.0.E-release'
     //mid包，minSdkVersion 14
     implementation 'com.tencent.mid:mid:4.0.7-Release'
-/*    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.0.2'*/
-
+    /*    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.0.2'*/
 }

@@ -74,7 +74,7 @@ public class Btn4Adapter extends RecyclerView.Adapter {
         SimpleDateFormat fomat2 = new SimpleDateFormat("MM-dd  hh:mm");
         String mydate = fomat2.format(date);
         myHodler.time.setText(mydate);
-        myHodler.detail.setText(mList.get(i).getMovieComment());
+        myHodler.detail.setText(mList.get(i).getCommentContent());
         myHodler.imageView.setImageURI(Uri.parse(mList.get(i).getCommentHeadPic()));
         myHodler.name.setText(mList.get(i).getCommentUserName());
         myHodler.good.setText(mList.get(i).getGreatNum() + "");
