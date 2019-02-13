@@ -1,6 +1,9 @@
 package com.bw.movie.frag;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -41,6 +44,8 @@ import com.bw.movie.presenter.FocusOnPresenter;
 import com.bw.movie.presenter.FuJinPresenter;
 import com.bw.movie.presenter.RecommendPresenter;
 import com.bw.movie.utils.util.UIUtils;
+import com.bw.movie.view.ListActivity;
+import com.bw.movie.view.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +81,7 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
     private FocusOnPresenter focusOnPresenter;
     private CancelFocusPresenter cancelFocusPresenter;
     private ImageView miv;
+    private boolean xian;
 
     @Nullable
     @Override
@@ -216,6 +222,23 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
     //关注
     @Override
     public void love(int id, int ischeck) {
+        SharedPreferences sp = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+        xian = sp.getBoolean("xian", false);
+        if (!xian){
+            Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
+        //查询数据库
+        AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
+        users.clear();
+        users.addAll(allUserDao.loadAll());
+        if (users.size() > 0) {
+            AllUser allUser = users.get(0);
+            userId = allUser.getUserId();
+            sessionId = allUser.getSessionId();
+        }
         if (ischeck == 1){
             focusOnPresenter = new FocusOnPresenter(new FoucsOnCall());
             focusOnPresenter.request(userId,sessionId,id);

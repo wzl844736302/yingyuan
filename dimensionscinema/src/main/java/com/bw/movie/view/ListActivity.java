@@ -1,7 +1,9 @@
 package com.bw.movie.view;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -66,6 +68,8 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
     private FocusMoviePresenter moviePresenter;
     private CancelMoviePresenter cancelMoviePresenter;
     private ImageView miv;
+    private SharedPreferences sp;
+    private boolean xian;
 
     @Override
     protected void initView() {
@@ -199,6 +203,23 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
     //是否关注电影
     @Override
     public void back(int id, int ischeck) {
+        sp = getSharedPreferences("login", Context.MODE_PRIVATE);
+        xian = sp.getBoolean("xian", false);
+        if (!xian){
+            Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(ListActivity.this, LoginActivity.class);
+            startActivity(intent);
+            return;
+        }
+        //查询数据库
+        AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
+        users.clear();
+        users.addAll(allUserDao.loadAll());
+        if (users.size() > 0) {
+            AllUser allUser = users.get(0);
+            userId = allUser.getUserId();
+            sessionId = allUser.getSessionId();
+        }
         if (ischeck == 1){
             moviePresenter = new FocusMoviePresenter(new MovieCalls());
             moviePresenter.request(userId,sessionId,id);

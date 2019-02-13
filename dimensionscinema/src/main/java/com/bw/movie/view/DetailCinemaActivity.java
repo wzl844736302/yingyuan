@@ -130,9 +130,11 @@ public class DetailCinemaActivity extends WDActivity {
                 intent.putExtra("name1",name);
                 intent.putExtra("address1",weizhi);
                 intent.putExtra("dname",result.get(pos).getName());
+                intent.putExtra("id",result.get(pos).getId());
                 intent.putExtra("begin",result1.get(pos).getBeginTime());
                 intent.putExtra("end",result1.get(pos).getEndTime());
                 intent.putExtra("mz",result1.get(pos).getScreeningHall());
+                intent.putExtra("qian",result1.get(pos).getPrice());
                 startActivity(intent);
             }
         });

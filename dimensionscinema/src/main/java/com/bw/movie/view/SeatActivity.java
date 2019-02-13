@@ -64,8 +64,7 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
         String begin = getIntent().getStringExtra("begin");
         String end = getIntent().getStringExtra("end");
         String mz = getIntent().getStringExtra("mz");
-         qian = getIntent().getDoubleExtra("qian", 0);
-
+        qian = getIntent().getDoubleExtra("qian", 0);
         id = getIntent().getIntExtra("id", 0);
         //设置值
         mname.setText(name1);
@@ -105,7 +104,7 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
 
             @Override
             public void checked(int row, int column) {
-                 nf = NumberFormat.getNumberInstance();
+                nf = NumberFormat.getNumberInstance();
                 nf.setMaximumFractionDigits(2);
                 checked++;
                 sumQian.setText(nf.format(qian*checked)+"");

@@ -133,12 +133,6 @@ public class FragUser extends Fragment{
     //点击退出登录
     @OnClick(R.id.tuichudenglu)
     public void tuichu(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("确定退出吗?");
-        builder.setNegativeButton("取消",null);
-        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
                 SharedPreferences.Editor edit = sp.edit();
                 edit.putBoolean("xian", false);
                 xian = false;
@@ -146,8 +140,6 @@ public class FragUser extends Fragment{
                 mtext.setText("登录/注册");
                 msim_user.setImageURI("");
                 mbt.setVisibility(View.GONE);
-            }
-        }).show();
     }
     //点击跳转系统消息
     @OnClick(R.id.ming_remind)

@@ -55,6 +55,8 @@ public class BuyTicketActivity extends AppCompatActivity implements BuyTicketAda
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //透明状态栏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         setContentView(R.layout.activity_buy_ticket);
         //绑定
         ButterKnife.bind(this);
