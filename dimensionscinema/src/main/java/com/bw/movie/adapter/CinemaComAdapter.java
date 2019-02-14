@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bw.movie.R;
+import com.bw.movie.bean.CinemaComment;
 import com.bw.movie.bean.MovieComment;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -20,29 +21,29 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Btn4Adapter extends RecyclerView.Adapter {
+public class CinemaComAdapter extends RecyclerView.Adapter {
 
-    private List<MovieComment> mList = new ArrayList<>();
+    private List<CinemaComment> mList = new ArrayList<>();
     private Context context;
     private LayoutInflater from;
 
-    public Btn4Adapter(Context context) {
+    public CinemaComAdapter(Context context) {
         this.context = context;
         from = LayoutInflater.from(context);
     }
     private MovieGreat movieGreat;
     public interface MovieGreat{
-        void great(int id,int ischeck);
+        void great(int id, int ischeck);
     }
     public void setMovieGreat1(MovieGreat movieGreat) {
         this.movieGreat = movieGreat;
     }
 
-    public void addList(List<MovieComment> data) {
+    public void addList(List<CinemaComment> data) {
         mList.addAll(data);
     }
 
-    public List<MovieComment> getList() {
+    public List<CinemaComment> getList() {
         return mList;
     }
 
@@ -57,7 +58,7 @@ public class Btn4Adapter extends RecyclerView.Adapter {
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = from.inflate(R.layout.item_btn4, viewGroup, false);
+        View view = from.inflate(R.layout.cinemacom, viewGroup, false);
         MyHodler myHodler = new MyHodler(view);
         return myHodler;
     }
@@ -65,7 +66,7 @@ public class Btn4Adapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int i) {
         MyHodler myHodler = (MyHodler) viewHolder;
-        final MovieComment comment = mList.get(i);
+        final CinemaComment comment = mList.get(i);
         Date date = new Date(mList.get(i).getCommentTime());
         SimpleDateFormat fomat2 = new SimpleDateFormat("MM-dd  hh:mm");
         String mydate = fomat2.format(date);
@@ -74,9 +75,8 @@ public class Btn4Adapter extends RecyclerView.Adapter {
         myHodler.imageView.setImageURI(Uri.parse(mList.get(i).getCommentHeadPic()));
         myHodler.name.setText(mList.get(i).getCommentUserName());
         myHodler.good.setText(mList.get(i).getGreatNum() + "");
-        myHodler.comentext.setText(mList.get(i).getReplyNum() + "");
         final int id = mList.get(i).getCommentId();
-        //点赞
+       /* //点赞
         myHodler.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +99,7 @@ public class Btn4Adapter extends RecyclerView.Adapter {
         myHodler.checkBox.setChecked(comment.getIsGreat()==1?true:false);
         if (comment.getIsGreat()==1?true:false){
             myHodler.checkBox.setEnabled(false);
-        }
+        }*/
     }
 
     @Override
@@ -110,7 +110,7 @@ public class Btn4Adapter extends RecyclerView.Adapter {
     class MyHodler extends RecyclerView.ViewHolder {
 
         private SimpleDraweeView imageView;
-        private TextView detail, name, time, comentext, good;
+        private TextView detail, name, time,good;
         private CheckBox checkBox;
         private ImageView coment;
         public MyHodler(View itemView) {
@@ -121,8 +121,6 @@ public class Btn4Adapter extends RecyclerView.Adapter {
             time = itemView.findViewById(R.id.item_btn4_time);
             good = itemView.findViewById(R.id.mText);
             checkBox = itemView.findViewById(R.id.item_btn4_good);
-            coment = itemView.findViewById(R.id.item_btn4_coment);
-            comentext = itemView.findViewById(R.id.item_btn4_coment_sum);
         }
     }
 }

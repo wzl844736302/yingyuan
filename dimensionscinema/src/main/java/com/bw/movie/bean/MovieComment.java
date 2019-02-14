@@ -1,6 +1,6 @@
 package com.bw.movie.bean;
 
-public class Comment {
+public class MovieComment {
 
     /**
      * commentId : 3
@@ -14,7 +14,7 @@ public class Comment {
      * commentUserId : 6
      * commentUserName : 谁的益达
      */
-    private String commentContent;
+
     private int commentId;
     private long commentTime;
     private int greatNum;
@@ -26,6 +26,7 @@ public class Comment {
     private int commentUserId;
     private String commentUserName;
     private int ischeck;
+    private String commentContent;
 
     public String getCommentContent() {
         return commentContent;
@@ -121,21 +122,5 @@ public class Comment {
 
     public void setCommentUserName(String commentUserName) {
         this.commentUserName = commentUserName;
-    }
-
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "commentId=" + commentId +
-                ", commentTime=" + commentTime +
-                ", greatNum=" + greatNum +
-                ", replyNum=" + replyNum +
-                ", commentHeadPic='" + commentHeadPic + '\'' +
-                ", hotComment=" + hotComment +
-                ", isGreat=" + isGreat +
-                ", movieComment='" + movieComment + '\'' +
-                ", commentUserId=" + commentUserId +
-                ", commentUserName='" + commentUserName + '\'' +
-                '}';
     }
 }

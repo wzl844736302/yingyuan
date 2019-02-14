@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -30,7 +28,7 @@ import com.bw.movie.adapter.Btn2Adapter;
 import com.bw.movie.adapter.Btn3Adapter;
 import com.bw.movie.bean.AllUser;
 import com.bw.movie.adapter.Btn4Adapter;
-import com.bw.movie.bean.Comment;
+import com.bw.movie.bean.MovieComment;
 import com.bw.movie.bean.MovieDetail;
 import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
@@ -39,21 +37,16 @@ import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.CommentPresenter;
 import com.bw.movie.presenter.DetailMoviePresenter;
 import com.bw.movie.presenter.MovieCommentPresenter;
+import com.bw.movie.presenter.MovieGreatPresenter;
 import com.bw.movie.utils.jilei.WDActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-
-
 import java.util.List;
-
 import java.util.ArrayList;
-import java.util.List;
-
 import cn.jzvd.JZVideoPlayerStandard;
-import me.jessyan.autosize.internal.CustomAdapt;
 
 
-public class DetailsActivity extends WDActivity implements View.OnClickListener {
+public class DetailsActivity extends WDActivity implements View.OnClickListener{
 
     private int userId;
     private String sessionId;
@@ -68,7 +61,7 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
     private LinearLayout pinglun;
     private ImageView xie;
     private EditText plEd;
-
+    private MovieGreatPresenter movieGreatPresenter;
     @Override
     protected void initView() {
         movieimage = findViewById(R.id.details_image);
@@ -83,7 +76,7 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
         //查询数据库
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         users.addAll(allUserDao.loadAll());
-        if (users.size()>0) {
+        if (users.size() > 0) {
             AllUser allUser = users.get(0);
             userId = allUser.getUserId();
             sessionId = allUser.getSessionId();
@@ -91,7 +84,7 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
 
         id = getIntent().getIntExtra("id", 0);
         DetailMoviePresenter presenter = new DetailMoviePresenter(new DetailData());
-        presenter.request(userId, sessionId,id);
+        presenter.request(userId, sessionId, id);
     }
 
     @Override
@@ -101,7 +94,7 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.details_btn1:
                 showBottomDialog();
                 break;
@@ -120,8 +113,8 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
             case R.id.goupiao:
                 //跳转
                 Intent intent = new Intent(DetailsActivity.this, TicketActivity.class);
-                intent.putExtra("name",name);
-                intent.putExtra("id",id);
+                intent.putExtra("name", name);
+                intent.putExtra("id", id);
                 startActivity(intent);
                 break;
         }
@@ -134,7 +127,7 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
             movieimage.setImageURI(Uri.parse(result.getImageUrl()));
             name = result.getName();
             moviename.setText(name);
-            id  = result.getId();
+            id = result.getId();
         }
 
         @Override
@@ -142,11 +135,12 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
 
         }
     }
-    private void showBottomDialog(){
+
+    private void showBottomDialog() {
         //1、使用Dialog、设置style
-        final Dialog dialog = new Dialog(this,R.style.DialogTheme);
+        final Dialog dialog = new Dialog(this, R.style.DialogTheme);
         //2、设置布局
-        View view = View.inflate(this,R.layout.dialog_btn1,null);
+        View view = View.inflate(this, R.layout.dialog_btn1, null);
         dialog.setContentView(view);
         Window window = dialog.getWindow();
         //设置弹出位置
@@ -182,11 +176,12 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
         TextView shi = dialog.findViewById(R.id.btn1_shi);
         shi.setText(result.getDuration());
     }
-    private void showBottomDialog3(){
+
+    private void showBottomDialog3() {
         //1、使用Dialog、设置style
-        final Dialog dialog = new Dialog(this,R.style.DialogTheme);
+        final Dialog dialog = new Dialog(this, R.style.DialogTheme);
         //2、设置布局
-        View view = View.inflate(this,R.layout.dialog_btn3,null);
+        View view = View.inflate(this, R.layout.dialog_btn3, null);
         dialog.setContentView(view);
         Window window = dialog.getWindow();
         //设置弹出位置
@@ -218,11 +213,12 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
         btn3Adapter.addList(result.getPosterList());
         btn3Adapter.notifyDataSetChanged();
     }
-    private void showBottomDialog2(){
+
+    private void showBottomDialog2() {
         //1、使用Dialog、设置style
-        final Dialog dialog = new Dialog(this,R.style.DialogTheme);
+        final Dialog dialog = new Dialog(this, R.style.DialogTheme);
         //2、设置布局
-        View view = View.inflate(this,R.layout.dialog_btn2,null);
+        View view = View.inflate(this, R.layout.dialog_btn2, null);
         dialog.setContentView(view);
         Window window = dialog.getWindow();
         //设置弹出位置
@@ -247,7 +243,7 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
         });
         RecyclerView recyclerView2 = dialog.findViewById(R.id.btn2_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(DetailsActivity.this);
-         recyclerView2.setLayoutManager(layoutManager);
+        recyclerView2.setLayoutManager(layoutManager);
         Btn2Adapter btn2Adapter = new Btn2Adapter(DetailsActivity.this);
         recyclerView2.setAdapter(btn2Adapter);
         btn2Adapter.addList(result.getShortFilmList());
@@ -259,11 +255,12 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
             }
         });
     }
-    private void showBottomDialog4(){
+
+    private void showBottomDialog4() {
         //1、使用Dialog、设置style
-        final Dialog dialog = new Dialog(this,R.style.DialogTheme);
+        final Dialog dialog = new Dialog(this, R.style.DialogTheme);
         //2、设置布局
-        View view = View.inflate(this,R.layout.dialog_btn4,null);
+        View view = View.inflate(this, R.layout.dialog_btn4, null);
         dialog.setContentView(view);
         Window window = dialog.getWindow();
         //设置弹出位置
@@ -300,10 +297,10 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
             public void onClick(View view) {
                 String trim = plEd.getText().toString().trim();
                 MovieCommentPresenter movieCommentPresenter = new MovieCommentPresenter(new plData());
-                movieCommentPresenter.request(userId,sessionId,id,trim);
+                movieCommentPresenter.request(userId, sessionId, id, trim);
                 plEd.setText("");
                 CommentPresenter commentPresenter = new CommentPresenter(new CommentData());
-                commentPresenter.request(userId,sessionId,id);
+                commentPresenter.request(userId, sessionId, id);
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
 
@@ -314,24 +311,47 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
         recyclerView.setLayoutManager(layoutManager);
         btn4Adapter = new Btn4Adapter(DetailsActivity.this);
         recyclerView.setAdapter(btn4Adapter);
+         //初始化回调接口
+        btn4Adapter.setMovieGreat1(new Btn4Adapter.MovieGreat() {
+            @Override
+            public void great(int id, int ischeck) {
+                if (ischeck == 0) {
+                    movieGreatPresenter = new MovieGreatPresenter(new MovieGreat());
+                    movieGreatPresenter.request(userId,sessionId,id);
+                }
+            }
+        });
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         List<AllUser> users = allUserDao.loadAll();
-        if (users.size()>0){
+        if (users.size() > 0) {
             AllUser allUser = users.get(0);
             userId = allUser.getUserId();
             sessionId = allUser.getSessionId();
         }
-
         CommentPresenter commentPresenter = new CommentPresenter(new CommentData());
-        commentPresenter.request(userId,sessionId,id);
+        commentPresenter.request(userId, sessionId, id);
     }
-    private class CommentData implements DataCall<Result<List<Comment>>> {
+    //实现影片评论点赞接口
+    class MovieGreat implements DataCall<Result>{
         @Override
-        public void success(Result<List<Comment>> data) {
+        public void success(Result data) {
+            if (data.getStatus().equals("0000")){
+                Toast.makeText(DetailsActivity.this, ""+data.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        @Override
+        public void fail(ApiException e) {
+
+        }
+    }
+    private class CommentData implements DataCall<Result<List<MovieComment>>> {
+        @Override
+        public void success(Result<List<MovieComment>> data) {
             btn4Adapter.clearList();
             btn4Adapter.addList(data.getResult());
             btn4Adapter.notifyDataSetChanged();
         }
+
         @Override
         public void fail(ApiException e) {
 
@@ -341,7 +361,7 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener 
     private class plData implements DataCall<Result> {
         @Override
         public void success(Result data) {
-            Toast.makeText(DetailsActivity.this, data.getMessage()+"", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DetailsActivity.this, data.getMessage() + "", Toast.LENGTH_SHORT).show();
         }
 
         @Override

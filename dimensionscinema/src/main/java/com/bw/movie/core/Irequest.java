@@ -1,13 +1,14 @@
 package com.bw.movie.core;
 
 import com.bw.movie.bean.BuyTicketList;
+import com.bw.movie.bean.CinemaComment;
 import com.bw.movie.bean.CinemaInfo;
 import com.bw.movie.bean.CinemasList;
-import com.bw.movie.bean.Comment;
 import com.bw.movie.bean.FocusList;
 import com.bw.movie.bean.HotMovie;
 import com.bw.movie.bean.MessageList;
 import com.bw.movie.bean.ModifyUser;
+import com.bw.movie.bean.MovieComment;
 import com.bw.movie.bean.MovieDetail;
 import com.bw.movie.bean.MovieList;
 import com.bw.movie.bean.QureyUser;
@@ -174,7 +175,7 @@ public interface Irequest {
     Observable<Result<List<MovieList>>> findMovieListByCinemaId(@Query("cinemaId")int cinemaId);
 
     /**
-     * 电影详情列表
+     * 查询影片评论
      * @param userId
      * @param sessionId
      * @param movieId
@@ -183,11 +184,11 @@ public interface Irequest {
      * @return
      */
     @GET("movie/v1/findAllMovieComment")
-    Observable<Result<List<Comment>>> findAllMovieComment(@Header("userId") int userId,
-                                                          @Header("sessionId") String sessionId,
-                                                          @Query("movieId") int movieId,
-                                                          @Query("page") int page,
-                                                          @Query("count") int count);
+    Observable<Result<List<MovieComment>>> findAllMovieComment(@Header("userId") int userId,
+                                                               @Header("sessionId") String sessionId,
+                                                               @Query("movieId") int movieId,
+                                                               @Query("page") int page,
+                                                               @Query("count") int count);
     /**
      * 根据电影ID和影院ID查询电影排期列表
      * @param cinemasId
@@ -355,12 +356,6 @@ public interface Irequest {
                                                             @Header("sessionId") String sessionId,
                                                             @Query("page")int page,
                                                             @Query("count")int count);
-    @GET("movie/v1/findAllMovieComment")
-    Observable<Result<List<Comment>>> findMovieComment(@Header("userId") int userId,
-                                                          @Header("sessionId") String sessionId,
-                                                          @Query("movieId") int movieId,
-                                                          @Query("page") int page,
-                                                          @Query("count") int count);
 
     /**
      * 上传头像
@@ -446,6 +441,19 @@ public interface Irequest {
     Observable<Result> cinemaCommentGreat(@Header("userId")int userid,
                                           @Header("sessionId")String sessionId,
                                           @Field("commentId")int commentId);
+
+    /**
+     * 电影评论点赞
+     * @param userid
+     * @param sessionId
+     * @param commentId
+     * @return
+     */
+    @POST("movie/v1/verify/movieCommentGreat")
+    @FormUrlEncoded
+    Observable<Result> movieCommentGreat(@Header("userId")int userid,
+                                         @Header("sessionId")String sessionId,
+                                         @Field("commentId")int commentId);
     @POST("user/v1/verify/modifyUserPwd")
     @FormUrlEncoded
     Observable<Result> modifyUserPwd(@Header("userId") int userId,
@@ -453,8 +461,8 @@ public interface Irequest {
                            @Field("oldPwd") String oldPwd,
                            @Field("newPwd") String newPwd,
                            @Field("newPwd2") String newPwd2);
-    @POST("movie/v1/verify/movieComment")
 
+    @POST("movie/v1/verify/movieComment")
     @FormUrlEncoded
     Observable<Result> Comment1(@Header("userId") int userId,
                                      @Header("sessionId") String sessionId,
@@ -470,10 +478,20 @@ public interface Irequest {
     @GET("user/v1/verify/userSignIn")
     Observable<Result> userSignIn(@Header("userId") int userId,
                                   @Header("sessionId") String sessionId);
+
+    /**
+     * 查询影院用户评论列表
+     * @param userId
+     * @param sessionId
+     * @param movieId
+     * @param page
+     * @param count
+     * @return
+     */
     @GET("cinema/v1/findAllCinemaComment")
-    Observable<Result<List<Comment>>> findAllCinemaComment(@Header("userId") int userId,
-                                                          @Header("sessionId") String sessionId,
-                                                          @Query("cinemaId") int movieId,
-                                                          @Query("page") int page,
-                                                          @Query("count") int count);
+    Observable<Result<List<CinemaComment>>> findAllCinemaComment(@Header("userId") int userId,
+                                                                 @Header("sessionId") String sessionId,
+                                                                 @Query("cinemaId") int movieId,
+                                                                 @Query("page") int page,
+                                                                 @Query("count") int count);
 }

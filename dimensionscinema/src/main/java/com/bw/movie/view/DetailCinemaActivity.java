@@ -1,10 +1,7 @@
 package com.bw.movie.view;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,17 +13,16 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bw.movie.MyApp;
 import com.bw.movie.R;
-import com.bw.movie.adapter.Btn2Adapter;
 import com.bw.movie.adapter.Btn4Adapter;
+import com.bw.movie.adapter.CinemaComAdapter;
 import com.bw.movie.adapter.DetailCinemaAdapter;
 import com.bw.movie.adapter.ScheduleAdapter;
 import com.bw.movie.bean.AllUser;
+import com.bw.movie.bean.CinemaComment;
 import com.bw.movie.bean.CinemaInfo;
-import com.bw.movie.bean.Comment;
 import com.bw.movie.bean.MovieList;
 import com.bw.movie.bean.Result;
 import com.bw.movie.bean.ScheduleList;
@@ -34,7 +30,6 @@ import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.presenter.CinemaInfoPresenter;
-import com.bw.movie.presenter.CinemaplPresenter;
 import com.bw.movie.presenter.CommentGreatPresenter;
 import com.bw.movie.presenter.DetailCinemaPresenter;
 import com.bw.movie.presenter.SchedulePresenter;
@@ -73,8 +68,8 @@ public class DetailCinemaActivity extends WDActivity {
     private TextView dh;
     private TextView zn;
     private RecyclerView myRecyc;
-    private Btn4Adapter btn4Adapter;
     private CommentGreatPresenter commentGreatPresenter;
+    private CinemaComAdapter cinemaComAdapter;
     @Override
     protected void initView() {
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
@@ -137,21 +132,12 @@ public class DetailCinemaActivity extends WDActivity {
                 startActivity(intent);
             }
         });
-        msim.setOnClickListener(new View.OnClickListener() {
+       msim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showBottomDialog2();
             }
         });
-        /*btn4Adapter.setCallLove1(this);*/
-      /*  btn4Adapter.setCallLove1(new Btn4Adapter.CallLove1() {
-            @Override
-            public void love(int id, int ischeck) {
-                if (ischeck == 1){
-                    Toast.makeText(DetailCinemaActivity.this, "111", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });*/
     }
 
     @Override
@@ -159,27 +145,6 @@ public class DetailCinemaActivity extends WDActivity {
         return R.layout.activity_detail_cinema;
     }
 
-   /* @Override
-    public void love(int id, int ischeck) {
-        if (ischeck == 1){
-            commentGreatPresenter = new CommentGreatPresenter(new Great());
-            commentGreatPresenter.request(userId,sessionId,id);
-        }
-    }*/
-
-   /* //实现影院点赞接口
-    class Great implements DataCall<Result>{
-        @Override
-        public void success(Result data) {
-            if (data.getStatus().equals("0000")){
-                Toast.makeText(DetailCinemaActivity.this, ""+data.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }
-        @Override
-        public void fail(ApiException e) {
-
-        }
-    }*/
     //实现当前电影列表
     class DetailCall implements DataCall<Result<List<MovieList>>> {
         @Override
@@ -283,10 +248,10 @@ public class DetailCinemaActivity extends WDActivity {
         myRecyc = dialog.findViewById(R.id.dc_recyc);
         YyPresenter cinemaplPresenter = new YyPresenter(new Cinemapl());
         cinemaplPresenter.request(userId,sessionId,id1);
-        btn4Adapter = new Btn4Adapter(this);
+        cinemaComAdapter = new CinemaComAdapter(this);
         LinearLayoutManager layoutManager = new GridLayoutManager(this,LinearLayoutManager.VERTICAL);
         myRecyc.setLayoutManager(layoutManager);
-        myRecyc.setAdapter(btn4Adapter);
+        myRecyc.setAdapter(cinemaComAdapter);
     }
     private class CinemaInfoData implements DataCall<Result<CinemaInfo>> {
         @Override
@@ -303,13 +268,13 @@ public class DetailCinemaActivity extends WDActivity {
         }
     }
 
-    private class Cinemapl implements DataCall<Result<List<Comment>>>  {
+    private class Cinemapl implements DataCall<Result<List<CinemaComment>>>  {
         @Override
-        public void success(Result<List<Comment>> data) {
+        public void success(Result<List<CinemaComment>> data) {
             if (data.getStatus().equals("0000")){
-                List<Comment> result = data.getResult();
-                btn4Adapter.addList(result);
-                btn4Adapter.notifyDataSetChanged();
+                List<CinemaComment> result = data.getResult();
+                cinemaComAdapter.addList(result);
+                cinemaComAdapter.notifyDataSetChanged();
             }
         }
 

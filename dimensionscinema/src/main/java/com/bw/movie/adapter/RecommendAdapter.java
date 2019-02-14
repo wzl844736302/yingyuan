@@ -74,7 +74,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             public void onClick(View v) {
                 CheckBox checkBox = (CheckBox) v;
                 boolean checked = checkBox.isChecked();
-                recommend.setIscheck(checked?1:2);
+                recommend.setIscheck(checked?1:0);
                 callLove.love(id,recommend.getIscheck());
             }
         });
