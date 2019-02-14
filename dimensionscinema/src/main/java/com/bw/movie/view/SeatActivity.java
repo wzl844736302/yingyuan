@@ -143,7 +143,6 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
                 break;
         }
     }
-
     private void showBottomDialog() {
         //1、使用Dialog、设置style
         final Dialog dialog = new Dialog(this, R.style.DialogTheme);
@@ -198,6 +197,7 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
                 MoviekeyPresenter moviekeyPresenter = new MoviekeyPresenter(new KeyData());
                 String s = MD5Utils.MD5(userId + "" + id + "" + checked + "movie");
                 moviekeyPresenter.request(userId, sessionId, id, checked, s);
+
             }
         });
     }
@@ -228,10 +228,12 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
             request.timeStamp = data.getTimeStamp();
             request.sign = data.getSign();
             msgApi.sendReq(request);
+            if (data.getStatus().equals("0000")){
+                finish();
+            }
         }
         @Override
         public void fail(ApiException e) {
-
         }
     }
 }

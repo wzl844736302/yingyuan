@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             save_pwd.setChecked(true);
         }
     }
-
     private void initView() {
         logBtn = findViewById(R.id.login_btn);
         logBtn.setOnClickListener(this);
