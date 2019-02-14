@@ -6,16 +6,16 @@ import com.bw.movie.utils.NetWorkUtils;
 
 import io.reactivex.Observable;
 
-public class CinemaplPresenter extends BasePresenter{
+public class YyPresenter extends BasePresenter{
 
-    public CinemaplPresenter(DataCall dataCall) {
+    public YyPresenter(DataCall dataCall) {
         super(dataCall);
     }
 
     @Override
     public Observable observable(Object... args) {
         Irequest irequest = NetWorkUtils.getMinstance().create(Irequest.class);
-        return irequest.findAllMovieComment((int)args[0],(String)args[1],(int)args[2],1,100);
+        return irequest.findAllCinemaComment((int)args[0],(String)args[1],(int)args[2],1,100);
     }
 
 }
