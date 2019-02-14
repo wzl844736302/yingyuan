@@ -53,10 +53,12 @@
                     android:layout_weight="1" />
 
                 <LinearLayout
+                    android:id="@+id/mlinear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/shape_search"
                     android:orientation="horizontal"
+                    android:layout_marginRight="-200dp"
                     android:layout_alignParentRight="true">
 
                     <ImageView
@@ -79,8 +81,7 @@
                         android:background="@null"
                         android:hint="请输入您要搜索的饮片"
                         android:textColorHint="#fff"
-                        android:textSize="10sp"
-                        android:visibility="gone" />
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/tv_sou"
@@ -90,8 +91,7 @@
                         android:layout_marginRight="24dp"
                         android:text="搜索"
                         android:textColor="#ffff"
-                        android:textSize="12sp"
-                        android:visibility="gone" />
+                        android:textSize="12sp" />
                 </LinearLayout>
             </RelativeLayout>
 
@@ -104,14 +104,69 @@
                 android:layout_marginRight="24dp">
 
             </com.bw.movie.view.RecyclerCoverFlow>
+            <RadioGroup
+                android:layout_marginTop="20dp"
+                android:id="@+id/home_radio_group"
+                android:layout_below="@id/list"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:background="@drawable/lineone"
+                android:layout_height="3dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp">
+                <RadioButton
+                    android:id="@+id/home_radio_1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:checked="true"
+                    android:background="@drawable/radio_selector"
+                    android:layout_height="match_parent"/>
+                <RadioButton
+                    android:id="@+id/home_radio_2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:background="@drawable/radio_selector"
+                    android:layout_height="match_parent"/>
+                <RadioButton
+                    android:id="@+id/home_radio_3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:background="@drawable/radio_selector"
+                    android:layout_height="match_parent"/>
+                <RadioButton
+                    android:id="@+id/home_radio_4"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:background="@drawable/radio_selector"
+                    android:layout_height="match_parent"/>
+                <RadioButton
+                    android:id="@+id/home_radio_5"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:background="@drawable/radio_selector"
+                    android:layout_height="match_parent"/>
+                <RadioButton
+                    android:id="@+id/home_radio_6"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:background="@drawable/radio_selector"
+                    android:layout_height="match_parent"/>
 
+
+            </RadioGroup>
             <RelativeLayout
                 android:id="@+id/ry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/list"
                 android:layout_marginLeft="24dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginRight="24dp">
 
                 <TextView

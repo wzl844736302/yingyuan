@@ -50,7 +50,6 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
     @BindView(R.id.tv_email)
     TextView tv_email;
     private QureyUserPresenter qureyUserPresenter;
-    private List<AllUser> users = new ArrayList<>();
     private int userId;
     private String sessionId;
     private String nickName;
@@ -58,19 +57,22 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
     private QureyUser result;
     private List<Object> objects = new ArrayList<>();
     private SimpleDraweeView simpleDraweeView;
-    private AllUser allUser;
     private ModifyUserPresenter modifyUserPresenter;
     private int index = 0;// 记录单选对话框的下标
     private String newsex;
+    private List<AllUser> allUsers;
+    private AllUser allUser;
+    private AllUserDao allUserDao;
+
     @Override
     protected void initView() {
         //绑定
         ButterKnife.bind(this);
         //查询数据库
-        AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
-        users.addAll(allUserDao.loadAll());
-        if (users.size() > 0) {
-            allUser = users.get(0);
+        allUserDao = MyApp.daoSession.getAllUserDao();
+        allUsers = allUserDao.loadAll();
+        if (allUsers.size() > 0) {
+            allUser = allUsers.get(0);
             userId = allUser.getUserId();
             sessionId = allUser.getSessionId();
         }
@@ -95,11 +97,11 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String s = editText.getText().toString().trim();
-                        users.get(0).setNickName(s);
+                        allUsers.get(0).setNickName(s);
+                        allUserDao.update(allUsers.get(0));
                         tv_username.setText(s);
                         modifyUserPresenter = new ModifyUserPresenter(new UpHeadC());
                         modifyUserPresenter.request(userId, sessionId, s, result.getSex(), result.getEmail());
-                        Toast.makeText(MyInForMation.this, "" + userId + "  " + sessionId + "  " + s + "  " + result.getSex() + "  " + result.getEmail(), Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("取消", null);
@@ -216,8 +218,8 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
                 nickName = result.getNickName();
                 tv_username.setText(nickName);
                 sex = result.getSex();
-                String s = sex == 1 ? "男" : "女";
-                tv_sex.setText(s);
+                String sex3 = sex == 1 ? "男" : "女";
+                tv_sex.setText(sex3);
                 long birthday = result.getBirthday();
                 tv_birthdate.setText(birthday + "");
                 String phone = result.getPhone();
@@ -236,6 +238,7 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
     //点击返回
     @OnClick(R.id.mreturn)
     public void mreturn() {
+
         finish();
     }
 
@@ -251,7 +254,8 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
             objects.add(filePath);
             Uri data1 = data.getData();
             simpleDraweeView.setImageURI(data1);
-            users.get(0).setHeadPic(data1.toString());
+            allUsers.get(0).setHeadPic(data1.toString());
+            allUserDao.update(allUsers.get(0));
             UpHeadPresenter upHeadPresenter = new UpHeadPresenter(new UpHeadC());
             upHeadPresenter.request(userId, sessionId, objects);
             objects.clear();
@@ -277,7 +281,7 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
         }
         return null;
     }
-    private class UpHeadC implements DataCall<Result> {
+    class UpHeadC implements DataCall<Result> {
         @Override
         public void success(Result data) {
             Toast.makeText(MyInForMation.this, data.getMessage()+"", Toast.LENGTH_SHORT).show();

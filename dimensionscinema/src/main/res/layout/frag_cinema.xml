@@ -29,11 +29,13 @@
             android:text="上海"/>
 
         <LinearLayout
+            android:id="@+id/mlinear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_search"
             android:orientation="horizontal"
-            android:layout_alignParentRight="true">
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="-200dp">
 
             <ImageView
                 android:id="@+id/sou"
@@ -54,14 +56,12 @@
                 android:hint="CGV影城"
                 android:textColorHint="#fff"
                 android:layout_gravity="center_vertical"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/tv_sou"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#ffff"
-                android:visibility="gone"
                 android:layout_gravity="center_vertical"
                 android:textSize="12sp"
                 android:layout_marginRight="24dp"

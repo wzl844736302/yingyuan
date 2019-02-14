@@ -1,6 +1,7 @@
 package com.bw.movie.frag;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,9 +19,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -82,6 +85,8 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
     private CancelFocusPresenter cancelFocusPresenter;
     private ImageView miv;
     private boolean xian;
+    private LinearLayout mlinear;
+    private ObjectAnimator animator;
 
     @Nullable
     @Override
@@ -99,6 +104,7 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
         et_sou = view.findViewById(R.id.et_sou);
         mdingwei = view.findViewById(R.id.mdingwei);
         miv = view.findViewById(R.id.miv);
+        mlinear = view.findViewById(R.id.mlinear);
         //查询数据库
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         users.addAll(allUserDao.loadAll());
@@ -209,15 +215,19 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
     //点击实现搜索
     @OnClick(R.id.sou)
     public void sou() {
-        tv_sou.setVisibility(View.VISIBLE);
-        et_sou.setVisibility(View.VISIBLE);
+        animator = ObjectAnimator.ofFloat(mlinear, "translationX", 30f, -550f);
+        animator.setDuration(1000);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.start();
     }
 
     //点击搜索隐藏
     @OnClick(R.id.tv_sou)
     public void et_sou() {
-        et_sou.setVisibility(View.GONE);
-        tv_sou.setVisibility(View.GONE);
+        animator = ObjectAnimator.ofFloat(mlinear, "translationX", -560f, 0f);
+        animator.setDuration(1000);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.start();
     }
     //关注
     @Override
