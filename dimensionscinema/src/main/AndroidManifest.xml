@@ -24,7 +24,9 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity">
+        <activity
+            android:name=".view.MainActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,8 +50,8 @@
         <activity android:name=".view.RegsterActivity" />
         <activity
             android:name=".view.HomeActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".view.MyInForMation" />
         <activity android:name=".view.ListActivity" />
         <activity android:name=".view.DetailsActivity" />

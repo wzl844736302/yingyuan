@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.bw.movie.R;
 import com.bw.movie.frag.FragCinema;
@@ -97,4 +98,17 @@ public class HomeActivity extends WDActivity {
         }
         transaction1.commit();
     }
+    private long exitTime = 0;
+    @Override
+    public void onBackPressed() {
+        if(System.currentTimeMillis() - exitTime > 2000) {
+            Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else {
+            finish();
+            System.exit(0);
+            android.os.Process.killProcess(android.os.Process.myPid());
+        }
+    }
+
 }

@@ -131,14 +131,12 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.mbutton1:
-                        recommendAdapter.clear();
                         mbutton1.setTextColor(Color.WHITE);
                         mbutton2.setTextColor(Color.BLACK);
                         recommendPresenter = new RecommendPresenter(new RecommendCall());
                         recommendPresenter.request(userId, sessionId, 1, 10);
                         break;
                     case R.id.mbutton2:
-                        recommendAdapter.clear();
                         mbutton1.setTextColor(Color.BLACK);
                         mbutton2.setTextColor(Color.WHITE);
                         fuJinPresenter = new FuJinPresenter(new FuJinCall());
@@ -288,6 +286,7 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
         @Override
         public void success(Result<List<Recommend>> data) {
             if (data.getStatus().equals("0000")) {
+                recommendAdapter.clear();
                 List<Recommend> result = data.getResult();
                 recommendAdapter.addAll(result);
                 recommendAdapter.notifyDataSetChanged();
@@ -306,6 +305,8 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
         public void success(Result<List<Recommend>> data) {
             if (data.getStatus().equals("0000")) {
                 recommendAdapter.clear();
+                mradio_cinema.check(mradio_cinema.getChildAt(0).getId());
+                mbutton1.setTextColor(Color.WHITE);
                 List<Recommend> result = data.getResult();
                 recommendAdapter.addAll(result);
                 recommendAdapter.notifyDataSetChanged();
