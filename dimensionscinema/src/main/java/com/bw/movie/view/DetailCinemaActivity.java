@@ -38,6 +38,7 @@ import com.bw.movie.presenter.CinemaplPresenter;
 import com.bw.movie.presenter.CommentGreatPresenter;
 import com.bw.movie.presenter.DetailCinemaPresenter;
 import com.bw.movie.presenter.SchedulePresenter;
+import com.bw.movie.presenter.YyPresenter;
 import com.bw.movie.utils.jilei.WDActivity;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -71,8 +72,6 @@ public class DetailCinemaActivity extends WDActivity {
     private TextView dt;
     private TextView dh;
     private TextView zn;
-    private TextView gj;
-    private TextView zj;
     private RecyclerView myRecyc;
     private Btn4Adapter btn4Adapter;
     private CommentGreatPresenter commentGreatPresenter;
@@ -282,7 +281,7 @@ public class DetailCinemaActivity extends WDActivity {
         dh = dialog.findViewById(R.id.dc_dh);
         zn = dialog.findViewById(R.id.dc_zn);
         myRecyc = dialog.findViewById(R.id.dc_recyc);
-        CinemaplPresenter cinemaplPresenter = new CinemaplPresenter(new Cinemapl());
+        YyPresenter cinemaplPresenter = new YyPresenter(new Cinemapl());
         cinemaplPresenter.request(userId,sessionId,id1);
         btn4Adapter = new Btn4Adapter(this);
         LinearLayoutManager layoutManager = new GridLayoutManager(this,LinearLayoutManager.VERTICAL);

@@ -47,7 +47,6 @@ public class FocusOnActivity extends AppCompatActivity {
     private FocusOnAdapter1 focusOnAdapter1;
     private ImageView mreturn;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +74,6 @@ public class FocusOnActivity extends AppCompatActivity {
         recyclerfocus.setAdapter(focusOnAdapter1);
         movieListPresenter = new MovieListPresenter(new MovieListCall());
         movieListPresenter.request(userId,sessionId,1,20);
-
         //默认选中第一个
         mradio_cinema.check(mradio_cinema.getChildAt(0).getId());
         mbutton1.setTextColor(Color.WHITE);

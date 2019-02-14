@@ -470,4 +470,10 @@ public interface Irequest {
     @GET("user/v1/verify/userSignIn")
     Observable<Result> userSignIn(@Header("userId") int userId,
                                   @Header("sessionId") String sessionId);
+    @GET("cinema/v1/findAllCinemaComment")
+    Observable<Result<List<Comment>>> findAllCinemaComment(@Header("userId") int userId,
+                                                          @Header("sessionId") String sessionId,
+                                                          @Query("cinemaId") int movieId,
+                                                          @Query("page") int page,
+                                                          @Query("count") int count);
 }

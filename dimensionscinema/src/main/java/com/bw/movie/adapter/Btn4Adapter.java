@@ -23,11 +23,8 @@ import java.util.List;
 
 public class Btn4Adapter extends RecyclerView.Adapter {
 
-
     private List<Comment> mList = new ArrayList<>();
     private Context context;
-
-
     private LayoutInflater from;
 
     public Btn4Adapter(Context context) {
@@ -108,7 +105,6 @@ public class Btn4Adapter extends RecyclerView.Adapter {
         private TextView detail, name, time, comentext, good;
         private CheckBox checkBox;
         private ImageView coment;
-
         public MyHodler(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.item_btn4_image);
