@@ -1,5 +1,6 @@
 package com.bw.movie.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -68,7 +69,10 @@ public class FeedBackActivity extends AppCompatActivity {
         @Override
         public void success(Result data) {
             if (data.getStatus().equals("0000")){
-                Toast.makeText(FeedBackActivity.this, ""+data.getMessage(), Toast.LENGTH_SHORT).show();
+                //跳转
+                Intent intent = new Intent(FeedBackActivity.this, FedSuccessActivity.class);
+                startActivity(intent);
+                finish();
             }
         }
         @Override

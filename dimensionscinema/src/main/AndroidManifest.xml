@@ -86,7 +86,8 @@
             android:value="${UMENG_CHANNEL_VALUE}" />
 
         <activity android:name=".view.MessageActivity" />
-        <activity android:name=".adapter.MmActivity"></activity>
+        <activity android:name=".adapter.MmActivity" />
+        <activity android:name=".view.FedSuccessActivity"></activity>
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@
         android:layout_height="80dp"
         android:orientation="horizontal"
         android:gravity="center"
+        android:background="@drawable/shape_detasli_bot"
         android:layout_alignParentBottom="true">
 
         <RadioButton

@@ -30,7 +30,7 @@ android {
                 XG_ACCESS_KEY: "A44FJ9N7N9EY",
         ]
     }
-    dexOptions{
+    dexOptions {
         javaMaxHeapSize "4g"
     }
     buildTypes {
