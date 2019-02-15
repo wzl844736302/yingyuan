@@ -57,6 +57,7 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
         end1 = findViewById(R.id.end);
         ting1 = findViewById(R.id.ting);
         sumQian = findViewById(R.id.sumqian);
+        findViewById(R.id.seat_no).setOnClickListener(this);
         //接收值
         String name1 = getIntent().getStringExtra("name1");
         String address1 = getIntent().getStringExtra("address1");
@@ -140,6 +141,9 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
                 } else {
                     Toast.makeText(this, "请选择", Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.seat_no:
+                finish();
                 break;
         }
     }

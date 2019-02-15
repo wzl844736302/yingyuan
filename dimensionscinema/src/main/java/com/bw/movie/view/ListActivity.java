@@ -82,6 +82,12 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
         list_mbutton1 = findViewById(R.id.list_mbutton1);
         list_mbutton2 = findViewById(R.id.list_mbutton2);
         list_mbutton3 = findViewById(R.id.list_mbutton3);
+        findViewById(R.id.list_return).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         //查询数据库
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         users.addAll(allUserDao.loadAll());

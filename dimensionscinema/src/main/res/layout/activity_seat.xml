@@ -188,6 +188,7 @@
             android:layout_gravity="center"
             android:layout_marginRight="20dp"/>
         <ImageView
+            android:id="@+id/seat_no"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:src="@drawable/seat_x"
