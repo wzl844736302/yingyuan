@@ -4,8 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -28,7 +26,6 @@ import com.bw.movie.utils.util.MD5Utils;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +42,6 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
     private TextView sumQian;
     private SharedPreferences sp;
     private boolean xian;
-
     @Override
     protected void initView() {
         //初始化控件
@@ -177,6 +173,12 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
                         Toast.makeText(SeatActivity.this, "支付宝", Toast.LENGTH_SHORT).show();
                         break;
                 }
+            }
+        });
+        dialog.findViewById(R.id.wx_down).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
             }
         });
         dialog.findViewById(R.id.wx_qd).setOnClickListener(new View.OnClickListener() {

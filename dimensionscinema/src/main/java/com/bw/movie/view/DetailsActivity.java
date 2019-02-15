@@ -168,13 +168,13 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener{
         TextView details = dialog.findViewById(R.id.tn1_detail);
         details.setText(result.getSummary());
         TextView chan = dialog.findViewById(R.id.btn1_chan);
-        chan.setText(result.getPlaceOrigin());
+        chan.setText("产地:  "+result.getPlaceOrigin());
         TextView dao = dialog.findViewById(R.id.btn1_dao);
-        dao.setText(result.getDirector());
+        dao.setText("导演:  "+result.getDirector());
         TextView lei = dialog.findViewById(R.id.btn1_lei);
-        lei.setText(result.getMovieTypes());
+        lei.setText("类型:  "+result.getMovieTypes());
         TextView shi = dialog.findViewById(R.id.btn1_shi);
-        shi.setText(result.getDuration());
+        shi.setText("时长:  "+result.getDuration());
     }
 
     private void showBottomDialog3() {

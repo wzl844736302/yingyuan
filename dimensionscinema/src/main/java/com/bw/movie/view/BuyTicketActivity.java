@@ -145,6 +145,12 @@ public class BuyTicketActivity extends AppCompatActivity implements BuyTicketAda
                 }
             }
         });
+        dialog.findViewById(R.id.wx_down).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
         dialog.findViewById(R.id.wx_qd).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
