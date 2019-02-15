@@ -8,7 +8,7 @@
     tools:context=".view.DetailsActivity"
     android:id="@+id/ll">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="30dp"
@@ -25,17 +25,21 @@
             android:layout_gravity="center"
             android:layout_marginLeft="6dp"
             android:textColor="#fff"/>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <CheckBox
+            android:id="@+id/lsit_item_cb"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/select_xin"
+            android:button="@null"
+            android:layout_gravity="center"
+            android:layout_marginRight="24dp"
+            android:layout_alignParentRight="true"/>
     </LinearLayout>
-    <CheckBox
-        android:id="@+id/lsit_item_cb"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:background="@drawable/select_xin"
-        android:button="@null"
-        android:layout_marginRight="24dp"
-        android:layout_marginTop="30dp"
-        android:layout_alignParentRight="true"/>
+
     <TextView
         android:id="@+id/details_name"
         android:layout_width="wrap_content"

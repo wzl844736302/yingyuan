@@ -1,6 +1,7 @@
 package com.bw.movie.view;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,8 +15,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -70,9 +73,13 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
     private ImageView miv;
     private SharedPreferences sp;
     private boolean xian;
+    private LinearLayout mlinear;
+    private ObjectAnimator animator;
 
     @Override
     protected void initView() {
+        //绑定
+        ButterKnife.bind(this);
         recyclerView = findViewById(R.id.list_recycer);
         group = findViewById(R.id.list_mRadio_cinema);
         mdingwei = findViewById(R.id.mdingwei);
@@ -82,6 +89,7 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
         list_mbutton1 = findViewById(R.id.list_mbutton1);
         list_mbutton2 = findViewById(R.id.list_mbutton2);
         list_mbutton3 = findViewById(R.id.list_mbutton3);
+        mlinear = findViewById(R.id.mlinear);
         findViewById(R.id.list_return).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,6 +178,23 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
                 initData();
             }
         });
+    }
+    //点击实现搜索
+    @OnClick(R.id.sou)
+    public void sou1() {
+        animator = ObjectAnimator.ofFloat(mlinear, "translationX", 30f, -550f);
+        animator.setDuration(1000);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.start();
+    }
+
+    //点击搜索隐藏
+    @OnClick(R.id.tv_sou)
+    public void tvsou() {
+        animator = ObjectAnimator.ofFloat(mlinear, "translationX", -560f, 0f);
+        animator.setDuration(1000);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.start();
     }
     private void initData(){
         if (ContextCompat.checkSelfPermission(ListActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
@@ -313,19 +338,6 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
         public void fail(ApiException e) {
 
         }
-    }
-    //点击实现搜索
-    @OnClick(R.id.sou)
-    public void sou() {
-        tv_sou.setVisibility(View.VISIBLE);
-        et_sou.setVisibility(View.VISIBLE);
-    }
-
-    //点击搜索隐藏
-    @OnClick(R.id.tv_sou)
-    public void et_sou() {
-        et_sou.setVisibility(View.GONE);
-        tv_sou.setVisibility(View.GONE);
     }
 
     private void onItemClick(final ListAdapter adapter){

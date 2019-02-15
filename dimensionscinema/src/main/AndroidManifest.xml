@@ -26,7 +26,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".view.MainActivity"
-            android:theme="@style/SplashTheme">
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,17 +46,31 @@
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop" />
-        <activity android:name=".view.GuideActivity" />
-        <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.RegsterActivity" />
+        <activity android:name=".view.GuideActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".view.LoginActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".view.RegsterActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name=".view.HomeActivity"
             android:theme="@style/SplashTheme"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".view.MyInForMation" />
-        <activity android:name=".view.ListActivity" />
-        <activity android:name=".view.DetailsActivity" />
-        <activity android:name=".view.DetailCinemaActivity" />
+        <activity android:name=".view.MyInForMation"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".view.ListActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".view.DetailsActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".view.DetailCinemaActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
@@ -66,17 +81,33 @@
             android:enabled="true"
             android:process=":remote" />
 
-        <activity android:name=".view.SeatActivity" />
-        <activity android:name=".view.TicketActivity" />
-        <activity android:name=".view.TicketDetailActivity" />
-        <activity android:name=".view.FocusOnActivity" />
-        <activity android:name=".view.FeedBackActivity" />
-        <activity android:name=".view.BuyTicketActivity" />
-        <activity android:name=".view.WxLoginActivity" />
+        <activity android:name=".view.SeatActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".view.TicketActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".view.TicketDetailActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".view.FocusOnActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".view.FeedBackActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".view.BuyTicketActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".view.WxLoginActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <!-- 友盟统计 -->
         <meta-data
             android:name="UMENG_APPKEY"
@@ -85,9 +116,15 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
 
-        <activity android:name=".view.MessageActivity" />
-        <activity android:name=".adapter.MmActivity" />
-        <activity android:name=".view.FedSuccessActivity"></activity>
+        <activity android:name=".view.MessageActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".adapter.MmActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:name=".view.FedSuccessActivity"
+            android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
     </application>
 
 </manifest>

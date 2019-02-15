@@ -79,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@null"
-                        android:hint="请输入您要搜索的饮片"
+                        android:hint="请输入您要搜索的影片"
                         android:textColorHint="#fff"
                         android:textSize="10sp" />
 

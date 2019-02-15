@@ -29,7 +29,9 @@ import com.bw.movie.utils.jilei.WDActivity;
 import com.bw.movie.utils.util.UIUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -221,7 +223,10 @@ public class MyInForMation extends WDActivity implements View.OnClickListener {
                 String sex3 = sex == 1 ? "男" : "女";
                 tv_sex.setText(sex3);
                 long birthday = result.getBirthday();
-                tv_birthdate.setText(birthday + "");
+                Date date = new Date(birthday);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                String s = format.format(date);
+                tv_birthdate.setText(s);
                 String phone = result.getPhone();
                 tv_telphone.setText(phone);
                 String email = result.getEmail();
