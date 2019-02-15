@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ListActivity"
-    android:orientation="vertical">
+    tools:context=".view.ListActivity">
     <RelativeLayout
+        android:id="@+id/titi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -71,6 +71,7 @@
         </LinearLayout>
     </RelativeLayout>
     <RadioGroup
+        android:layout_below="@+id/titi"
         android:id="@+id/list_mRadio_cinema"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -122,5 +123,12 @@
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
-
-</LinearLayout>
+    <ImageView
+        android:id="@+id/list_return"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/com_icon_my_default_return"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="24dp"
+        android:layout_marginBottom="20dp"/>
+</RelativeLayout>
