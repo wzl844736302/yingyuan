@@ -64,12 +64,12 @@ public class RegsterActivity extends WDActivity implements View.OnClickListener 
                 if (email) {
                     String numberStr = numberEd.getText().toString().trim();
                     boolean b = compileExChar(numberStr);
-                    if(b){
+                    if(!b){
                     String pwdStr = pwdEd.getText().toString().trim();
                     /*String pwd2Str = pwd2Ed.getText().toString().trim();*/
                     String nameStr = nameEd.getText().toString().trim();
                         boolean b1 = compileExChar(nameStr);
-                        if (b1){
+                        if (!b1){
                             String pwdStr1 = EncryptUtil.encrypt(pwdStr);
                             RegsterPresenter regsterPresenter = new RegsterPresenter(new RegData());
                             regsterPresenter.request(nameStr, numberStr, pwdStr1, pwdStr1, 1, datate.getText(), "移动设备识别码", "设备类型", "屏幕尺寸", "手机系统", emailStr);
