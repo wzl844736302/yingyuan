@@ -90,7 +90,6 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
             public boolean isValidSeat(int row, int column) {
                 return true;
             }
-
             @Override
             public boolean isSold(int row, int column) {
                 if (row == 6 && column == 6) {
@@ -120,9 +119,7 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
 
         });
         seatTableView.setData(10, 10);
-
     }
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_seat;

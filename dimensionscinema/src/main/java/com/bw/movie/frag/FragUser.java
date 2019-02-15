@@ -18,12 +18,14 @@ import com.bw.movie.MyApp;
 import com.bw.movie.R;
 import com.bw.movie.bean.AllUser;
 import com.bw.movie.bean.Result;
+import com.bw.movie.bean.Sign;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.dao.DaoMaster;
 import com.bw.movie.dao.DaoSession;
 import com.bw.movie.presenter.SignInPresenter;
+import com.bw.movie.presenter.UserHomePresenter;
 import com.bw.movie.view.BuyTicketActivity;
 import com.bw.movie.view.FeedBackActivity;
 import com.bw.movie.view.FocusOnActivity;
@@ -89,6 +91,8 @@ public class FragUser extends Fragment {
                 signInPresenter.request(userId, sessionId);
             }
         });
+        UserHomePresenter userHomePresenter = new UserHomePresenter(new UserData1());
+        userHomePresenter.request(userId, sessionId);
         return view;
     }
 
@@ -97,9 +101,9 @@ public class FragUser extends Fragment {
         @Override
         public void success(Result data) {
             if (data.getStatus().equals("0000")) {
-                Toast.makeText(getActivity(), ""+data.getMessage(), Toast.LENGTH_SHORT).show();
+                mbt.setText("已签到");
             }else {
-                Toast.makeText(getActivity(), "今天已签到", Toast.LENGTH_SHORT).show();
+                mbt.setText("签到");
             }
         }
 
@@ -201,9 +205,12 @@ public class FragUser extends Fragment {
         bind = null;
     }
 
+
+
     @Override
     public void onResume() {
         super.onResume();
+
         xian = sp.getBoolean("xian", false);
         if (!xian) {
             mtext.setText("登录/注册");
@@ -232,5 +239,26 @@ public class FragUser extends Fragment {
             userId = allUser.getUserId();
             sessionId = allUser.getSessionId();
         }
+        UserHomePresenter userHomePresenter = new UserHomePresenter(new UserData1());
+        userHomePresenter.request(userId, sessionId);
     }
+
+    private class UserData1 implements DataCall<Result<Sign>> {
+        @Override
+        public void success(Result<Sign> data) {
+            if (data.getStatus().equals("0000")){
+                if (data.getResult().getUserSignStatus()==2){
+                    mbt.setText("已签到");
+                }else {
+                    mbt.setText("签到");
+                }
+            }
+        }
+
+        @Override
+        public void fail(ApiException e) {
+
+        }
+    }
+
 }
