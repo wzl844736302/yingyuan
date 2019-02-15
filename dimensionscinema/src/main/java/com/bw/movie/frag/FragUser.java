@@ -118,7 +118,7 @@ public class FragUser extends Fragment {
     }
 
     //点击跳转我的信息
-    @OnClick(R.id.wodexinxi)
+    @OnClick(R.id.btn_msg_mine)
     public void xinxi() {
         if (!xian) {
             Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
@@ -129,7 +129,7 @@ public class FragUser extends Fragment {
     }
 
     //点击跳转我的关注
-    @OnClick(R.id.wodeguanzhu)
+    @OnClick(R.id.btn_like_mine)
     public void guanzhu() {
         if (!xian) {
             Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
@@ -141,7 +141,7 @@ public class FragUser extends Fragment {
     }
 
     //点击跳转购票记录
-    @OnClick(R.id.goupiaojilu)
+    @OnClick(R.id.btn_rccord_mine)
     public void jilu() {
         if (!xian) {
             Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
@@ -153,7 +153,7 @@ public class FragUser extends Fragment {
     }
 
     //点击跳转意见反馈
-    @OnClick(R.id.yijianfankui)
+    @OnClick(R.id.btn_feedback_mine)
     public void fankui() {
         if (!xian) {
             Toast.makeText(getActivity(), "请先登录", Toast.LENGTH_SHORT).show();
@@ -165,13 +165,13 @@ public class FragUser extends Fragment {
     }
 
     //点击最新版本
-    @OnClick(R.id.zuixinbanben)
+    @OnClick(R.id.btn_version_mine)
     public void banben() {
         Toast.makeText(getActivity(), "已经是最新版本", Toast.LENGTH_SHORT).show();
     }
 
     //点击退出登录
-    @OnClick(R.id.tuichudenglu)
+    @OnClick(R.id.btn_tuichu_mine)
     public void tuichu() {
         SharedPreferences.Editor edit = sp.edit();
         edit.putBoolean("xian", false);

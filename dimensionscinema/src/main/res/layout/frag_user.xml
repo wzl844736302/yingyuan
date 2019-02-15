@@ -218,6 +218,7 @@
                 android:textSize="12sp"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/btn_tuichu_mine"
             android:layout_width="0dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"

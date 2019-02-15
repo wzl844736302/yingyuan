@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bw.movie.MyApp;
@@ -28,6 +29,7 @@ public class MessageActivity extends AppCompatActivity {
     private int userId;
     private String sessionId;
     private MessageAdapter messageAdapter;
+    private ImageView fanhui;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
         //初始化控件
         mrecycler = findViewById(R.id.mrecycler);
+        fanhui = findViewById(R.id.fanhui);
         //查询数据库
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         users.addAll(allUserDao.loadAll());
@@ -51,6 +54,13 @@ public class MessageActivity extends AppCompatActivity {
         //设置数据
         messagePresenter = new MessagePresenter(new MessageCall());
         messagePresenter.request(userId,sessionId,1,10);
+        //点击返回
+        fanhui.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     class MessageCall implements DataCall<Result<List<MessageList>>>{
 
