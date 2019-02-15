@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:text="北京"
+                    android:text="定位中......"
                     android:layout_toRightOf="@id/miv"
                     android:textColor="#fff"
                     android:layout_marginRight="45dp"

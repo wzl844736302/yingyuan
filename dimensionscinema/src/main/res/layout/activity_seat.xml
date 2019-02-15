@@ -145,7 +145,8 @@
        android:layout_below="@id/seat_bg"
        android:layout_marginTop="50dp"
        android:layout_width="match_parent"
-       android:layout_height="match_parent" />
+       android:layout_height="match_parent"
+       android:layout_marginBottom="73dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="73dp"

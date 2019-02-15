@@ -26,7 +26,7 @@
             android:layout_toRightOf="@id/miv"
             android:layout_centerVertical="true"
             android:layout_marginRight="45dp"
-            android:text="上海"/>
+            android:text="定位中......"/>
 
         <LinearLayout
             android:id="@+id/mlinear"

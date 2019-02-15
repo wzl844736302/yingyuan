@@ -10,14 +10,10 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -38,6 +34,7 @@ import com.bw.movie.bean.Result;
 import com.bw.movie.core.DataCall;
 import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
+import com.bw.movie.frag.FragCinema;
 import com.bw.movie.presenter.CancelMoviePresenter;
 import com.bw.movie.presenter.FocusMoviePresenter;
 import com.bw.movie.presenter.HotMoviePresenter;
@@ -50,46 +47,39 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import me.jessyan.autosize.internal.CustomAdapt;
 
 public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
 
     private RecyclerView recyclerView;
     private RadioGroup group;
     private ListAdapter adapter;
-    private MapView mMapView = null;
-    public LocationClient mLocationClient = null;
-    private MyLocationListener myListener = new MyLocationListener();
-    private TextView mdingwei;
     private int userId;
     private String sessionId;
     private List<AllUser> users = new ArrayList<>();
-    private TextView tv_sou;
-    private EditText et_sou;
     private RadioButton list_mbutton1,list_mbutton2,list_mbutton3;
     private int a;
     private FocusMoviePresenter moviePresenter;
     private CancelMoviePresenter cancelMoviePresenter;
-    private ImageView miv;
     private SharedPreferences sp;
     private boolean xian;
     private LinearLayout mlinear;
     private ObjectAnimator animator;
-
+    //百度定位
+    private MapView mMapView = null;
+    public LocationClient mLocationClient = null;
+    private MyLocationListener myListener = new MyLocationListener();
+    private TextView mdingwei;
     @Override
     protected void initView() {
         //绑定
         ButterKnife.bind(this);
         recyclerView = findViewById(R.id.list_recycer);
         group = findViewById(R.id.list_mRadio_cinema);
-        mdingwei = findViewById(R.id.mdingwei);
-        tv_sou = findViewById(R.id.tv_sou);
-        et_sou = findViewById(R.id.et_sou);
-        miv = findViewById(R.id.miv);
         list_mbutton1 = findViewById(R.id.list_mbutton1);
         list_mbutton2 = findViewById(R.id.list_mbutton2);
         list_mbutton3 = findViewById(R.id.list_mbutton3);
         mlinear = findViewById(R.id.mlinear);
+        mdingwei = findViewById(R.id.mdingwei);
         findViewById(R.id.list_return).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,8 +102,6 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
         recyclerView.setAdapter(adapter);
 
         onItemClick(adapter);
-       /* HotMoviePresenter hotMoviePresenter = new HotMoviePresenter(new HorMovieData());
-        hotMoviePresenter.request(userId, sessionId, 1, 500);*/
         int id = getIntent().getIntExtra("id", 0);
         switch (id){
             case 0:
@@ -170,14 +158,8 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
             }
         });
         adapter.setItemBack(this);
+        //调用百度定位的方法
         initData();
-        //点击定位
-        miv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                initData();
-            }
-        });
     }
     //点击实现搜索
     @OnClick(R.id.sou)
@@ -196,36 +178,7 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
         animator.setInterpolator(new LinearInterpolator());
         animator.start();
     }
-    private void initData(){
-        if (ContextCompat.checkSelfPermission(ListActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-            //权限还没有授予，需要在这里写申请权限的代码
-            ActivityCompat.requestPermissions(ListActivity.this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.CAMERA,
-                            Manifest.permission.READ_PHONE_STATE},0);
-        }else {
-            mLocationClient = new LocationClient(this);
-            //声明LocationClient类
-            mLocationClient.registerLocationListener(myListener);
-            //注册监听函数
-            LocationClientOption option = new LocationClientOption();
-            option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
-            //可选，是否需要位置描述信息，默认为不需要，即参数为false
-            //如果开发者需要获得当前点的位置信息，此处必须为true
-            option.setIsNeedLocationDescribe(true);
-            //可选，设置是否需要地址信息，默认不需要
-            option.setIsNeedAddress(true);
-            //可选，默认false,设置是否使用gps
-            option.setOpenGps(true);
-            //可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
-            option.setLocationNotify(true);
-            mLocationClient.setLocOption(option);
-            mLocationClient.start();
-        }
-    }
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_list;
@@ -285,20 +238,6 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
 
         }
     }
-    //定位实现接口
-    public class MyLocationListener implements BDLocationListener {
-        @Override
-        public void onReceiveLocation(BDLocation location) {
-            //此处的BDLocation为定位结果信息类，通过它的各种get方法可获取定位相关的全部结果
-            //以下只列举部分获取地址相关的结果信息
-            //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
-            String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
-            String addr = location.getAddrStr();    //获取详细地址信息
-            mdingwei.setText(locationDescribe + addr);
-
-        }
-    }
-
     //热门电影
     private class HorMovieData implements DataCall<Result<List<HotMovie>>> {
         @Override
@@ -350,5 +289,76 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
                 startActivity(intent);
              }
         });
+    }
+    //百度定位
+    public class MyLocationListener implements BDLocationListener {
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            //此处的BDLocation为定位结果信息类，通过它的各种get方法可获取定位相关的全部结果
+            //以下只列举部分获取地址相关的结果信息
+            //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
+            String city = location.getCity();
+         /*   String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
+            String addr = location.getAddrStr();    //获取详细地址信息*/
+            if (city != null | city.equals("")) {
+                mdingwei.setText(city);
+            }
+        }
+    }
+    //定位的方法
+    private void initData() {
+
+        if (ContextCompat.checkSelfPermission(ListActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            //权限还没有授予，需要在这里写申请权限的代码
+            ActivityCompat.requestPermissions(ListActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.CAMERA,
+                            Manifest.permission.READ_PHONE_STATE}, 100);
+        } else {
+            mLocationClient = new LocationClient(this);
+            //声明LocationClient类
+            mLocationClient.registerLocationListener(myListener);
+            //注册监听函数
+            LocationClientOption option = new LocationClientOption();
+            option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
+            //可选，是否需要位置描述信息，默认为不需要，即参数为false
+            //如果开发者需要获得当前点的位置信息，此处必须为true
+            option.setIsNeedLocationDescribe(true);
+            //可选，设置是否需要地址信息，默认不需要
+            option.setIsNeedAddress(true);
+            //可选，默认false,设置是否使用gps
+            option.setOpenGps(true);
+            //可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
+            option.setLocationNotify(true);
+            mLocationClient.setLocOption(option);
+            mLocationClient.start();
+        }
+    }
+    //动态权限回调方法
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 100) {
+            mLocationClient = new LocationClient(this);
+            //声明LocationClient类
+            mLocationClient.registerLocationListener(myListener);
+            //注册监听函数
+            LocationClientOption option = new LocationClientOption();
+            option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
+            //可选，是否需要位置描述信息，默认为不需要，即参数为false
+            //如果开发者需要获得当前点的位置信息，此处必须为true
+            option.setIsNeedLocationDescribe(true);
+            //可选，设置是否需要地址信息，默认不需要
+            option.setIsNeedAddress(true);
+            //可选，默认false,设置是否使用gps
+            option.setOpenGps(true);
+            //可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
+            option.setLocationNotify(true);
+            mLocationClient.setLocOption(option);
+            mLocationClient.start();
+        }
     }
 }
