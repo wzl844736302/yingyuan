@@ -95,6 +95,7 @@ public class HomeActivity extends WDActivity {
                 transaction1.hide(fragCinema);
                 transaction1.hide(fragMovie);
                 break;
+
         }
         transaction1.commit();
     }
