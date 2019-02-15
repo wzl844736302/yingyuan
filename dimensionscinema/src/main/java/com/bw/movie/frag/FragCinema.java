@@ -75,6 +75,9 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
     public LocationClient mLocationClient = null;
     private MyLocationListener myListener = new MyLocationListener();
     private TextView mdingwei;
+    private double longitude;
+    private double latitude;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -124,7 +127,7 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
                         mbutton1.setTextColor(Color.BLACK);
                         mbutton2.setTextColor(Color.WHITE);
                         fuJinPresenter = new FuJinPresenter(new FuJinCall());
-                        fuJinPresenter.request(userId, sessionId, "1111111.11.1", "10152.3641.1", 1, 10);
+                        fuJinPresenter.request(userId, sessionId, longitude+"", latitude+"", 1, 10);
                         break;
                 }
             }
@@ -273,6 +276,8 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
             //以下只列举部分获取地址相关的结果信息
             //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
             String city = location.getCity();
+            longitude = location.getLongitude();
+            latitude = location.getLatitude();
          /*   String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
             String addr = location.getAddrStr();    //获取详细地址信息*/
             if (city != null | city.equals("")) {
