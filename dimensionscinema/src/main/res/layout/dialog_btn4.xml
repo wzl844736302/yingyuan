@@ -13,7 +13,6 @@
         android:layout_marginLeft="24dp"
         android:textColor="#333"
         android:textSize="16sp" />
-
     <View
         android:layout_width="30dp"
         android:layout_height="3dp"
@@ -54,8 +53,6 @@
         android:layout_height="70dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-
-
         android:background="#fff">
         <EditText
             android:id="@+id/btn4_pinged"

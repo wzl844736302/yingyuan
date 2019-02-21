@@ -102,8 +102,6 @@ public class FragUser extends Fragment {
         public void success(Result data) {
             if (data.getStatus().equals("0000")) {
                 mbt.setText("已签到");
-            }else {
-                mbt.setText("签到");
             }
         }
 
