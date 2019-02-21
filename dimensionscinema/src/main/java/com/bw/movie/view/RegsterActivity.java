@@ -1,9 +1,7 @@
 package com.bw.movie.view;
 
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
@@ -18,7 +16,6 @@ import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.presenter.RegsterPresenter;
 import com.bw.movie.utils.jilei.WDActivity;
 import com.bw.movie.utils.util.EncryptUtil;
-import com.bw.movie.utils.util.StringUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -15,6 +15,10 @@ import com.tencent.android.tpush.XGPushConfig;
 import com.tencent.android.tpush.XGPushManager;
 import com.tencent.bugly.crashreport.CrashReport;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+
 public class MyApp extends Application {
     /** 主线程ID */
     private static int mMainThreadId = -1;

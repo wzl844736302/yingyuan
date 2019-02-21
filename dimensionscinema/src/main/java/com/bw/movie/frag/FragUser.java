@@ -3,6 +3,7 @@ package com.bw.movie.frag;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,8 +25,10 @@ import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.dao.AllUserDao;
 import com.bw.movie.dao.DaoMaster;
 import com.bw.movie.dao.DaoSession;
+import com.bw.movie.presenter.NewVersionPresenter;
 import com.bw.movie.presenter.SignInPresenter;
 import com.bw.movie.presenter.UserHomePresenter;
+import com.bw.movie.utils.util.DownLoadService;
 import com.bw.movie.view.BuyTicketActivity;
 import com.bw.movie.view.FeedBackActivity;
 import com.bw.movie.view.FocusOnActivity;
@@ -60,6 +63,7 @@ public class FragUser extends Fragment {
     private SignInPresenter signInPresenter;
     private int userId;
     private String sessionId;
+    private NewVersionPresenter newVersionPresenter;
 
     @Nullable
     @Override
@@ -169,9 +173,38 @@ public class FragUser extends Fragment {
     //点击最新版本
     @OnClick(R.id.btn_version_mine)
     public void banben() {
-        Toast.makeText(getActivity(), "已经是最新版本", Toast.LENGTH_SHORT).show();
+        try {
+            String versionCode = getActivity().getPackageManager().
+                    getPackageInfo(getContext().getPackageName(), 0).versionName;
+            newVersionPresenter = new NewVersionPresenter(new NewVersionCall());
+            newVersionPresenter.request(userId,sessionId,versionCode);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
+    //实现新版本的接口
+    class NewVersionCall implements DataCall<Result>{
 
+        @Override
+        public void success(Result data) {
+            if (data.getStatus().equals("0000")){
+                int flag = data.getFlag();
+                if (flag!=1){
+                    Toast.makeText(getActivity(), "已是最新版本", Toast.LENGTH_SHORT).show();
+                }else {
+                    String url = data.getDownloadUrl();
+                    Intent intent = new Intent(getActivity(), DownLoadService.class);
+                    intent.putExtra("download_url",url);
+                    getActivity().startService(intent);
+                }
+            }
+        }
+
+        @Override
+        public void fail(ApiException e) {
+
+        }
+    }
     //点击退出登录
     @OnClick(R.id.btn_tuichu_mine)
     public void tuichu() {
