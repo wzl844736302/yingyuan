@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.text.SpannableString;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -55,6 +56,7 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener{
     private MovieDetail result;
     private RelativeLayout ll;
     private int id;
+    private  String str;
     private Btn4Adapter btn4Adapter;
     private String name;
     private List<AllUser> users = new ArrayList<>();
@@ -62,6 +64,10 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener{
     private ImageView xie;
     private EditText plEd;
     private MovieGreatPresenter movieGreatPresenter;
+    private XRecyclerView recyclerbtn4;
+    private LinearLayout pinglun1;
+    private EditText plEd1;
+
     @Override
     protected void initView() {
         movieimage = findViewById(R.id.details_image);
@@ -283,7 +289,9 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener{
             }
         });
         pinglun = dialog.findViewById(R.id.btn4_ping);
+        pinglun1 = dialog.findViewById(R.id.btn4_ping1);
         plEd = dialog.findViewById(R.id.btn4_pinged);
+        plEd1 = dialog.findViewById(R.id.btn4_pinged1);
         xie = dialog.findViewById(R.id.btn4_xie);
         xie.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -306,11 +314,25 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener{
 
             }
         });
-        XRecyclerView recyclerView = dialog.findViewById(R.id.btn4_recycler);
+        dialog.findViewById(R.id.btn4_fs1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String trim = plEd1.getText().toString().trim();
+                MovieCommentPresenter movieCommentPresenter = new MovieCommentPresenter(new plData());
+                movieCommentPresenter.request(userId, sessionId, id, "@ "+str+" 回复 "+trim);
+                plEd1.setText("");
+                CommentPresenter commentPresenter = new CommentPresenter(new CommentData());
+                commentPresenter.request(userId, sessionId, id);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+                pinglun1.setVisibility(View.GONE);
+            }
+        });
+        recyclerbtn4 = dialog.findViewById(R.id.btn4_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(DetailsActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerbtn4.setLayoutManager(layoutManager);
         btn4Adapter = new Btn4Adapter(DetailsActivity.this);
-        recyclerView.setAdapter(btn4Adapter);
+        recyclerbtn4.setAdapter(btn4Adapter);
          //初始化回调接口
         btn4Adapter.setMovieGreat1(new Btn4Adapter.MovieGreat() {
             @Override
@@ -319,6 +341,17 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener{
                     movieGreatPresenter = new MovieGreatPresenter(new MovieGreat());
                     movieGreatPresenter.request(userId,sessionId,id);
                 }
+            }
+        });
+        btn4Adapter.setOnclickItem(new Btn4Adapter.OnclickItem1() {
+            @Override
+            public void OnclickItem1(View view, String s) {
+                str=s;
+                int i = recyclerbtn4.getChildAdapterPosition(view);
+                pinglun1.setVisibility(View.VISIBLE);
+                SpannableString s1 = new SpannableString("@ "+str+" 回复 ");//这里输入自己想要的提示文字
+
+                plEd1.setHint(s1);
             }
         });
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
@@ -362,6 +395,8 @@ public class DetailsActivity extends WDActivity implements View.OnClickListener{
         @Override
         public void success(Result data) {
             Toast.makeText(DetailsActivity.this, data.getMessage() + "", Toast.LENGTH_SHORT).show();
+            CommentPresenter commentPresenter = new CommentPresenter(new CommentData());
+            commentPresenter.request(userId, sessionId, id);
         }
 
         @Override

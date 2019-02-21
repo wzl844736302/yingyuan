@@ -31,22 +31,18 @@
             android:layout_weight="1"
             android:layout_below="@id/wx_text"
             android:layout_marginTop="20dp"/>
-        <ImageView
-            android:id="@+id/wx_zhi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/pay_icon_zhifubao"
-            android:layout_below="@id/wx_wx"
-            android:layout_marginTop="15dp"/>
+
     </LinearLayout>
     <LinearLayout
         android:layout_below="@id/wx_text"
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_toRightOf="@id/mll"
         android:gravity="center"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,17 +54,6 @@
             android:gravity="center_vertical"
             android:layout_toRightOf="@id/wx_wx"
             android:layout_below="@id/wx_text" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="支付宝支付"
-            android:textSize="14sp"
-            android:textColor="#666"
-            android:layout_weight="1"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:layout_toRightOf="@id/wx_zhi"
-            android:layout_below="@id/wx_wx" />
     </LinearLayout>
     <ImageView
         android:id="@+id/wx_down"
@@ -95,11 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="true"/>
-        <RadioButton
-            android:id="@+id/wx_but2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"/>
+
     </RadioGroup>
     <TextView
         android:id="@+id/wx_qd"
