@@ -4,7 +4,24 @@ public class Result<T> {
     private String message;
     private String status;
     private T result;
+    private int count;
+    private Object[] args;
 
+    public Object[] getArgs() {
+        return args;
+    }
+
+    public void setArgs(Object[] args) {
+        this.args = args;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     /**
      * appId : wxb3852e6a6b7d9516

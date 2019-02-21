@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -77,6 +78,7 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
     private TextView mdingwei;
     private double longitude;
     private double latitude;
+    private ImageView miv;
 
     @Nullable
     @Override
@@ -92,6 +94,7 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
         mrecycler_cinema = view.findViewById(R.id.mrecycler_cinema);
         mlinear = view.findViewById(R.id.mlinear);
         mdingwei = view.findViewById(R.id.mdingwei);
+        miv = view.findViewById(R.id.miv);
         //查询数据库
         AllUserDao allUserDao = MyApp.daoSession.getAllUserDao();
         users.addAll(allUserDao.loadAll());
@@ -134,6 +137,13 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
         });
         //调用定位的方法
         initData();
+      /* miv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initData();
+                onResume();
+            }
+        });*/
         return view;
     }
 
@@ -342,7 +352,7 @@ public class FragCinema extends Fragment implements RecommendAdapter.CallLove {
         }
     }
 
-    @Override
+   @Override
     public void onResume() {
         super.onResume();
         initData();

@@ -18,6 +18,7 @@ import com.bw.movie.core.exception.ApiException;
 import com.bw.movie.presenter.RegsterPresenter;
 import com.bw.movie.utils.jilei.WDActivity;
 import com.bw.movie.utils.util.EncryptUtil;
+import com.bw.movie.utils.util.StringUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,19 +65,24 @@ public class RegsterActivity extends WDActivity implements View.OnClickListener 
                 if (email) {
                     String numberStr = numberEd.getText().toString().trim();
                     boolean b = compileExChar(numberStr);
-                    if(!b){
-                    String pwdStr = pwdEd.getText().toString().trim();
-                    /*String pwd2Str = pwd2Ed.getText().toString().trim();*/
-                    String nameStr = nameEd.getText().toString().trim();
+                    if (!b) {
+                        /*String pwd2Str = pwd2Ed.getText().toString().trim();*/
+                        String nameStr = nameEd.getText().toString().trim();
                         boolean b1 = compileExChar(nameStr);
-                        if (!b1){
+                        if (!b1) {
+                            String pwdStr = pwdEd.getText().toString().trim();
                             String pwdStr1 = EncryptUtil.encrypt(pwdStr);
-                            RegsterPresenter regsterPresenter = new RegsterPresenter(new RegData());
-                            regsterPresenter.request(nameStr, numberStr, pwdStr1, pwdStr1, 1, datate.getText(), "移动设备识别码", "设备类型", "屏幕尺寸", "手机系统", emailStr);
-                        }else {
+                            boolean b2 = validatePhonePass(pwdStr);
+                            if (b2) {
+                                RegsterPresenter regsterPresenter = new RegsterPresenter(new RegData());
+                                regsterPresenter.request(nameStr, numberStr, pwdStr1, pwdStr1, 1, datate.getText(), "移动设备识别码", "设备类型", "屏幕尺寸", "手机系统", emailStr);
+                            } else {
+                                Toast.makeText(this, "必须包含大小写密码至少8位", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
                             Toast.makeText(this, "禁止输入非法字符", Toast.LENGTH_SHORT).show();
                         }
-                        }else {
+                    } else {
                         Toast.makeText(this, "禁止输入非法字符", Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -121,6 +127,11 @@ public class RegsterActivity extends WDActivity implements View.OnClickListener 
             return;
         }*/
 
+    }
+
+    public static boolean validatePhonePass(String pass) {
+        String passRegex = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$";
+        return !TextUtils.isEmpty(pass) && pass.matches(passRegex);
     }
 
 }

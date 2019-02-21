@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -158,8 +159,16 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
             }
         });
         adapter.setItemBack(this);
+
         //调用百度定位的方法
         initData();
+       findViewById(R.id.miv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initData();
+                onResume();
+            }
+        });
     }
     //点击实现搜索
     @OnClick(R.id.sou)
@@ -244,6 +253,7 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
         public void success(Result<List<HotMovie>> data) {
             adapter.clearList();
             adapter.addList(data.getResult());
+            initData();
             adapter.notifyDataSetChanged();
         }
         @Override
@@ -256,6 +266,7 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
         public void success(Result<List<HotMovie>> data) {
             adapter.clearList();
             adapter.addList(data.getResult());
+            initData();
             adapter.notifyDataSetChanged();
         }
 
@@ -270,6 +281,7 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
         public void success(Result<List<HotMovie>> data) {
             adapter.clearList();
             adapter.addList(data.getResult());
+            initData();
             adapter.notifyDataSetChanged();
         }
         @Override
@@ -307,35 +319,34 @@ public class ListActivity extends WDActivity implements ListAdapter.OnItemBack {
     }
     //定位的方法
     private void initData() {
-
-        if (ContextCompat.checkSelfPermission(ListActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            //权限还没有授予，需要在这里写申请权限的代码
-            ActivityCompat.requestPermissions(ListActivity.this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.CAMERA,
-                            Manifest.permission.READ_PHONE_STATE}, 100);
-        } else {
-            mLocationClient = new LocationClient(this);
-            //声明LocationClient类
-            mLocationClient.registerLocationListener(myListener);
-            //注册监听函数
-            LocationClientOption option = new LocationClientOption();
-            option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
-            //可选，是否需要位置描述信息，默认为不需要，即参数为false
-            //如果开发者需要获得当前点的位置信息，此处必须为true
-            option.setIsNeedLocationDescribe(true);
-            //可选，设置是否需要地址信息，默认不需要
-            option.setIsNeedAddress(true);
-            //可选，默认false,设置是否使用gps
-            option.setOpenGps(true);
-            //可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
-            option.setLocationNotify(true);
-            mLocationClient.setLocOption(option);
-            mLocationClient.start();
-        }
+            if (ContextCompat.checkSelfPermission(ListActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                //权限还没有授予，需要在这里写申请权限的代码
+                ActivityCompat.requestPermissions(ListActivity.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.ACCESS_COARSE_LOCATION,
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.CAMERA,
+                                Manifest.permission.READ_PHONE_STATE}, 100);
+            } else {
+                mLocationClient = new LocationClient(this);
+                //声明LocationClient类
+                mLocationClient.registerLocationListener(myListener);
+                //注册监听函数
+                LocationClientOption option = new LocationClientOption();
+                option.setLocationMode(LocationClientOption.LocationMode.Battery_Saving);
+                //可选，是否需要位置描述信息，默认为不需要，即参数为false
+                //如果开发者需要获得当前点的位置信息，此处必须为true
+                option.setIsNeedLocationDescribe(true);
+                //可选，设置是否需要地址信息，默认不需要
+                option.setIsNeedAddress(true);
+                //可选，默认false,设置是否使用gps
+                option.setOpenGps(true);
+                //可选，默认false，设置是否当GPS有效时按照1S/1次频率输出GPS结果
+                option.setLocationNotify(true);
+                mLocationClient.setLocOption(option);
+                mLocationClient.start();
+            }
     }
     //动态权限回调方法
     @Override

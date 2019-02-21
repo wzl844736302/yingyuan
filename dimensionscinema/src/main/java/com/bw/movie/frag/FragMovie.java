@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -133,7 +134,6 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick, 
             }
         });
         mlinear = view.findViewById(R.id.mlinear);
-        //调用定位的方法
         initData();
         return view;
     }
@@ -302,8 +302,9 @@ public class FragMovie extends Fragment implements HotMovieAdapter.onItemClick, 
             //以下只列举部分获取地址相关的结果信息
             //更多结果信息获取说明，请参照类参考中BDLocation类中的说明
             String city = location.getCity();
-         /*   String locationDescribe = location.getLocationDescribe();    //获取位置描述信息
-            String addr = location.getAddrStr();    //获取详细地址信息*/
+         /*   String locationDescribe = location.getLocationDescribe();    //获取位置描述信息*/
+           /* String addr = location.getAddrStr();    //获取详细地址信息*/
+
             if (city != null | city.equals("")) {
                 mdingwei.setText(city);
             }
