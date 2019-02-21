@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bw.movie.R;
@@ -25,10 +26,13 @@ public class Btn4Adapter extends RecyclerView.Adapter {
     private List<MovieComment> mList = new ArrayList<>();
     private Context context;
     private LayoutInflater from;
-
+    private OnclickItem1 onclickItem;
     public Btn4Adapter(Context context) {
         this.context = context;
         from = LayoutInflater.from(context);
+    }
+    public void setOnclickItem(OnclickItem1 onclickItem) {
+        this.onclickItem = onclickItem;
     }
     private MovieGreat movieGreat;
     public interface MovieGreat{
@@ -64,7 +68,7 @@ public class Btn4Adapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, final int i) {
-        MyHodler myHodler = (MyHodler) viewHolder;
+        final MyHodler myHodler = (MyHodler) viewHolder;
         final MovieComment comment = mList.get(i);
         Date date = new Date(mList.get(i).getCommentTime());
         SimpleDateFormat fomat2 = new SimpleDateFormat("MM-dd  hh:mm");
@@ -76,6 +80,15 @@ public class Btn4Adapter extends RecyclerView.Adapter {
         myHodler.good.setText(mList.get(i).getGreatNum() + "");
         myHodler.comentext.setText(mList.get(i).getReplyNum() + "");
         final int id = mList.get(i).getCommentId();
+        if (onclickItem != null){
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onclickItem.OnclickItem1(view,mList.get(i).getCommentUserName());
+
+                }
+            });
+        }
         //点赞
         myHodler.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +126,7 @@ public class Btn4Adapter extends RecyclerView.Adapter {
         private TextView detail, name, time, comentext, good;
         private CheckBox checkBox;
         private ImageView coment;
+        private  ImageView imageCom;
         public MyHodler(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.item_btn4_image);
@@ -123,6 +137,10 @@ public class Btn4Adapter extends RecyclerView.Adapter {
             checkBox = itemView.findViewById(R.id.item_btn4_good);
             coment = itemView.findViewById(R.id.item_btn4_coment);
             comentext = itemView.findViewById(R.id.item_btn4_coment_sum);
+            imageCom = itemView.findViewById(R.id.item_btn4_coment);
         }
+    }
+    public  interface OnclickItem1{
+        void OnclickItem1(View view,String s);
     }
 }

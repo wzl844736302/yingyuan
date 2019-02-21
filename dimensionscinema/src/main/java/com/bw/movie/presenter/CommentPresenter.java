@@ -15,6 +15,6 @@ public class CommentPresenter extends BasePresenter{
     @Override
     public Observable observable(Object... args) {
         Irequest irequest = NetWorkUtils.getMinstance().create(Irequest.class);
-        return irequest.findAllMovieComment((int)args[0],(String)args[1],(int)args[2],1,8);
+        return irequest.findAllMovieComment((int)args[0],(String)args[1],(int)args[2],1,100);
     }
 }

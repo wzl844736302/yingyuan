@@ -139,9 +139,7 @@ public class BuyTicketActivity extends AppCompatActivity implements BuyTicketAda
                     case R.id.wx_but1:
                         Toast.makeText(BuyTicketActivity.this, "微信", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.wx_but2:
-                        Toast.makeText(BuyTicketActivity.this, "支付宝", Toast.LENGTH_SHORT).show();
-                        break;
+
                 }
             }
         });

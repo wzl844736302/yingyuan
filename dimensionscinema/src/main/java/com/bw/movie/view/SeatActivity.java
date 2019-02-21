@@ -166,9 +166,7 @@ public class SeatActivity extends WDActivity implements View.OnClickListener {
                     case R.id.wx_but1:
                         Toast.makeText(SeatActivity.this, "微信", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.wx_but2:
-                        Toast.makeText(SeatActivity.this, "支付宝", Toast.LENGTH_SHORT).show();
-                        break;
+
                 }
             }
         });
