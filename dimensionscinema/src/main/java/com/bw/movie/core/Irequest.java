@@ -500,4 +500,25 @@ public interface Irequest {
     @GET("user/v1/verify/findUserHomeInfo")
     Observable<Result<Sign>> findUserHomeInfo(@Header("userId") int userId,
                                                     @Header("sessionId") String sessionId);
+
+    /**
+     * 系统消息读取状态修改
+     * @param userId
+     * @param sessionId
+     * @return
+     */
+    @GET("tool/v1/verify/changeSysMsgStatus")
+    Observable<Result> changeSysMsgStatus(@Header("userId") int userId,
+                                          @Header("sessionId") String sessionId,
+                                          @Query("id")int id);
+
+    /**
+     * 查询用户当前未读消息数量
+     * @param userId
+     * @param sessionId
+     * @return
+     */
+    @GET("tool/v1/verify/findUnreadMessageCount")
+    Observable<Result> findUnreadMessageCount(@Header("userId") int userId,
+                                              @Header("sessionId") String sessionId);
 }

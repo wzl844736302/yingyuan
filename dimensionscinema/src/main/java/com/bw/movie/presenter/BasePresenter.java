@@ -23,7 +23,7 @@ public abstract class BasePresenter {
     public abstract Observable observable(Object... args);
 
     //请求方法
-    public void request(Object... args) {
+    public void request(final Object... args) {
         observable(args)
                 .compose(ResponseTransformer.handleResult())
                 .compose(new ObservableTransformer() {
@@ -38,6 +38,7 @@ public abstract class BasePresenter {
                     @Override
                     public void accept(Result result) throws Exception {
                         if (dataCall != null) {
+                            result.setArgs(args);
                             dataCall.success(result);
                         }
                     }

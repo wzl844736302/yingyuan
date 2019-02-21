@@ -1,43 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.MessageActivity"
-    android:orientation="vertical"
-    android:background="#fff">
-    <TextView
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ttxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="系统消息"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="30dp"
-        android:textSize="14sp"
-        android:textColor="#333333"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginRight="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="20dp">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mrecycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-        </android.support.v7.widget.RecyclerView>
-        <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="24dp"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/shape_detasli_bot">
-            <ImageView
-                android:id="@+id/fanhui"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@drawable/com_icon_my_default_return"
-                android:layout_marginBottom="10dp"/>
-        </LinearLayout>
-    </RelativeLayout>
-</LinearLayout>
+            android:layout_marginTop="10dp"
+            android:text="系统消息"
+            android:textColor="#333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/weidu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="(3条未读)"
+            android:textColor="#333"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/message_recy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ttxt"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_detasli_bot">
+
+        <ImageView
+            android:id="@+id/img_finnish"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/com_icon_my_default_return" />
+    </LinearLayout>
+
+</RelativeLayout>
